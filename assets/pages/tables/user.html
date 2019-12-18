@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+    <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>LPIQNAS | User Management</title>
+
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-teal navbar-light">
+
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars" style="color: #ffffff;"></i></a>
+      </li>
+    </ul>
+      
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell" style="color: #ffffff;"></i>
+          <span class="badge badge-warning navbar-badge">15</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-user" style="color: #ffffff;">&emsp;ADMIN</i>
+          <span class="badge badge-warning navbar-badge"></span>
+        </a>
+
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-sign-out" style="color: #ffffff;"></i>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
+            class="fas fa-th-large" style="color: #ffffff;"></i></a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container color changer adminlte.css line 11762 -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">Adm LPIQNAS</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">ADMIN</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+          <li class="nav-item">
+            <a href="pages/tables/user.html" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                User Management
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="pages/widgets.html" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Materi Management
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="pages/widgets.html" class="nav-link">
+              <i class="nav-icon fas fa-play"></i>
+              <p>
+                Video Management
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="pages/widgets.html" class="nav-link">
+              <i class="nav-icon fas fa-list-alt"></i>
+              <p>
+                Tugas Management
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="pages/widgets.html" class="nav-link">
+              <i class="nav-icon fas fa-file"></i>
+              <p>
+                Ujian Management
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="pages/widgets.html" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Jadwal Kelas
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="pages/widgets.html" class="nav-link">
+              <i class="nav-icon fas fa-info"></i>
+              <p>
+                Informasi dan Event
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="pages/widgets.html" class="nav-link">
+              <i class="nav-icon fas fa-plus-circle"></i>
+              <p>
+                Posting dan Diskusi
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="pages/widgets.html" class="nav-link">
+              <i class="nav-icon fas fa-comments"></i>
+              <p>
+                Komentar
+              </p>
+            </a>
+          </li>
+
+      </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>User Management</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="index3.html">Home</a></li>
+              <li class="breadcrumb-item active">User Management</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+      <div class="row">
+        <div class="col-12">
+
+          <div class="card">
+            
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-square mr-2"></i> Tambah Siswa</a>
+                </div>
+                <div class="col-md-6">
+                  <input class="form-control col-4 mb-3" type="search" placeholder="Search" style="float: right;">
+                </div>
+              </div>
+              
+              <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th scope="col">Nama Lengkap</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Alamat</th>
+                  <th scope="col">Tanggal Lahir</th>
+                  <th scope="col">Telepon</th>
+                  <th scope="col">Aksi</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Reinardus Dimas Bagus Kurniawan</td>
+                  <td>dim.bk</td>
+                  <td>Tangerang selatan bukan tangerang</td>
+                  <td>13 november 1996</td>
+                  <td>089662806561</td>
+                  <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Ignatius Chandra Cristian</td>
+                  <td>serigalamalam</td>
+                  <td>Sintang kalimantan</td>
+                  <td>14 november 1996</td>
+                  <td>08973367127</td>
+                  <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Ignatius Adri Sinaga</td>
+                  <td>adsi</td>
+                  <td>Maunya Cikarang, gamau nanti</td>
+                  <td>15 november 1996</td>
+                  <td>089772772727</td>
+                  <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Robby</td>
+                  <td>Rbby</td>
+                  <td>Sama cikarang juga</td>
+                  <td>16 november 1996</td>
+                  <td>0819239123891</td>
+                  <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Bernardus Alexander habedean</td>
+                  <td>bernardbear</td>
+                  <td>balige medan pojok</td>
+                  <td>17 november 1996</td>
+                  <td>0899239123891</td>
+                  <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Willy Aditya nugraha</td>
+                  <td>wonkaman</td>
+                  <td>Bekasi deket cikarang</td>
+                  <td>17 november 1996</td>
+                  <td>0819239121231</td>
+                  <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Ignatius Suryo </td>
+                  <td>ignatius3</td>
+                  <td>Bandung euy</td>
+                  <td>18 november 1996</td>
+                  <td>0819239456891</td>
+                  <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Julio Dimitri Fredick</td>
+                  <td>Summer</td>
+                  <td>Nomaden</td>
+                  <td>19 november 1996</td>
+                  <td>0819239123891</td>
+                  <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Dian Sastro Hadikusumo</td>
+                  <td>diansastro</td>
+                  <td>Jakarta Pusat</td>
+                  <td>1 november 1996</td>
+                  <td>081923912231</td>
+                  <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Chelsea Islan</td>
+                  <td>Chelsiii</td>
+                  <td>Jakarta Utara</td>
+                  <td>29 november 1996</td>
+                  <td>0819234533891</td>
+                  <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
+                      </div>
+                  </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th scope="col">Nama Lengkap</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Alamat</th>
+                  <th scope="col">Tanggal Lahir</th>
+                  <th scope="col">Telepon</th>
+                  <th colspan="2" scope="col">Aksi</th>
+                </tr>
+                </tfoot>
+              </table>
+
+              <div class="row">
+                <div class="col-md-6" style="margin-top: 20px;">
+                  <label>Showing 1 to 10 of 10 entries </label>
+                </div>
+                <div class="col-md-6" style="margin-top: 20px;">
+                  <ul class="pagination" style="float: right;">
+                    <li class="paginate_button page-item previous disabled" id="example2_previous">
+                      <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                    </li>
+                    <li class="paginate_button page-item active">
+                      <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                    </li>
+                    <li class="paginate_button page-item ">
+                      <a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+                    </li>
+                    <li class="paginate_button page-item ">
+                      <a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+                    </li>
+                    <li class="paginate_button page-item ">
+                      <a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+                    </li>
+                    <li class="paginate_button page-item ">
+                      <a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a>
+                    </li>
+                    <li class="paginate_button page-item ">
+                      <a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a>
+                    </li>
+                    <li class="paginate_button page-item next" id="example2_next">
+                      <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- modal hapus -->
+      <div class="modal fade" id="modal-hapus">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Hapus User</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Apakah Anda Yakin Ingin Menghapus User ini?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+              <button type="button" class="btn btn-primary toastrDeleteSuccess">Ya</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+      <!-- modal edit -->
+      <div class="modal fade" id="modal-edit">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit Data User</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- /.modal form body -->
+              <form role="form">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="NamaLengkap">Nama Lengkap</label>
+                    <input type="text" class="form-control" id="NamaLengkap" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label for="Username">Username</label>
+                    <input type="text" class="form-control" id="Username" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label for="Alamat">Alamat</label>
+                    <input type="text" class="form-control" id="Alamat" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label for="Tgl">Tanggal Lahir</label>
+                    <input type="date" class="form-control" id="Tgl" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label for="Telepon">Telepon</label>
+                    <input type="text" class="form-control" id="Telepon" placeholder="">
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+              <button type="button" class="btn btn-primary toastrEditSuccess">Simpan</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+      <!-- modal tambah -->
+      <div class="modal fade" id="modal-tambah">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Tambah Data User</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- /.modal form body -->
+              <form role="form">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="NamaLengkap">Nama Lengkap</label>
+                    <input type="text" class="form-control" id="NamaLengkap" placeholder="Masukkan Nama Lengkap">
+                  </div>
+                  <div class="form-group">
+                    <label for="Username">Username</label>
+                    <input type="text" class="form-control" id="Username" placeholder="Masukkan Username">
+                  </div>
+                  <div class="form-group">
+                    <label for="Alamat">Alamat</label>
+                    <input type="text" class="form-control" id="Alamat" placeholder="Masukkan Alamat">
+                  </div>
+                  <div class="form-group">
+                    <label for="Tgl">Tanggal Lahir</label>
+                    <input type="date" class="form-control" id="Tgl" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label for="Telepon">Telepon</label>
+                    <input type="text" class="form-control" id="Telepon" placeholder="Masukkan Telepon">
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+              <button type="button" class="btn btn-primary toastrAddSuccess">Tambah</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.0.0
+    </div>
+    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+    reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<!-- SweetAlert2 -->
+<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="../../plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
+    });
+
+    $('.swalAddSuccess').click(function() {
+      Toast.fire({
+        type: 'success',
+        title: 'Anda Berhasil Menambahkan User.'
+      })
+    });
+    $('.swalDefaultSuccess').click(function() {
+      Toast.fire({
+        type: 'success',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+
+    $('.swalDefaultInfo').click(function() {
+      Toast.fire({
+        type: 'info',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalDefaultError').click(function() {
+      Toast.fire({
+        type: 'error',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalDefaultWarning').click(function() {
+      Toast.fire({
+        type: 'warning',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalDefaultQuestion').click(function() {
+      Toast.fire({
+        type: 'question',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+
+    $('.toastrAddSuccess').click(function() {
+      toastr.success('Berhasil Menambahkan User.')
+    });
+    $('.toastrEditSuccess').click(function() {
+      toastr.success('Data Berhasil Diubah.')
+    });
+    $('.toastrDeleteSuccess').click(function() {
+      toastr.success('Data Berhasil Dihapus.')
+    });
+    $('.toastrDefaultSuccess').click(function() {
+      toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+    });
+    $('.toastrDefaultInfo').click(function() {
+      toastr.info('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+    });
+    $('.toastrDefaultError').click(function() {
+      toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+    });
+    $('.toastrDefaultWarning').click(function() {
+      toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+    });
+
+    $('.toastsDefaultDefault').click(function() {
+      $(document).Toasts('create', {
+        title: 'Toast Title',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultTopLeft').click(function() {
+      $(document).Toasts('create', {
+        title: 'Toast Title',
+        position: 'topLeft',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultBottomRight').click(function() {
+      $(document).Toasts('create', {
+        title: 'Toast Title',
+        position: 'bottomRight',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultBottomLeft').click(function() {
+      $(document).Toasts('create', {
+        title: 'Toast Title',
+        position: 'bottomLeft',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultAutohide').click(function() {
+      $(document).Toasts('create', {
+        title: 'Toast Title',
+        autohide: true,
+        delay: 750,
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultNotFixed').click(function() {
+      $(document).Toasts('create', {
+        title: 'Toast Title',
+        fixed: false,
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultFull').click(function() {
+      $(document).Toasts('create', {
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        icon: 'fas fa-envelope fa-lg',
+      })
+    });
+    $('.toastsDefaultFullImage').click(function() {
+      $(document).Toasts('create', {
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        image: '../../dist/img/user3-128x128.jpg',
+        imageAlt: 'User Picture',
+      })
+    });
+    $('.toastsDefaultSuccess').click(function() {
+      $(document).Toasts('create', {
+        class: 'bg-success', 
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultInfo').click(function() {
+      $(document).Toasts('create', {
+        class: 'bg-info', 
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultWarning').click(function() {
+      $(document).Toasts('create', {
+        class: 'bg-warning', 
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultDanger').click(function() {
+      $(document).Toasts('create', {
+        class: 'bg-danger', 
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.toastsDefaultMaroon').click(function() {
+      $(document).Toasts('create', {
+        class: 'bg-maroon', 
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+  });
+
+</script>
+</body>
+</html>
