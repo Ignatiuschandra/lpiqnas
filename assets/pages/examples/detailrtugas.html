@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>LPIQNAS | Jadwal Kelas</title>
+  <title>LPIQNAS | Review Tugas</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -79,7 +79,7 @@
 
     </ul>
   </nav>
-
+  
   <!-- /.navbar -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #056644 !important; ">
     <!-- Brand Logo -->
@@ -234,12 +234,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Jadwal Kelas</h1>
+            <h1>Detail Review Ujian Aqidah KELAS C</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index3.html">Home</a></li>
-              <li class="breadcrumb-item active">Jadwal Kelas</li>
+              <li class="breadcrumb-item"><a href="rujian.html">Review Ujian</a></li>
+              <li class="breadcrumb-item active">Detail Review Ujian</li>
             </ol>
           </div>
         </div>
@@ -254,12 +255,8 @@
           <div class="card">
 
             <div class="card-body">
-              
               <div class="row">
-                <div class="col-md-6">
-                  <a href="" class="btn btn-success mb-3" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-square mr-2"></i> Tambah Jadwal</a>
-                </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <input class="form-control col-4 mb-3" type="search" placeholder="Search" style="float: right;">
                 </div>
               </div>
@@ -267,104 +264,64 @@
               <table class="table text-center">
                 <thead>
                   <tr>
-                    <th class="text-left">Mata Pelajaran</th>
-                    <th>Kelas</th>
-                    <th>Jam Mulai</th>
-                    <th>Jam Selesai</th>
-                    <th class="text-center">Aksi</th>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Jawaban</th>
+                    <th>Nilai</th> <!--kalau PG otomatis muncul nilai, seperti ujian-->
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-left">Ushul Fiqh</td>
-                    <td>A</td>
-                    <td>10.00</td>
-                    <td>12.00</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
+                    <td>1</td>
+                    <td>Adri</td>
+                    <td>Bendera Indonesia itu merah putih</td>
+                    <td>
+                      <input type="text" class="form-control" id="nilai" placeholder="Masukkan Nilai">
                     </td>
                   <tr>
-                    <td class="text-left">Sejarah Islam</td>
-                    <td>C</td>
-                    <td>09.00</td>
-                    <td>11.00</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
+                    <td>2</td>
+                    <td>Andi</td>
+                    <td>Bendera Indonesia itu dari kain</td>
+                    <td>
+                      <input type="text" class="form-control" id="nilai" placeholder="Masukkan Nilai">
                     </td>
                   <tr>
-                    <td class="text-left">Pengetahuan Umum</td>
-                    <td>B</td>
-                    <td>16.00</td>
-                    <td>17.00</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
+                    <td>3</td>
+                    <td>Budi</td>
+                    <td>Bendera Indonesia itu kalau tidak salah merah, apa putih</td>
+                    <td>
+                      <input type="text" class="form-control" id="nilai" placeholder="Masukkan Nilai">
                     </td>
                   <tr>
-                    <td class="text-left">Sejarah Islam</td>
-                    <td>A</td>
-                    <td>09.00</td>
-                    <td>12.00</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
+                    <td>4</td>
+                    <td>Chandra</td>
+                    <td>Bendera Indonesia itu merah putih</td>
+                    <td>
+                      <input type="text" class="form-control" id="nilai" placeholder="Masukkan Nilai">
                     </td>
                   <tr>
-                    <td class="text-left">Sejarah Islam</td>
-                    <td>D</td>
-                    <td>15.00</td>
-                    <td>17.00</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
+                    <td>5</td>
+                    <td>Dimas</td>
+                    <td>Bendera Indonesia itu merah putih</td>
+                    <td>
+                      <input type="text" class="form-control" id="nilai" placeholder="Masukkan Nilai">
                     </td>
-
+                  <tr>
+                    <td>6</td>
+                    <td>Robby</td>
+                    <td>Bendera Indonesia itu merah putih</td>
+                    <td>
+                      <input type="text" class="form-control" id="nilai" placeholder="Masukkan Nilai">
+                    </td>
                 </tbody>
               </table>
 
               <div class="row">
                 <div class="col-md-6" style="margin-top: 20px;">
-                  <label>Showing 1 to 10 of 10 entries </label>
+                  <label>Showing 1 to 30 of 30 entries </label>
                 </div>
-                <div class="col-md-6" style="margin-top: 20px;">
-                  <ul class="pagination" style="float: right;">
-                    <li class="paginate_button page-item previous disabled" id="example2_previous">
-                      <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                    </li>
-                    <li class="paginate_button page-item active">
-                      <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-                    </li>
-                    <li class="paginate_button page-item next" id="example2_next">
-                      <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                    </li>
-                  </ul>
+                <div class="col-md-6">
+                  <a href="detailrtugas.html" class="btn btn-success mb-3" style="float: right;">Input Nilai</a>
                 </div>
               </div>
 
@@ -372,6 +329,7 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card-->
+
        </div>
     <!-- /.col -->
     </div>
@@ -383,62 +341,17 @@
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Hapus Jadwal</h4>
+              <h4 class="modal-title">Hapus Ujian</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <p>Apakah Anda Yakin Ingin Menghapus Jadwal ini?</p>
+              <p>Apakah Anda Yakin Ingin Menghapus Ujian ini?</p>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
               <button type="button" class="btn btn-primary toastrDeleteSuccess">Ya</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
-
-      <!-- modal edit -->
-      <div class="modal fade" id="modal-edit">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Edit Jadwal</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <!-- /.modal form body -->
-              <form role="form">
-                <div class="card-body">
-                  <div class="form-group">
-                    <label for="MataPelajaran">Mata Pelajaran</label>
-                    <input type="text" class="form-control" id="MataPelajaran" placeholder="">
-                  </div>
-                  <div class="form-group">
-                    <label for="Kelas">Kelas</label>
-                    <input type="text" class="form-control" id="Kelas" placeholder="">
-                  </div>
-                  <div class="form-group">
-                    <label for="Mulai">Jam Mulai</label>
-                    <input type="text" class="form-control" id="Mulai" placeholder="">
-                  </div>
-                  <div class="form-group">
-                    <label for="Selesai">Jam Selesai</label>
-                    <input type="text" class="form-control" id="Selesai" placeholder="">
-                  </div>
-                </div>
-                <!-- /.card-body -->
-              </form>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-              <button type="button" class="btn btn-primary toastrEditSuccess">Simpan</button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -452,7 +365,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Tambah Jadwal Kelas</h4>
+              <h4 class="modal-title">Tambah Ujian</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -462,28 +375,24 @@
               <form role="form">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="MataPelajaran">Mata Pelajaran</label>
-                    <input type="text" class="form-control" id="MataPelajaran" placeholder="Masukkan Mata Pelajaran">
+                    <label for="Judul">Judul Ujian</label>
+                    <input type="text" class="form-control" id="Judul" placeholder="Masukkan Judul Ujian">
                   </div>
                   <div class="form-group">
-                    <label for="Kelas">Kelas</label>
-                    <input type="text" class="form-control" id="Kelas" placeholder="Masukkan Kelas">
+                    <label for="Pembuat">Pembuat</label>
+                    <input type="text" class="form-control" id="Pembuat" placeholder="Masukkan Pembuat Ujian">
                   </div>
                   <div class="form-group">
-                    <label for="Mulai">Jam Mulai</label>
-                    <input type="text" class="form-control" id="Mulai" placeholder="Masukkan Jam Mulai">
+                    <label for="Bsoal">Banyak Soal</label>
+                    <input type="text" class="form-control" id="Bsoal" placeholder="Masukkan Banyaknya Soal">
                   </div>
-                  <div class="form-group">
-                    <label for="Selesai">Jam Selesai</label>
-                    <input type="text" class="form-control" id="Selesai" placeholder="Masukkan Jam Selesai">
-                  </div>              
                 </div>
                 <!-- /.card-body -->
               </form>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-              <button type="button" class="btn btn-success toastrAddSuccess">Tambah</button>
+              <button type="button" class="btn btn-primary"><a href="tambah-ujian.html" class="text-white">Tambah</a></button>
             </div>
           </div>
           <!-- /.modal-content -->

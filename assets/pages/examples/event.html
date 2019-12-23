@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>LPIQNAS | Jadwal Kelas</title>
+  <title>LPIQNAS | Informasi dan Event</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -234,12 +234,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Jadwal Kelas</h1>
+            <h1>Informasi dan Event</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index3.html">Home</a></li>
-              <li class="breadcrumb-item active">Jadwal Kelas</li>
+              <li class="breadcrumb-item active">Informasi dan Event</li>
             </ol>
           </div>
         </div>
@@ -257,29 +257,29 @@
               
               <div class="row">
                 <div class="col-md-6">
-                  <a href="" class="btn btn-success mb-3" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-square mr-2"></i> Tambah Jadwal</a>
+                  <a href="" class="btn btn-success mb-3" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-square mr-2"></i> Tambah Event</a>
                 </div>
                 <div class="col-md-6">
                   <input class="form-control col-4 mb-3" type="search" placeholder="Search" style="float: right;">
                 </div>
               </div>
 
-              <table class="table text-center">
+              <table class="table">
                 <thead>
                   <tr>
-                    <th class="text-left">Mata Pelajaran</th>
-                    <th>Kelas</th>
-                    <th>Jam Mulai</th>
-                    <th>Jam Selesai</th>
+                    <th class="text-left">Judul Event</th>
+                    <th>Deskripsi</th>
+                    <th>Pembuat Event</th>
+                    <th>Tanggal Event</th>
                     <th class="text-center">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-left">Ushul Fiqh</td>
-                    <td>A</td>
-                    <td>10.00</td>
-                    <td>12.00</td>
+                    <td class="text-left">Pekan Olahraga</td>
+                    <td>Akan diadakan pekan olahraga</td>
+                    <td>Guru Olahraga</td>
+                    <td>2 Januari 2020</td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
                         <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
@@ -287,10 +287,10 @@
                       </div>
                     </td>
                   <tr>
-                    <td class="text-left">Sejarah Islam</td>
-                    <td>C</td>
-                    <td>09.00</td>
-                    <td>11.00</td>
+                    <td class="text-left">Libur nasional</td>
+                    <td>Libur Nasional serempak</td>
+                    <td>Kepala Sekolah</td>
+                    <td>12 Januari 2020</td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
                         <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
@@ -298,38 +298,17 @@
                       </div>
                     </td>
                   <tr>
-                    <td class="text-left">Pengetahuan Umum</td>
-                    <td>B</td>
-                    <td>16.00</td>
-                    <td>17.00</td>
+                    <td class="text-left">Lomba Mengaji</td>
+                    <td>Adu skill mengajimu!</td>
+                    <td>Guru Agama</td>
+                    <td>20 Januari 2020</td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
                         <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
                         <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
                       </div>
                     </td>
-                  <tr>
-                    <td class="text-left">Sejarah Islam</td>
-                    <td>A</td>
-                    <td>09.00</td>
-                    <td>12.00</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-                  <tr>
-                    <td class="text-left">Sejarah Islam</td>
-                    <td>D</td>
-                    <td>15.00</td>
-                    <td>17.00</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
+                  
 
                 </tbody>
               </table>
@@ -383,13 +362,13 @@
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Hapus Jadwal</h4>
+              <h4 class="modal-title">Hapus Event</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <p>Apakah Anda Yakin Ingin Menghapus Jadwal ini?</p>
+              <p>Apakah Anda Yakin Ingin Menghapus Event ini?</p>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
@@ -407,7 +386,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Edit Jadwal</h4>
+              <h4 class="modal-title">Edit Event</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -417,20 +396,20 @@
               <form role="form">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="MataPelajaran">Mata Pelajaran</label>
-                    <input type="text" class="form-control" id="MataPelajaran" placeholder="">
+                    <label for="Judul">Judul Event</label>
+                    <input type="text" class="form-control" id="Judul" placeholder="">
                   </div>
                   <div class="form-group">
-                    <label for="Kelas">Kelas</label>
-                    <input type="text" class="form-control" id="Kelas" placeholder="">
+                    <label for="desc">Deskripsi</label>
+                    <textarea id="desc" class="form-control" rows="2" placeholder=""></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="Mulai">Jam Mulai</label>
-                    <input type="text" class="form-control" id="Mulai" placeholder="">
+                    <label for="Pembuat">Pembuat Event</label>
+                    <input type="text" class="form-control" id="Pembuat" placeholder="">
                   </div>
                   <div class="form-group">
-                    <label for="Selesai">Jam Selesai</label>
-                    <input type="text" class="form-control" id="Selesai" placeholder="">
+                    <label for="Tanggal">Tanggal Event</label>
+                    <input type="date" class="form-control" id="Tanggal" placeholder="">
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -452,7 +431,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Tambah Jadwal Kelas</h4>
+              <h4 class="modal-title">Tambah Event Kelas</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -462,20 +441,20 @@
               <form role="form">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="MataPelajaran">Mata Pelajaran</label>
-                    <input type="text" class="form-control" id="MataPelajaran" placeholder="Masukkan Mata Pelajaran">
+                    <label for="Judul">Judul Event</label>
+                    <input type="text" class="form-control" id="Judul" placeholder="Masukkan Judul Event">
                   </div>
                   <div class="form-group">
-                    <label for="Kelas">Kelas</label>
-                    <input type="text" class="form-control" id="Kelas" placeholder="Masukkan Kelas">
+                    <label for="desc">Deskripsi</label>
+                   <textarea id="desc" class="form-control" rows="2" placeholder="Masukkan Deskripsi Event"></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="Mulai">Jam Mulai</label>
-                    <input type="text" class="form-control" id="Mulai" placeholder="Masukkan Jam Mulai">
+                    <label for="Pembuat">Pembuat Event</label>
+                    <input type="text" class="form-control" id="Pembuat" placeholder="Masukkan Pembuat Event">
                   </div>
                   <div class="form-group">
-                    <label for="Selesai">Jam Selesai</label>
-                    <input type="text" class="form-control" id="Selesai" placeholder="Masukkan Jam Selesai">
+                    <label for="Tanggal">Tanggal Event</label>
+                    <input type="date" class="form-control" id="Tanggal" placeholder="Masukkan Tanggal Event">
                   </div>              
                 </div>
                 <!-- /.card-body -->
@@ -579,7 +558,7 @@
     });
 
     $('.toastrAddSuccess').click(function() {
-      toastr.success('Berhasil Menambahkan Jadwal.')
+      toastr.success('Berhasil Menambahkan Event.')
     });
     $('.toastrEditSuccess').click(function() {
       toastr.success('Data Berhasil Diubah.')

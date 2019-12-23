@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>LPIQNAS | Jadwal Kelas</title>
+  <title>LPIQNAS | Posting dan Diskusi</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -226,7 +226,6 @@
     </div>
     <!-- /.sidebar -->
   </aside>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -234,12 +233,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Jadwal Kelas</h1>
+            <h1>Posting dan Diskusi</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index3.html">Home</a></li>
-              <li class="breadcrumb-item active">Jadwal Kelas</li>
+              <li class="breadcrumb-item active">Posting dan Diskusi</li>
             </ol>
           </div>
         </div>
@@ -257,79 +256,46 @@
               
               <div class="row">
                 <div class="col-md-6">
-                  <a href="" class="btn btn-success mb-3" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-square mr-2"></i> Tambah Jadwal</a>
+                  <a href="" class="btn btn-success mb-3" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-square mr-2"></i> Tambah Diskusi</a>
                 </div>
                 <div class="col-md-6">
                   <input class="form-control col-4 mb-3" type="search" placeholder="Search" style="float: right;">
                 </div>
               </div>
 
-              <table class="table text-center">
+              <table class="table">
                 <thead>
                   <tr>
-                    <th class="text-left">Mata Pelajaran</th>
-                    <th>Kelas</th>
-                    <th>Jam Mulai</th>
-                    <th>Jam Selesai</th>
+                    <th class="text-left">Judul Diskusi</th>
+                    <th>Pembuat Diskusi</th>
+                    <th class="text-center">Jumlah Komentar</th>
                     <th class="text-center">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-left">Ushul Fiqh</td>
-                    <td>A</td>
-                    <td>10.00</td>
-                    <td>12.00</td>
+                    <td class="text-left">Bagaimana cara buat diskusi?</td>
+                    <td>Randy</td>
+                    <td class="text-center">4</td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail"><i class="fas fa-eye"></i></a>
                         <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
                         <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
                       </div>
                     </td>
                   <tr>
-                    <td class="text-left">Sejarah Islam</td>
-                    <td>C</td>
-                    <td>09.00</td>
-                    <td>11.00</td>
+                    <td class="text-left">Materi ujian sejarah apa aja ya?</td>
+                    <td>Rizky</td>
+                    <td class="text-center">0</td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail"><i class="fas fa-eye"></i></a>
                         <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
                         <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
                       </div>
                     </td>
-                  <tr>
-                    <td class="text-left">Pengetahuan Umum</td>
-                    <td>B</td>
-                    <td>16.00</td>
-                    <td>17.00</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-                  <tr>
-                    <td class="text-left">Sejarah Islam</td>
-                    <td>A</td>
-                    <td>09.00</td>
-                    <td>12.00</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-                  <tr>
-                    <td class="text-left">Sejarah Islam</td>
-                    <td>D</td>
-                    <td>15.00</td>
-                    <td>17.00</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
+                  
 
                 </tbody>
               </table>
@@ -378,18 +344,108 @@
  <!-- /.row -->
 
 
-      <!-- modal hapus -->
-      <div class="modal fade" id="modal-hapus">
-        <div class="modal-dialog modal-sm">
+      <!-- modal detail -->
+      <div class="modal fade" id="modal-detail">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Hapus Jadwal</h4>
+              <h4 class="modal-title">Detail Diskusi</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <p>Apakah Anda Yakin Ingin Menghapus Jadwal ini?</p>
+              <!-- /.modal form body -->
+              <form role="form">
+                <div class="card-body">
+                  <div class="post">
+                      <div class="user-block">
+                        <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                        <span class="username">
+                          <a href="#">Randy</a>
+                        </span>
+                        <span class="description">7:30 PM today</span>
+                      </div>
+                      <!-- /.user-block -->
+                      <p style="margin-bottom: 30px;">
+                        Bagaimana cara buat diskusi?
+                      </p>
+
+                      <p style="margin-bottom: 20px; text-align: left;">
+                        <a href="#" class="link-black text-sm">
+                          <i class="fas fa-comments mr-1"></i> Comments (1)
+                        </a>
+                      </p>
+
+                      <div class="card-footer card-comments" style="margin-bottom: 10px;">
+                      <div class="card-comment">
+                        <div class="comment-text">
+                          <span class="username">
+                            Siti
+                            <span class="text-muted float-right">8:03 PM Today</span>
+                          </span><!-- /.username -->
+                          Bercanda terus ih hahaha
+                        </div>
+                        <!-- /.comment-text -->
+                      </div>
+                      </div>
+
+                      <div class="card-footer card-comments" style="margin-bottom: 10px;">
+                      <div class="card-comment">
+                        <div class="comment-text">
+                          <span class="username">
+                            Budi
+                            <span class="text-muted float-right">8:13 PM Today</span>
+                          </span><!-- /.username -->
+                          wkwkwk ngeselinn
+                        </div>
+                        <!-- /.comment-text -->
+                      </div>
+                      </div>
+
+                      <!--card komen admin-->
+                      <div class="card-footer card-comments" style="margin-bottom: 10px;">
+                      <div class="card-comment">
+                        <div class="comment-text">
+                          <span class="username" style="color: #47E5B1;">
+                            Admin LPIQNAS
+                            <span class="text-muted float-right">8:30 PM Today</span>
+                          </span><!-- /.username -->
+                          Hallo Rookie219, secara tidak sadar kamu telah membuat diskusi. Terima Kasih 
+                        </div>
+                        <!-- /.comment-text -->
+                      </div>
+                      </div>
+
+                      <input class="form-control form-control-sm" type="text" placeholder="Type a comment" style="margin-top: 10px;">
+                </div>
+                </div>
+                <!-- /.card-body -->
+              </form>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+            
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+      <!-- modal hapus -->
+      <div class="modal fade" id="modal-hapus">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Hapus Diskusi</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Apakah Anda Yakin Ingin Menghapus Diskusi ini?</p>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
@@ -407,7 +463,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Edit Jadwal</h4>
+              <h4 class="modal-title">Edit Diskusi</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -417,20 +473,12 @@
               <form role="form">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="MataPelajaran">Mata Pelajaran</label>
-                    <input type="text" class="form-control" id="MataPelajaran" placeholder="">
+                    <label for="Judul">Judul Diskusi</label>
+                    <textarea id="Judul" class="form-control" rows="2" placeholder=""></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="Kelas">Kelas</label>
-                    <input type="text" class="form-control" id="Kelas" placeholder="">
-                  </div>
-                  <div class="form-group">
-                    <label for="Mulai">Jam Mulai</label>
-                    <input type="text" class="form-control" id="Mulai" placeholder="">
-                  </div>
-                  <div class="form-group">
-                    <label for="Selesai">Jam Selesai</label>
-                    <input type="text" class="form-control" id="Selesai" placeholder="">
+                    <label for="Pembuat">Pembuat Diskusi</label>
+                    <input type="text" class="form-control" id="Pembuat" placeholder="">
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -452,7 +500,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Tambah Jadwal Kelas</h4>
+              <h4 class="modal-title">Tambah Diskusi Kelas</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -462,21 +510,13 @@
               <form role="form">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="MataPelajaran">Mata Pelajaran</label>
-                    <input type="text" class="form-control" id="MataPelajaran" placeholder="Masukkan Mata Pelajaran">
+                    <label for="Judul">Judul Diskusi</label>
+                    <textarea id="Judul" class="form-control" rows="2" placeholder="Masukkan Judul Diskusi"></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="Kelas">Kelas</label>
-                    <input type="text" class="form-control" id="Kelas" placeholder="Masukkan Kelas">
+                    <label for="Pembuat">Pembuat Diskusi</label>
+                    <input type="text" class="form-control" id="Pembuat" placeholder="Masukkan Pembuat Diskusi">
                   </div>
-                  <div class="form-group">
-                    <label for="Mulai">Jam Mulai</label>
-                    <input type="text" class="form-control" id="Mulai" placeholder="Masukkan Jam Mulai">
-                  </div>
-                  <div class="form-group">
-                    <label for="Selesai">Jam Selesai</label>
-                    <input type="text" class="form-control" id="Selesai" placeholder="Masukkan Jam Selesai">
-                  </div>              
                 </div>
                 <!-- /.card-body -->
               </form>
@@ -579,7 +619,7 @@
     });
 
     $('.toastrAddSuccess').click(function() {
-      toastr.success('Berhasil Menambahkan Jadwal.')
+      toastr.success('Berhasil Menambahkan Diskusi.')
     });
     $('.toastrEditSuccess').click(function() {
       toastr.success('Data Berhasil Diubah.')
