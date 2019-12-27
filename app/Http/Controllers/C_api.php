@@ -511,7 +511,7 @@ class C_api extends Controller
     		$data['kontenUjian'] = UjianSoal::select('us_id', 'us_soal', 'us_gambar','us_jawaban', 'us_kunci')
     			->where('us_ujian_id', $request->idUjian)->get();
     		$data['durasiUjian'] = Ujian::select('ujian_durasi')
-    			->where('ujian_id', $request->idUjian)->get();
+    			->where('ujian_id', $request->idUjian)->first()->ujian_durasi;
 
     		return [
     			'success' 	=> true,
