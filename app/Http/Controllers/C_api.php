@@ -882,4 +882,38 @@ class C_api extends Controller
     	}
     }
 
+    public function getDaftarMateri(Request $request){
+        $validate = Validator::make($request->all(), [
+            'idSiswa'       => 'required|numeric'
+        ]);
+
+        if ($validate->fails()) {
+            return [
+                'success'   => false,
+                'info'      => $validate->errors(),
+                'data'      => null
+            ];
+        }
+
+        try {
+            $data['materi'] = Materi::select('materi_id', 'materi_nama')
+                                ->join('kelas', 'kelas_tingkat', '=', 'materi_tingkat')
+                                ->join('siswa_kelas', 'sk_kelas_id', '=', 'kelas_id')
+                                ->join('siswa', 'siswa_id', '=', 'sk_siswa_id')
+                                ->where('siswa_id', '=', $request->idSiswa)->get();
+
+            return [
+                'success'   => true,
+                'info'      => 'Success get data from DB',
+                'data'      => $data
+            ];      
+        } catch (Exception $e) {
+            return [
+                'success'   => false,
+                'info'      => $e->getMessage(),
+                'data'      => null
+            ];  
+        }
+    }
+
 }
