@@ -3,13 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Posting dan Diskusi - LPIQNAS</title>
+  <title>Edit Materi - LPIQNAS</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Favicons -->
-  <link href="../../dist/img/favicon.png" rel="icon">
-  <link href="../../dist/img/apple-touch-icon.png" rel="apple-touch-icon">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -20,6 +17,8 @@
   <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -38,6 +37,7 @@
       
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+      
       
 
       <li class="nav-item dropdown">
@@ -92,7 +92,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="materii.html" class="nav-link" style="color: #ffffff;">
+            <a href="pages/examples/materii.html" class="nav-link" style="color: #ffffff;">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Materi Management
@@ -101,7 +101,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="video.html" class="nav-link" style="color: #ffffff;">
+            <a href="pages/examples/video.html" class="nav-link" style="color: #ffffff;">
               <i class="nav-icon fas fa-play"></i>
               <p>
                 Video Management
@@ -110,7 +110,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="tugas.html" class="nav-link" style="color: #ffffff;">
+            <a href="pages/examples/tugas.html" class="nav-link" style="color: #ffffff;">
               <i class="nav-icon fas fa-list-alt"></i>
               <p>
                 Tugas Management
@@ -119,7 +119,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="ujian.html" class="nav-link" style="color: #ffffff;">
+            <a href="pages/examples/ujian.html" class="nav-link" style="color: #ffffff;">
               <i class="nav-icon fas fa-file"></i>
               <p>
                 Ujian Management
@@ -137,13 +137,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="rtugas.html" class="nav-link" style="color: #ffffff;">
+                <a href="pages/examples/rtugas.html" class="nav-link" style="color: #ffffff;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tugas</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="rujian.html" class="nav-link" style="color: #ffffff;">
+                <a href="pages/examples/rujian.html" class="nav-link" style="color: #ffffff;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Ujian</p>
                 </a>
@@ -152,7 +152,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="jadwal.html" class="nav-link" style="color: #ffffff;">
+            <a href="pages/examples/jadwal.html" class="nav-link" style="color: #ffffff;">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Jadwal Kelas
@@ -161,7 +161,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="event.html" class="nav-link" style="color: #ffffff;">
+            <a href="pages/examples/event.html" class="nav-link" style="color: #ffffff;">
               <i class="nav-icon fas fa-info"></i>
               <p>
                 Informasi dan Event
@@ -170,7 +170,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="diskusi.html" class="nav-link" style="color: #ffffff;"> 
+            <a href="pages/examples/diskusi.html" class="nav-link" style="color: #ffffff;"> 
               <i class="nav-icon fas fa-plus-circle"></i>
               <p>
                 Posting dan Diskusi
@@ -179,7 +179,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="komentar.html" class="nav-link" style="color: #ffffff;">
+            <a href="pages/examples/komentar.html" class="nav-link" style="color: #ffffff;">
               <i class="nav-icon fas fa-comments"></i>
               <p>
                 Komentar
@@ -188,7 +188,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="broadcast.html" class="nav-link" style="color: #ffffff;">
+            <a href="pages/examples/broadcast.html" class="nav-link" style="color: #ffffff;">
               <i class="nav-icon fab fa-whatsapp"></i>
               <p>
                 Broadcast
@@ -202,6 +202,7 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -209,12 +210,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Posting dan Diskusi</h1>
+            <h1>Edit Materi</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index3.html">Home</a></li>
-              <li class="breadcrumb-item active">Posting dan Diskusi</li>
+              <li class="breadcrumb-item"><a href="materii.html">Materi</a></li>
+              <li class="breadcrumb-item active">Edit Materi</li>
             </ol>
           </div>
         </div>
@@ -227,86 +229,34 @@
         <div class="col-12">
           
           <div class="card">
-
+            
             <div class="card-body">
-              
-              <div class="row">
-                <div class="col-md-6">
-                  <a href="" class="btn btn-success mb-3" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-square mr-2"></i> Tambah Diskusi</a>
-                </div>
-                <div class="col-md-6">
-                  <input class="form-control col-4 mb-3" type="search" placeholder="Search" style="float: right;">
-                </div>
+
+              <div class="card-body pad">
+                <!-- select -->
+                      <div class="form-group mb-4">
+                        <label>Pilih Kelas</label>
+                        <select class="form-control">
+                          <option>Kelas 10</option>
+                          <option>Kelas 11</option>
+                          <option>Kelas 12</option>
+                        </select>
+                      </div>
+
+              <div class="mb-3">
+                <label>Deskripsi Materi</label>
+                <textarea class="textarea" placeholder="Place some text here"
+                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
               </div>
-
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th class="text-left">Judul Diskusi</th>
-                    <th>Pembuat Diskusi</th>
-                    <th class="text-center">Jumlah Komentar</th>
-                    <th class="text-center">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="text-left">Bagaimana cara buat diskusi?</td>
-                    <td>Randy</td>
-                    <td class="text-center">4</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail"><i class="fas fa-eye"></i></a>
-                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-                  <tr>
-                    <td class="text-left">Materi ujian sejarah apa aja ya?</td>
-                    <td>Rizky</td>
-                    <td class="text-center">0</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail"><i class="fas fa-eye"></i></a>
-                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-                  
-
-                </tbody>
-              </table>
-
-              <div class="row">
-                <div class="col-md-6" style="margin-top: 20px;">
-                  <label>Showing 1 to 10 of 10 entries </label>
+              
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6" style="margin-top: 5px;">
+                  <h7 style="color: #a6a6a6; ">Silahkan perluas textarea jika diperlukan</h7>
                 </div>
-                <div class="col-md-6" style="margin-top: 20px;">
-                  <ul class="pagination" style="float: right;">
-                    <li class="paginate_button page-item previous disabled" id="example2_previous">
-                      <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                    </li>
-                    <li class="paginate_button page-item active">
-                      <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-                    </li>
-                    <li class="paginate_button page-item next" id="example2_next">
-                      <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                    </li>
-                  </ul>
+                <div class="col-md-6" style="margin-top: 5px;">
+                  <a href="materii.html" class="btn btn-success" style="float: right;">Edit Materi</a>
                 </div>
               </div>
 
@@ -320,108 +270,18 @@
  <!-- /.row -->
 
 
-      <!-- modal detail -->
-      <div class="modal fade" id="modal-detail">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Detail Diskusi</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <!-- /.modal form body -->
-              <form role="form">
-                <div class="card-body">
-                  <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../../dist/img/user2-160x160.jpg" alt="user image">
-                        <span class="username">
-                          <a href="#">Randy</a>
-                        </span>
-                        <span class="description">7:30 PM today</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p style="margin-bottom: 30px;">
-                        Bagaimana cara buat diskusi?
-                      </p>
-
-                      <p style="margin-bottom: 20px; text-align: left;">
-                        <a href="#" class="link-black text-sm">
-                          <i class="fas fa-comments mr-1"></i> Comments (1)
-                        </a>
-                      </p>
-
-                      <div class="card-footer card-comments" style="margin-bottom: 10px;">
-                      <div class="card-comment">
-                        <div class="comment-text">
-                          <span class="username">
-                            Siti
-                            <span class="text-muted float-right">8:03 PM Today</span>
-                          </span><!-- /.username -->
-                          Bercanda terus ih hahaha
-                        </div>
-                        <!-- /.comment-text -->
-                      </div>
-                      </div>
-
-                      <div class="card-footer card-comments" style="margin-bottom: 10px;">
-                      <div class="card-comment">
-                        <div class="comment-text">
-                          <span class="username">
-                            Budi
-                            <span class="text-muted float-right">8:13 PM Today</span>
-                          </span><!-- /.username -->
-                          wkwkwk ngeselinn
-                        </div>
-                        <!-- /.comment-text -->
-                      </div>
-                      </div>
-
-                      <!--card komen admin-->
-                      <div class="card-footer card-comments" style="margin-bottom: 10px;">
-                      <div class="card-comment">
-                        <div class="comment-text">
-                          <span class="username" style="color: #47E5B1;">
-                            Admin LPIQNAS
-                            <span class="text-muted float-right">8:30 PM Today</span>
-                          </span><!-- /.username -->
-                          Hallo Randy, secara tidak sadar kamu telah membuat diskusi. Terima Kasih 
-                        </div>
-                        <!-- /.comment-text -->
-                      </div>
-                      </div>
-
-                      <input class="form-control form-control-sm" type="text" placeholder="Type a comment" style="margin-top: 10px;">
-                </div>
-                </div>
-                <!-- /.card-body -->
-              </form>
-
-            </div>
-            <div class="modal-footer justify-content-between">
-            
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
-
       <!-- modal hapus -->
       <div class="modal fade" id="modal-hapus">
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Hapus Diskusi</h4>
+              <h4 class="modal-title">Hapus Materi</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <p>Apakah Anda Yakin Ingin Menghapus Diskusi ini?</p>
+              <p>Apakah Anda Yakin Ingin Menghapus Materi ini?</p>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
@@ -439,7 +299,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Edit Diskusi</h4>
+              <h4 class="modal-title">Edit Data Materi</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -449,12 +309,16 @@
               <form role="form">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="Judul">Judul Diskusi</label>
-                    <textarea id="Judul" class="form-control" rows="2" placeholder=""></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="Pembuat">Pembuat Diskusi</label>
-                    <input type="text" class="form-control" id="Pembuat" placeholder="">
+                    <label for="exampleInputFile">File input</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
+                      </div>
+                      <div class="input-group-append">
+                        <span class="input-group-text" id="">Upload</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -476,7 +340,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Tambah Diskusi Kelas</h4>
+              <h4 class="modal-title">Tambah Data Materi</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -486,12 +350,8 @@
               <form role="form">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="Judul">Judul Diskusi</label>
-                    <textarea id="Judul" class="form-control" rows="2" placeholder="Masukkan Judul Diskusi"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="Pembuat">Pembuat Diskusi</label>
-                    <input type="text" class="form-control" id="Pembuat" placeholder="Masukkan Pembuat Diskusi">
+                    <label for="Mulai">Jam Mulai</label>
+                    <input type="text" class="form-control" id="Mulai" placeholder="Masukkan Jam Mulai">
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -546,6 +406,18 @@
 <!-- DataTables -->
 <script src="../../plugins/datatables/jquery.dataTables.js"></script>
 <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<!-- OPTIONAL SCRIPTS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="dist/js/pages/dashboard3.js"></script>
+<!-- Summernote -->
+<script src="../../plugins/summernote/summernote-bs4.min.js"></script>
+<script>
+  $(function () {
+    // Summernote
+    $('.textarea').summernote()
+  })
+</script>
 
 <script type="text/javascript">
   $(function() {
@@ -595,7 +467,7 @@
     });
 
     $('.toastrAddSuccess').click(function() {
-      toastr.success('Berhasil Menambahkan Diskusi.')
+      toastr.success('Berhasil Menambahkan Materi.')
     });
     $('.toastrEditSuccess').click(function() {
       toastr.success('Data Berhasil Diubah.')
