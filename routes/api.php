@@ -41,4 +41,5 @@ Route::group(['middleware' => 'check-token'], function(){
 	Route::post('insertVideoBroadcastingKomentar', 'C_api@insertVideoBroadcastingKomentar');
 	Route::post('getKomentarVideoBroadcasting', 'C_api@getKomentarVideoBroadcasting');
 	Route::post('getDaftarMateri', 'C_api@getDaftarMateri');
+	Route::post('getUserProfile', 'C_api@getUserProfile');
 });

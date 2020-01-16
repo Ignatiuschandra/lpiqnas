@@ -20,7 +20,7 @@
           <table class="table" id="tabel-tugas">
             <thead>
               <tr>
-                <th>Materi</th>
+                <th>Judul Tugas</th>
                 <th>Pembuat</th>
                 <th>Kelas</th>
                 <th class="text-center">Aksi</th>
@@ -53,10 +53,11 @@
         </div>
         <div class="modal-body">
           <p>Apakah Anda Yakin Ingin Menghapus Tugas ini?</p>
+          <input type="hidden" name="tugas_id" id="tugas_id">
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-          <button type="button" class="btn btn-primary toastrDeleteSuccess">Ya</button>
+          <button id="hapusDataTugas" type="button" class="btn btn-primary toastrDeleteSuccess">Ya</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -77,31 +78,41 @@
         </div>
         <div class="modal-body">
           <!-- /.modal form body -->
-          <form role="form">
+          <form role="form" id="formTambah">
             <div class="card-body">
               <div class="form-group">
-                <label for="Judul">Materi</label>
-                <input type="text" class="form-control" id="Judul" placeholder="Masukkan Materi Tugas">
+                <label for="Judul">Judul Tugas</label>
+                <input type="text" class="form-control" name="judul" id="addJudul" placeholder="Masukkan Judul Tugas">
               </div>
               <div class="form-group">
                 <label for="Pembuat">Pembuat</label>
-                <input type="text" class="form-control" id="Pembuat" placeholder="Masukkan Pembuat Tugas">
+                <!-- <input type="text" class="form-control" id="Pembuat" placeholder="Masukkan Pembuat Tugas"> -->
+                <select class="form-control" name="pembuat" id="addPembuat">
+                  <option value="1">Admin LPIQNAS</option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="Kelas">Kelas</label>
-                <input type="text" class="form-control" id="Kelas" placeholder="Masukkan Kelas">
+                <!-- <input type="text" class="form-control" id="addKelas" placeholder="Masukkan Kelas"> -->
+                <select class="form-control" name="kelas" id="addKelas">
+                  @foreach($kelas as $k)
+                  <option value="{{ $k['kelas_id'] }}">
+                    {{ $k['kelas_tingkat'].' '.$k['kelas_nama'].' - '.$k['kelas_tahun_ajaran'] }}
+                  </option>
+                  @endforeach
+                </select>
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="Bsoal">Banyak Soal</label>
-                <input type="text" class="form-control" id="Bsoal" placeholder="Masukkan Banyaknya Soal">
-              </div>
+                <input type="text" class="form-control" id="addBsoal" placeholder="Masukkan Banyaknya Soal">
+              </div> -->
             </div>
             <!-- /.card-body -->
           </form>
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-          <button type="button" class="btn btn-success"><a href="tambah-tugas.html" class="text-white">Tambah</a></button>
+          <button id="tambahDataTugas" type="button" class="btn btn-success"><a class="text-white">Tambah</a></button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -159,9 +170,9 @@
     });
   });
 
-  $('#tambahDataVideo').on('click', function(){
+  $('#tambahDataTugas').on('click', function(){
     $.ajax({
-      url:"{{ url('video-management/tambah-video') }}",
+      url:"{{ url('tugas-management/tambah-tugas') }}",
       method:"POST", 
       data:$('#formTambah').serialize(),
       success:function(response) {
@@ -189,33 +200,33 @@
   });
 
   function setIdHapus(id){
-    $('#video_id').val(id);
+    $('#tugas_id').val(id);
   }
 
-  $('#hapusDataVideo').on('click', function(){
+  $('#hapusDataTugas').on('click', function(){
     $.ajax({
-      url:"{{ url('video-management/hapus-video') }}",
+      url:"{{ url('tugas-management/hapus-tugas') }}",
       method:"POST", 
-      data:{video_id : $('#video_id').val()},
+      data:{tugas_id : $('#tugas_id').val()},
       success:function(response) {
         if (response.success == true) {
           $('#modal-hapus').modal('toggle');
           Toast.fire({
             type: 'success',
-            title: 'Anda Berhasil Menghapus Data Video.'
+            title: 'Anda Berhasil Menghapus Data Tugas.'
           });
           tableTugas.ajax.reload();
         }else{
           Toast.fire({
             type: 'error',
-            title: 'Anda Gagal Menghapus Data Video. Mohon Coba Kembali!'
+            title: 'Anda Gagal Menghapus Data Tugas. Mohon Coba Kembali!'
           });  
         }
       },
       error:function(){
         Toast.fire({
           type: 'error',
-          title: 'Anda Gagal Menghapus Data Video. Hubungi Developer!'
+          title: 'Anda Gagal Menghapus Data Tugas. Hubungi Developer!'
         });
       }
     });

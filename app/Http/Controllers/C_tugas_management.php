@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tugas;
 use App\Models\TugasSoal;
+use App\Models\Kelas;
 use Datatables;
 use DB;
 use Response;
@@ -12,7 +13,9 @@ use Response;
 class C_tugas_management extends Controller
 {
 	public function index(){
-		return view('v_tugasManagement');
+        $kelas = Kelas::get();
+        // print_r($kelas); exit();
+		return view('v_tugasManagement', ['kelas' => $kelas]);
 	}
 
 	public function getJsonTugas(){
@@ -23,12 +26,13 @@ class C_tugas_management extends Controller
         )->make(true);
 	}
 
-	public function insertVideo(Request $request){
-		$video = new Video();
-    	$video->vb_judul 	= $request->judul;
-    	$video->vb_link		= $request->link;
+	public function insertTugas(Request $request){
+		$tugas = new Tugas();
+    	$tugas->tugas_judul 	   = $request->judul;
+    	$tugas->tugas_pembuat_id   = $request->pembuat;
+        $tugas->tugas_kelas_id     = $request->kelas;
 
-    	if ($video->save()) {
+    	if ($tugas->save()) {
     		return Response::json([
     			'success'	=> true,
     			'data'		=> null
@@ -41,18 +45,21 @@ class C_tugas_management extends Controller
     	}
 	}
 
-	public function deleteVideo(Request $request){
-		if (Video::where('vb_id', $request->video_id)->delete()) {
-    		return Response::json([
-    			'success'	=> true,
-    			'data'		=> null
-    		]);
-    	}else{
-    		return Response::json([
-    			'success'	=> false,
-    			'data'		=> null
-    		]);
-    	}
+	public function deleteTugas(Request $request){
+        try {
+            TugasSoal::where('ts_tugas_id', $request->tugas_id)->delete();
+            Tugas::where('tugas_id', $request->tugas_id)->delete();
+
+            return Response::json([
+                'success'   => true,
+                'data'      => null
+            ]);
+        } catch (Exception $e) {
+            return Response::json([
+                'success'   => false,
+                'data'      => $e->message()
+            ]);
+        }
 	}	
 
     // detail tugas 
