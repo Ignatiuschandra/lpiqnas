@@ -8,6 +8,9 @@
 
   <title>@yield('title_nav')</title>
 
+  <!-- Favicons -->
+  <link href="{{ asset('assets/dist/img/favicon.png') }}" rel="icon">
+  <link href="{{ asset('assets/dist/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- IonIcons -->
@@ -24,6 +27,8 @@
   <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Timepicker -->
+  <link rel="stylesheet" href="{{ asset('assets/plugins/timepicker/css/bootstrap-material-datetimepicker.css') }}">
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -191,7 +196,7 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
-            <a href="pages/examples/jadwal.html" class="nav-link" style="color: #ffffff;">
+            <a href="{{url('jadwal')}}" class="nav-link" style="color: #ffffff;">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Jadwal Kelas
@@ -200,7 +205,7 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
-            <a href="pages/examples/event.html" class="nav-link" style="color: #ffffff;">
+            <a href="{{url('pengumuman')}}" class="nav-link" style="color: #ffffff;">
               <i class="nav-icon fas fa-info"></i>
               <p>
                 Informasi dan Event
@@ -209,7 +214,7 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
-            <a href="pages/examples/diskusi.html" class="nav-link" style="color: #ffffff;"> 
+            <a href="{{url('diskusi')}}" class="nav-link" style="color: #ffffff;"> 
               <i class="nav-icon fas fa-plus-circle"></i>
               <p>
                 Posting dan Diskusi
@@ -217,14 +222,14 @@ to get the desired effect
             </a>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="pages/examples/komentar.html" class="nav-link" style="color: #ffffff;">
               <i class="nav-icon fas fa-comments"></i>
               <p>
                 Komentar
               </p>
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-item">
             <a href="pages/examples/broadcast.html" class="nav-link" style="color: #ffffff;">
@@ -302,6 +307,10 @@ to get the desired effect
 <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+<!-- Moment -->
+<script src="{{ asset('assets/plugins/moment/moment.min.js') }}"></script>
+<!-- Timepicker -->
+<script src="{{ asset('assets/plugins/timepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="{{ asset('assets/plugins/chart.js/Chart.min.js') }}"></script>

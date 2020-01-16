@@ -55,3 +55,32 @@ Route::group(['prefix'=>'tugas-management'], function(){
     Route::get('/detail-tugas/{id}', 'C_tugas_management@detailTugas');
     Route::get('/get-json-tugas-soal/{id}', 'C_tugas_management@getJsonTugasSoal');
 });
+
+Route::group(['prefix'=>'jadwal'], function(){
+    Route::get('/', 'C_jadwal@index');
+    Route::get('/get-json-jadwal', 'C_jadwal@getJsonJadwal');
+    Route::post('/get-jadwal', 'C_jadwal@getJadwal');
+    Route::post('/tambah-jadwal', 'C_jadwal@insertJadwal');
+    Route::post('/hapus-jadwal', 'C_jadwal@deleteJadwal');
+    Route::post('/update-jadwal', 'C_jadwal@updateJadwal');
+});
+
+Route::group(['prefix'=>'pengumuman'], function(){
+    Route::get('/', 'C_pengumuman@index');
+    Route::get('/get-json-pengumuman', 'C_pengumuman@getJsonPengumuman');
+    Route::post('/get-pengumuman', 'C_pengumuman@getPengumuman');
+    Route::post('/tambah-pengumuman', 'C_pengumuman@insertPengumuman');
+    Route::post('/hapus-pengumuman', 'C_pengumuman@deletePengumuman');
+    Route::post('/update-pengumuman', 'C_pengumuman@updatePengumuman');
+});
+
+Route::group(['prefix'=>'diskusi'], function(){
+    Route::get('/', 'C_diskusi@index');
+    Route::get('/get-json-diskusi', 'C_diskusi@getJsonDiskusi');
+    Route::post('/get-diskusi', 'C_diskusi@getDiskusi');
+    Route::post('/get-detail-diskusi', 'C_diskusi@getDetailDiskusi');
+    Route::post('/tambah-diskusi', 'C_diskusi@insertDiskusi');
+    Route::post('/tambah-komentar', 'C_diskusi@insertKomentar');
+    Route::post('/hapus-diskusi', 'C_diskusi@deleteDiskusi');
+    Route::post('/update-diskusi', 'C_diskusi@updateDiskusi');
+});

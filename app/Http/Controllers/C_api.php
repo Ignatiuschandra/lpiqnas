@@ -916,4 +916,35 @@ class C_api extends Controller
         }
     }
 
+    public function getUserProfile(Request $request){
+        $validate = Validator::make($request->all(), [
+            'idSiswa'       => 'required|numeric'
+        ]);
+
+        if ($validate->fails()) {
+            return [
+                'success'   => false,
+                'info'      => $validate->errors(),
+                'data'      => null
+            ];
+        }
+
+        try {
+            $data['materi'] = Siswa::select('siswa_nama_lengkap', 'siswa_alamat', 'siswa_dob', 'siswa_telepon', 'siswa_foto', 'siswa_username')
+                ->where('siswa_id', '=', $request->idSiswa)->get();
+
+            return [
+                'success'   => true,
+                'info'      => 'Success get data from DB',
+                'data'      => $data
+            ];      
+        } catch (Exception $e) {
+            return [
+                'success'   => false,
+                'info'      => $e->getMessage(),
+                'data'      => null
+            ];  
+        }
+    }
+
 }
