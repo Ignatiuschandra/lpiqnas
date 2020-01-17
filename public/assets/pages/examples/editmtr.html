@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Materi Management - LPIQNAS</title>
+  <title>Edit Materi - LPIQNAS</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -208,12 +210,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Materi Management</h1>
+            <h1>Edit Materi</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index3.html">Home</a></li>
-              <li class="breadcrumb-item active">Materi Management</li>
+              <li class="breadcrumb-item"><a href="materii.html">Materi</a></li>
+              <li class="breadcrumb-item active">Edit Materi</li>
             </ol>
           </div>
         </div>
@@ -226,107 +229,44 @@
         <div class="col-12">
           
           <div class="card">
-
+            
             <div class="card-body">
-              
-              <div class="row">
-                <div class="col-md-6">
-                  <a href="nambahmtr.html" class="btn btn-success mb-3" ><i class="fas fa-plus-square mr-2"></i> Tambah Materi</a>
-                </div>
-                <div class="col-md-6">
-                  <input class="form-control col-4 mb-3" type="search" placeholder="Search" style="float: right;">
-                </div>
+
+              <div class="card-body pad">
+                <!-- select -->
+                      <div class="form-group mb-4">
+                        <label>Pilih Kelas</label>
+                        <select class="form-control">
+                          <option>Kelas 10</option>
+                          <option>Kelas 11</option>
+                          <option>Kelas 12</option>
+                        </select>
+                      </div>
+
+              <div class="mb-3">
+                <label>Deskripsi Materi</label>
+                <textarea class="textarea" placeholder="Place some text here"
+                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
               </div>
-
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Nama File</th>
-                    <th>Ukuran File</th>
-                    <th class="text-center">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a href="" type="file">Functional-requirements.docx</a></td>
-                    <td>49.8005 kb</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="editmtr.html" class="btn btn-info"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
+              
+              <label for="exampleInputFile">Upload File</label>
+                  <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
                       </div>
-                    </td>
-                  <tr>
-                    <td><a href="" type="file">UAT.pdf</a></td>
-                    <td>28.4883 kb</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="editmtr.html" class="btn btn-info"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
+                      <div class="input-group-append mb-3">
+                        <span class="input-group-text" id="">Upload</span>
                       </div>
-                    </td>
-                  <tr>
-                    <td><a href="" type="file">Materi 1.docx</a></td>
-                    <td>57.9003 kb</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="editmtr.html" class="btn btn-info"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-                  <tr>
-                    <td><a href="" type="file">PPKN.pdf</a></td>
-                    <td>50.5190 kb</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="editmtr.html" class="btn btn-info"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-                  <tr>
-                    <td><a href="" type="file">BAHASA.docx</a></td>
-                    <td>44.9715 kb</td>
-                    <td class="text-center py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="editmtr.html" class="btn btn-info"><i class="fas fa-user-edit"></i></a>
-                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-
-                </tbody>
-              </table>
-
-              <div class="row">
-                <div class="col-md-6" style="margin-top: 20px;">
-                  <label>Showing 1 to 10 of 10 entries </label>
+                  </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6" style="margin-top: 5px;">
+                  <h7 style="color: #a6a6a6; ">Silahkan perluas textarea jika diperlukan</h7>
                 </div>
-                <div class="col-md-6" style="margin-top: 20px;">
-                  <ul class="pagination" style="float: right;">
-                    <li class="paginate_button page-item previous disabled" id="example2_previous">
-                      <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                    </li>
-                    <li class="paginate_button page-item active">
-                      <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-                    </li>
-                    <li class="paginate_button page-item next" id="example2_next">
-                      <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                    </li>
-                  </ul>
+                <div class="col-md-6" style="margin-top: 5px;">
+                  <a href="materii.html" class="btn btn-success" style="float: right;">Edit Materi</a>
                 </div>
               </div>
 
@@ -379,13 +319,13 @@
               <form role="form">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputFile">Edit file</label>
+                    <label for="exampleInputFile">File input</label>
                     <div class="input-group">
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" id="exampleInputFile">
                         <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
                       </div>
-                      <div class="input-group-append mb-3">
+                      <div class="input-group-append">
                         <span class="input-group-text" id="">Upload</span>
                       </div>
                     </div>
@@ -394,7 +334,10 @@
                 <!-- /.card-body -->
               </form>
             </div>
-            
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+              <button type="button" class="btn btn-primary toastrEditSuccess">Simpan</button>
+            </div>
           </div>
           <!-- /.modal-content -->
         </div>
@@ -416,21 +359,18 @@
               <!-- /.modal form body -->
               <form role="form">
                 <div class="card-body">
-                  <label for="exampleInputFile">Upload File</label>
-                  <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
-                      </div>
-                      <div class="input-group-append mb-3">
-                        <span class="input-group-text" id="">Upload</span>
-                      </div>
+                  <div class="form-group">
+                    <label for="Mulai">Jam Mulai</label>
+                    <input type="text" class="form-control" id="Mulai" placeholder="Masukkan Jam Mulai">
                   </div>
                 </div>
                 <!-- /.card-body -->
               </form>
             </div>
-            
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+              <button type="button" class="btn btn-success toastrAddSuccess">Tambah</button>
+            </div>
           </div>
           <!-- /.modal-content -->
         </div>
@@ -480,7 +420,14 @@
 <script src="plugins/chart.js/Chart.min.js"></script>
 <script src="dist/js/demo.js"></script>
 <script src="dist/js/pages/dashboard3.js"></script>
-
+<!-- Summernote -->
+<script src="../../plugins/summernote/summernote-bs4.min.js"></script>
+<script>
+  $(function () {
+    // Summernote
+    $('.textarea').summernote()
+  })
+</script>
 
 <script type="text/javascript">
   $(function() {
