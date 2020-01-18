@@ -231,7 +231,7 @@
               
               <div class="row">
                 <div class="col-md-6">
-                  <a href="nambahmtr.html" class="btn btn-success mb-3" ><i class="fas fa-plus-square mr-2"></i> Tambah Materi</a>
+                  <a href="" class="btn btn-success mb-3" data-toggle="modal" data-target="#modal-tambah" ><i class="fas fa-plus-square mr-2"></i> Tambah Materi</a>
                 </div>
                 <div class="col-md-6">
                   <input class="form-control col-4 mb-3" type="search" placeholder="Search" style="float: right;">
@@ -241,54 +241,66 @@
               <table class="table">
                 <thead>
                   <tr>
+                    <th>Judul</th>
+                    <th>Kelas</th>
+                    <th>Deskripsi</th>
                     <th>Nama File</th>
-                    <th>Ukuran File</th>
                     <th class="text-center">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
+                    <td>Fungsi</td>
+                    <td>11</td>
+                    <td>Fungsi-fungsi</td>
                     <td><a href="" type="file">Functional-requirements.docx</a></td>
-                    <td>49.8005 kb</td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="editmtr.html" class="btn btn-info"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
                         <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
                       </div>
                     </td>
                   <tr>
-                    <td><a href="" type="file">UAT.pdf</a></td>
-                    <td>28.4883 kb</td>
+                    <td>Sejarah</td>
+                    <td>11</td>
+                    <td>sejarah islam</td>
+                    <td><a href="" type="file">sejarah.pdf</a></td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="editmtr.html" class="btn btn-info"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
                         <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
                       </div>
                     </td>
                   <tr>
+                    <td>Matematika</td>
+                    <td>11</td>
+                    <td>Matematika dasar</td>
                     <td><a href="" type="file">Materi 1.docx</a></td>
-                    <td>57.9003 kb</td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="editmtr.html" class="btn btn-info"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
                         <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
                       </div>
                     </td>
                   <tr>
+                    <td>PPkn</td>
+                    <td>11</td>
+                    <td>PPkn materi terbaru</td>
                     <td><a href="" type="file">PPKN.pdf</a></td>
-                    <td>50.5190 kb</td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="editmtr.html" class="btn btn-info"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
                         <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
                       </div>
                     </td>
                   <tr>
+                    <td>Bahasa Indonesia</td>
+                    <td>12</td>
+                    <td>B.I materi menjelang uts</td>
                     <td><a href="" type="file">BAHASA.docx</a></td>
-                    <td>44.9715 kb</td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="editmtr.html" class="btn btn-info"><i class="fas fa-user-edit"></i></a>
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
                         <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
                       </div>
                     </td>
@@ -378,9 +390,27 @@
               <!-- /.modal form body -->
               <form role="form">
                 <div class="card-body">
-                  <div class="form-group">
-                    <label for="exampleInputFile">Edit file</label>
-                    <div class="input-group">
+                      <div class="form-group">
+                      <label for="judul">Judul Materi</label>
+                      <input type="text" class="form-control" id="judul" placeholder="">
+                      </div>
+
+                      <div class="form-group">
+                        <label>Pilih Kelas</label>
+                        <select class="form-control">
+                          <option>Kelas 10</option>
+                          <option>Kelas 11</option>
+                          <option>Kelas 12</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                      <label for="desc">Deskripsi Materi</label>
+                      <textarea id="desc" class="form-control" rows="4" placeholder=""></textarea>
+                      </div>
+
+                      <label for="exampleInputFile">Upload File</label>
+                      <div class="input-group">
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" id="exampleInputFile">
                         <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
@@ -388,13 +418,15 @@
                       <div class="input-group-append mb-3">
                         <span class="input-group-text" id="">Upload</span>
                       </div>
-                    </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
               </form>
             </div>
-            
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+              <button type="button" class="btn btn-success toastrEditSuccess">Edit</button>
+            </div>
           </div>
           <!-- /.modal-content -->
         </div>
@@ -416,8 +448,27 @@
               <!-- /.modal form body -->
               <form role="form">
                 <div class="card-body">
-                  <label for="exampleInputFile">Upload File</label>
-                  <div class="input-group">
+                      <div class="form-group">
+                      <label for="judul">Judul Materi</label>
+                      <input type="text" class="form-control" id="judul" placeholder="Masukkan Judul Materi">
+                      </div>
+
+                      <div class="form-group">
+                        <label>Pilih Kelas</label>
+                        <select class="form-control">
+                          <option>Kelas 10</option>
+                          <option>Kelas 11</option>
+                          <option>Kelas 12</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                      <label for="desc">Deskripsi Materi</label>
+                      <textarea id="desc" class="form-control" rows="4" placeholder="Masukkan Deskripsi"></textarea>
+                      </div>
+
+                      <label for="exampleInputFile">Upload File</label>
+                      <div class="input-group">
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" id="exampleInputFile">
                         <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
@@ -430,7 +481,10 @@
                 <!-- /.card-body -->
               </form>
             </div>
-            
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+              <button type="button" class="btn btn-success toastrAddSuccess">Tambah</button>
+            </div>
           </div>
           <!-- /.modal-content -->
         </div>
