@@ -379,12 +379,65 @@
       </div>
       <!-- /.modal -->
 
-      <!-- modal edit -->
+      <!-- modal edit essay-->
+      <div class="modal fade" id="modal-edit-essay">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit Soal Tugas</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- /.modal form body -->
+              <form role="form">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="no">No.</label>
+                    <input type="text" class="form-control" id="no" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label for="Soal">Soal</label>
+                    <textarea id="soal" class="form-control" rows="3"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputFile">Gambar (Opsional)</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
+                      </div>
+                      <div class="input-group-append">
+                        <span class="input-group-text" id="">Upload</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="Jawaban">Jawaban</label>
+                    <textarea id="Jawaban" class="form-control" rows="3"></textarea>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+              <button type="button" class="btn btn-primary toastrEditSuccess">Simpan</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+      <!-- modal edit PG -->
       <div class="modal fade" id="modal-edit">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Edit Soal Ujian</h4>
+              <h4 class="modal-title">Edit Soal Tugas</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -415,7 +468,26 @@
                   </div>
                   <div class="form-group">
                     <label for="Jawaban">Jawaban</label>
-                    <input type="text" class="form-control" id="Jawaban" placeholder="">
+                  </div>
+                  <div class="form-inline">
+                    <label>A.</label>
+                    <input type="text" class="form-control col-4 mb-3" id="Jawaban" >
+                  </div>
+                  <div class="form-inline">
+                    <label>B.</label>
+                    <input type="text" class="form-control col-4 mb-3" id="Jawaban" >
+                  </div>
+                  <div class="form-inline">
+                    <label>C.</label>
+                    <input type="text" class="form-control col-4 mb-3" id="Jawaban" >
+                  </div>
+                  <div class="form-inline">
+                    <label>D.</label>
+                    <input type="text" class="form-control col-4 mb-3" id="Jawaban" >
+                  </div>
+                  <div class="form-inline">
+                    <label>E.</label>
+                    <input type="text" class="form-control col-4 mb-3" id="Jawaban" >
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -432,7 +504,60 @@
       </div>
       <!-- /.modal -->
 
-      <!-- modal tambah -->
+      <!-- modal tambah Essay-->
+      <div class="modal fade" id="modal-tambah-essay">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Tambah Soal</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- /.modal form body -->
+              <form role="form">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="no">No.</label>
+                    <input type="text" class="form-control" id="no" placeholder="Masukkan No">
+                  </div>
+                  <div class="form-group">
+                    <label for="Soal">Soal</label>
+                    <textarea id="soal" class="form-control" rows="3" placeholder="Masukkan Soal"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputFile">Gambar (Opsional)</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
+                      </div>
+                      <div class="input-group-append">
+                        <span class="input-group-text" id="">Upload</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="Jawaban">Jawaban</label><br>
+                    <textarea id="Jawaban" class="form-control" rows="3" placeholder="Masukkan Jawaban"></textarea>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+              <button type="button" class="btn btn-success"><a href="tambah-ujian-PG.html" class="text-white">Tambah</a></button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+      <!-- modal tambah PG -->
       <div class="modal fade" id="modal-tambah">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -467,8 +592,27 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="Jawaban">Jawaban</label>
-                    <input type="text" class="form-control" id="Jawaban" placeholder="Masukkan Jawaban">
+                    <label>Jawaban</label><br>
+                  </div>
+                  <div class="form-inline">
+                    <label>A.</label>
+                    <input type="text" class="form-control col-4 mb-3" id="Jawaban" >
+                  </div>
+                  <div class="form-inline">
+                    <label>B.</label>
+                    <input type="text" class="form-control col-4 mb-3" id="Jawaban" >
+                  </div>
+                  <div class="form-inline">
+                    <label>C.</label>
+                    <input type="text" class="form-control col-4 mb-3" id="Jawaban" >
+                  </div>
+                  <div class="form-inline">
+                    <label>D.</label>
+                    <input type="text" class="form-control col-4 mb-3" id="Jawaban" >
+                  </div>
+                  <div class="form-inline">
+                    <label>E.</label>
+                    <input type="text" class="form-control col-4 mb-3" id="Jawaban" >
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -476,7 +620,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-              <button type="button" class="btn btn-success"><a href="tambah-ujian.html" class="text-white">Tambah</a></button>
+              <button type="button" class="btn btn-success"><a href="tambah-ujian-PG.html" class="text-white">Tambah</a></button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -484,6 +628,8 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
+
+
 
 
 

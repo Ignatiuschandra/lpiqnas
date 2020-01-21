@@ -367,8 +367,15 @@
                     <input type="text" class="form-control" id="Kelas" placeholder="Masukkan Kelas">
                   </div>
                   <div class="form-group">
-                    <label for="Bsoal">Banyak Soal</label>
-                    <input type="text" class="form-control" id="Bsoal" placeholder="Masukkan Banyaknya Soal">
+                    <label>Jenis Soal</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Essay">
+                    <label class="form-check-label">Essay</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="PG">
+                    <label class="form-check-label">Pilihan Ganda</label>
+                  </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -376,7 +383,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-              <button type="button" class="btn btn-success"><a href="tambah-tugas.html" class="text-white">Tambah</a></button>
+              <button type="button" class="btn btn-success"><a href="tambah-tugas-PG.html" class="text-white">Tambah</a></button>
             </div>
           </div>
           <!-- /.modal-content -->
