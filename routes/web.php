@@ -17,6 +17,16 @@
 
 Route::get('/', 'C_dashboard@index');
 
+Route::get('/foo', function () {
+    if(!file_exists(public_path('storage'))) {
+        echo "string";
+
+        $target = 'public_html/api/public';
+        $shortcut = 'public_html/api/storage';
+        symlink($target, $shortcut);
+    }
+});
+
 Route::group(['prefix'=>'user-management'], function(){
     Route::get('/', 'C_user_management@index');
     Route::get('/get-json-siswa', 'C_user_management@getJsonSiswa');
@@ -33,6 +43,7 @@ Route::group(['prefix'=>'materi-management'], function(){
     Route::post('/tambah-materi', 'C_materi_management@insertMateri');
     Route::post('/hapus-materi', 'C_materi_management@deleteMateri');
     Route::post('/update-materi', 'C_materi_management@updateMateri');
+    Route::get('/download/{id}', 'C_materi_management@downloadMateri');
 });
 
 Route::group(['prefix'=>'video-management'], function(){
@@ -54,6 +65,26 @@ Route::group(['prefix'=>'tugas-management'], function(){
 
     Route::get('/detail-tugas/{id}', 'C_tugas_management@detailTugas');
     Route::get('/get-json-tugas-soal/{id}', 'C_tugas_management@getJsonTugasSoal');
+    Route::post('/get-soal', 'C_tugas_management@getSoal');
+    Route::post('/tambah-soal', 'C_tugas_management@insertSoal');
+    Route::post('/hapus-soal', 'C_tugas_management@deleteSoal');
+    Route::post('/update-soal', 'C_tugas_management@updateSoal');
+});
+
+Route::group(['prefix'=>'ujian-management'], function(){
+    Route::get('/', 'C_ujian_management@index');
+    Route::get('/get-json-ujian', 'C_ujian_management@getJsonUjian');
+    Route::post('/get-ujian', 'C_ujian_management@getUjian');
+    Route::post('/tambah-ujian', 'C_ujian_management@insertUjian');
+    Route::post('/hapus-ujian', 'C_ujian_management@deleteUjian');
+    Route::post('/update-ujian', 'C_ujian_management@updateUjian');
+
+    Route::get('/detail-ujian/{id}', 'C_ujian_management@detailUjian');
+    Route::get('/get-json-ujian-soal/{id}', 'C_ujian_management@getJsonUjianSoal');
+    Route::post('/get-soal', 'C_ujian_management@getSoal');
+    Route::post('/tambah-soal', 'C_ujian_management@insertSoal');
+    Route::post('/hapus-soal', 'C_ujian_management@deleteSoal');
+    Route::post('/update-soal', 'C_ujian_management@updateSoal');
 });
 
 Route::group(['prefix'=>'jadwal'], function(){
@@ -83,4 +114,16 @@ Route::group(['prefix'=>'diskusi'], function(){
     Route::post('/tambah-komentar', 'C_diskusi@insertKomentar');
     Route::post('/hapus-diskusi', 'C_diskusi@deleteDiskusi');
     Route::post('/update-diskusi', 'C_diskusi@updateDiskusi');
+});
+
+Route::group(['prefix'=>'review-ujian'], function(){
+    Route::get('/', 'C_review_ujian@index');
+    Route::get('/get-json-ujian', 'C_review_ujian@getJsonUjian');
+    Route::post('/get-ujian', 'C_review_ujian@getUjian');
+    Route::post('/tambah-ujian', 'C_review_ujian@insertUjian');
+    Route::post('/hapus-ujian', 'C_review_ujian@deleteUjian');
+    Route::post('/update-ujian', 'C_review_ujian@updateUjian');
+
+    Route::get('/detail-ujian/{id}', 'C_review_ujian@detailReviewUjian');
+    Route::get('/get-json-ujian-detail/{id}', 'C_review_ujian@getJsonUjianDetail');
 });

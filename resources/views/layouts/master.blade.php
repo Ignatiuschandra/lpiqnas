@@ -163,7 +163,7 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
-            <a href="pages/examples/ujian.html" class="nav-link" style="color: #ffffff;">
+            <a href="{{url('ujian-management')}}" class="nav-link" style="color: #ffffff;">
               <i class="nav-icon fas fa-file"></i>
               <p>
                 Ujian Management
@@ -187,7 +187,7 @@ to get the desired effect
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/examples/rujian.html" class="nav-link" style="color: #ffffff;">
+                <a href="{{url('review-ujian')}}" class="nav-link" style="color: #ffffff;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Ujian</p>
                 </a>

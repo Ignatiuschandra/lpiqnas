@@ -14,20 +14,21 @@
           
           <div class="row">
             <div class="col-md-6">
-              <a href="" class="btn btn-success mb-3" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-square mr-2"></i> Tambah Materi</a>
+              <a href="" class="btn btn-success mb-3" data-toggle="modal" data-target="#modal-tambah" ><i class="fas fa-plus-square mr-2"></i> Tambah Materi</a>
             </div>
           </div>
 
-          <table class="table" id="tabel-materi">
+          <table class="table" id="tabel-materi" width="100%">
             <thead>
               <tr>
-                <th>Nama Materi</th>
-                <th>Tingkat / Kelas</th>
+                <th>Judul</th>
+                <th>Kelas</th>
+                <th>Deskripsi</th>
+                <th>Link File</th>
                 <th class="text-center">Aksi</th>
               </tr>
             </thead>
             <tbody>
- 
             </tbody>
           </table>
 
@@ -53,10 +54,11 @@
         </div>
         <div class="modal-body">
           <p>Apakah Anda Yakin Ingin Menghapus Materi ini?</p>
+          <input type="hidden" id="materi_id">
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-          <button type="button" class="btn btn-primary toastrDeleteSuccess">Ya</button>
+          <button id="hapusDataMateri" type="button" class="btn btn-primary toastrDeleteSuccess">Ya</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -79,17 +81,34 @@
           <!-- /.modal form body -->
           <form role="form">
             <div class="card-body">
-              <div class="form-group">
-                <label for="exampleInputFile">File input</label>
-                <div class="input-group">
+                  <div class="form-group">
+                  <label for="judul">Judul Materi</label>
+                  <input type="text" class="form-control" id="judul" placeholder="">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Pilih Kelas</label>
+                    <select class="form-control">
+                      <option>Kelas 10</option>
+                      <option>Kelas 11</option>
+                      <option>Kelas 12</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                  <label for="desc">Deskripsi Materi</label>
+                  <textarea id="desc" class="form-control" rows="4" placeholder=""></textarea>
+                  </div>
+
+                  <label for="exampleInputFile">Upload File</label>
+                  <div class="input-group">
                   <div class="custom-file">
                     <input type="file" class="custom-file-input" id="exampleInputFile">
                     <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
                   </div>
-                  <div class="input-group-append">
+                  <div class="input-group-append mb-3">
                     <span class="input-group-text" id="">Upload</span>
                   </div>
-                </div>
               </div>
             </div>
             <!-- /.card-body -->
@@ -97,7 +116,7 @@
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-          <button type="button" class="btn btn-primary toastrEditSuccess">Simpan</button>
+          <button id="" type="button" class="btn btn-success toastrEditSuccess">Edit</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -118,15 +137,36 @@
         </div>
         <div class="modal-body">
           <!-- /.modal form body -->
-          <form role="form" id="formTambah">
+          <form role="form" enctype="multipart/form-data" id="formTambah">
             <div class="card-body">
-              <div class="form-group">
-                <label for="addNama">Nama Materi</label>
-                <input type="text" class="form-control" id="addNama" placeholder="Masukkan Nama / Judul Materi">
-              </div>
-              <div class="form-group">
-                <label for="addNama">Tingkat / Kelas Materi</label>
-                <select>Materi</select>
+                  <div class="form-group">
+                  <label for="judul">Judul Materi</label>
+                  <input type="text" class="form-control" id="addJudul" placeholder="Masukkan Judul Materi" name="judul">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Pilih Kelas</label>
+                    <select class="form-control" name="kelas" id="addKelas">
+                      <option value="10">Kelas 10</option>
+                      <option value="11">Kelas 11</option>
+                      <option value="12">Kelas 12</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                  <label for="desc">Deskripsi Materi</label>
+                  <textarea name="desc" id="addDesc" class="form-control" rows="4" placeholder="Masukkan Deskripsi"></textarea>
+                  </div>
+
+                  <label for="exampleInputFile">Upload File</label>
+                  <div class="input-group">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="addExampleInputFile" name="file">
+                    <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
+                  </div>
+                  <div class="input-group-append mb-3">
+                    <span class="input-group-text" id="">Upload</span>
+                  </div>
               </div>
             </div>
             <!-- /.card-body -->
@@ -134,7 +174,7 @@
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-          <button type="button" class="btn btn-success toastrAddSuccess">Tambah</button>
+          <button id="tambahDataMateri" type="button" class="btn btn-success toastrAddSuccess">Tambah</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -172,27 +212,41 @@
       columns: [
           { data: 'materi_nama' },
           { data: 'materi_tingkat' },
+          { data: 'materi_detail' },
+          { data: null,
+            orderable: false,
+            render: function(data, type, row){
+              return `<a target="_blank" href="{{ url('materi-management/download/`+data.materi_id+`') }}">Download</a>`;
+            }
+          },
           { data: null,
             render: function(data, type, row){
               return `<div class="btn-group btn-group-sm">
-              <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit" onclick="getDataMateri(`+data.materi_id+`)"><i class="fas fa-user-edit"></i></a>
-              <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus" onclick="setIdHapus(`+data.materi_id+`)"><i class="fas fa-trash"></i></a>
+              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modal-edit" onclick="getDataMateri(`+data.materi_id+`)"><i class="fas fa-user-edit"></i></a>
+              <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus" onclick="setIdHapus(`+data.materi_id+`)"><i class="fas fa-trash"></i></a>
             </div>`;
             }
           }
       ],
       columnDefs: [{
-        targets: 2,
+        targets: 4,
         className: 'text-center'
       }]
     });
   });
 
   $('#tambahDataMateri').on('click', function(){
+    var formData = new FormData();
+    formData.append('judul', $('#addJudul').val());
+    formData.append('kelas', $('#addKelas').val());
+    formData.append('desc', $('#addDesc').val());
+    formData.append('file', $('#addExampleInputFile')[0].files[0]);
     $.ajax({
-      url:"{{ url('user-management/tambah-materi') }}",
+      url:"{{ url('materi-management/tambah-materi') }}",
       method:"POST", 
-      data:$('#formTambah').serialize(),
+      data:formData,
+      processData: false,
+      contentType: false,
       success:function(response) {
         if (response.success == true) {
           $('#modal-tambah').modal('toggle');
@@ -223,7 +277,7 @@
 
   $('#hapusDataMateri').on('click', function(){
     $.ajax({
-      url:"{{ url('user-management/hapus-materi') }}",
+      url:"{{ url('materi-management/hapus-materi') }}",
       method:"POST", 
       data:{materi_id : $('#materi_id').val()},
       success:function(response) {

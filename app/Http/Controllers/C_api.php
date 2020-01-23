@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Siswa;
 use App\Models\SiswaPembayaran;
 use App\Models\KelasJadwal;
@@ -96,7 +97,7 @@ class C_api extends Controller
     		return [
     			'success'	=> false,
     			'info' 		=> 'Invalid password provided',
-    			'data' 		=> false
+    			'data' 		=> null
     		];
     	}
 
@@ -322,9 +323,19 @@ class C_api extends Controller
     	}
 
     	try {
-    		$data['materi'] = Materi::select('materi_nama', 'materi_detail')
-	    		->where('materi_id', '=', $request->idMateri)->first();
+    		$materi = Materi::select('materi_nama', 'materi_detail', 'materi_file')
+	    		->where('materi_id', '=', $request->idMateri)->first()->toArray();
 
+            foreach ($materi as $key => $value) {
+                if ($key == 'materi_file') {
+                    $val_temp = $value;
+                    unset($materi['materi_file']);
+                    $url = url('/');
+                    $materi['materi_file'] = $url.'/storage/files/'.$val_temp;
+                }
+            }
+
+            $data['materi'] = $materi;
     		return [
     			'success' 	=> true,
     			'info' 		=> 'Success get data from DB',

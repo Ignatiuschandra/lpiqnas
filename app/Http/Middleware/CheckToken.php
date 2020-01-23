@@ -19,12 +19,12 @@ class CheckToken
     public function handle(Request $request, Closure $next)
     {
         $token = $request->header('lpiqnas-api-key');
-        // $headers = getallheaders();
+        $headers = getallheaders();
         if(empty($token)){
             return response()->json([
                 'error' => 'Authorization Header is empty',
                 // 'requestPHP' => $token,
-                // 'requestLaravel' => $headers
+                'requestLaravel' => $headers
             ]);
         }
 

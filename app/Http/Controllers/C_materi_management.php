@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Materi;
 use Datatables;
 use DB;
@@ -15,19 +16,20 @@ class C_materi_management extends Controller
 	}
 
 	public function getJsonMateri(){
-		return Datatables::of(Materi::select('materi_id', 'materi_nama', 'materi_tingkat'))->make(true);
+		return Datatables::of(Materi::select('materi_id', 'materi_nama', 'materi_tingkat', 'materi_detail', 'materi_file'))->make(true);
 	}
 
-	public function insertSiswa(Request $request){
-		$siswa = new Siswa();
-    	$siswa->siswa_nama_lengkap 	= $request->namaLengkap;
-    	$siswa->siswa_telepon 		= $request->noTelp;
-    	$siswa->siswa_username 		= $request->username;
-    	$siswa->siswa_dob 			= $request->dob;
-    	$siswa->siswa_alamat		= $request->alamat;
-    	$siswa->siswa_password 		= password_hash('lpiqnas', PASSWORD_DEFAULT);
+	public function insertMateri(Request $request){
+        $uploadedFile   = $request->file('file');
+        $path           = $uploadedFile->store('', ['disk' => 'storage_files']);  
 
-    	if ($siswa->save()) {
+		$materi = new Materi();
+    	$materi->materi_nama 	= $request->judul;
+    	$materi->materi_tingkat = $request->kelas;
+    	$materi->materi_detail  = $request->desc;
+    	$materi->materi_file 	= $path;
+
+    	if ($materi->save()) {
     		return Response::json([
     			'success'	=> true,
     			'data'		=> null
@@ -40,8 +42,8 @@ class C_materi_management extends Controller
     	}
 	}
 
-	public function deleteSiswa(Request $request){
-		if (Siswa::where('siswa_id', $request->siswa_id)->delete()) {
+	public function deleteMateri(Request $request){
+		if (Materi::where('materi_id', $request->materi_id)->delete()) {
     		return Response::json([
     			'success'	=> true,
     			'data'		=> null
@@ -84,5 +86,10 @@ class C_materi_management extends Controller
     		]);	
     	}
 	}
+
+    public function downloadMateri(Request $request){
+        $materi = Materi::where('materi_id', '=', $request->id)->first();
+        return Response::download(public_path() . '/storage/files/'.$materi->materi_file);
+    }
 
 }

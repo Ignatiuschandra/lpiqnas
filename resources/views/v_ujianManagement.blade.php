@@ -1,6 +1,6 @@
 @extends('layouts.master')
-@section('title_nav', 'LPIQNAS | Tugas Management')
-@section('judul_halaman', 'Tugas Management')
+@section('title_nav', 'LPIQNAS | Ujian Management')
+@section('judul_halaman', 'Ujian Management')
 
 @section('konten')
 <!-- Main content -->
@@ -13,20 +13,33 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-6">
-              <a href="" class="btn btn-success mb-3" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-square mr-2"></i> Tambah Tugas</a>
+              <a href="" class="btn btn-success mb-3" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus-square mr-2"></i> Tambah Ujian</a>
             </div>
           </div>
 
-          <table class="table" id="tabel-tugas">
+          <table class="table" id="tabel-ujian">
             <thead>
               <tr>
-                <th>Judul Tugas</th>
+                <th>Materi</th>
                 <th>Pembuat</th>
                 <th>Kelas</th>
+                <th>Jadwal</th>
+                <th>Durasi (Menit)</th>
                 <th class="text-center">Aksi</th>
               </tr>
             </thead>
             <tbody>
+              <!-- <tr>
+                <td>Ujian Aqidah</td>
+                <td>Adri Sinaga</td>
+                <td>A</td>
+                <td class="text-center py-0 align-middle">
+                  <div class="btn-group btn-group-sm">
+                    <a href="detail-ujian.html" class="btn btn-primary" title="Detail"><i class="fas fa-eye"></i></a>
+                    <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus" title="Hapus"><i class="fas fa-trash"></i></a>
+                  </div>
+                </td>
+              </tr> -->
             </tbody>
           </table>
 
@@ -46,18 +59,18 @@
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Hapus Tugas</h4>
+          <h4 class="modal-title">Hapus Ujian</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>Apakah Anda Yakin Ingin Menghapus Tugas ini?</p>
-          <input type="hidden" name="tugas_id" id="tugas_id">
+          <p>Apakah Anda Yakin Ingin Menghapus Ujian ini?</p>
+          <input type="hidden" id="ujian_id">
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-          <button id="hapusDataTugas" type="button" class="btn btn-primary toastrDeleteSuccess">Ya</button>
+          <button id="hapusDataUjian" type="button" class="btn btn-primary toastrDeleteSuccess">Ya</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -71,7 +84,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Tambah Tugas</h4>
+          <h4 class="modal-title">Tambah Ujian</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -81,38 +94,54 @@
           <form role="form" id="formTambah">
             <div class="card-body">
               <div class="form-group">
-                <label for="Judul">Judul Tugas</label>
-                <input type="text" class="form-control" name="judul" id="addJudul" placeholder="Masukkan Judul Tugas">
+                <label for="Kelas">Materi</label>
+                <select class="form-control" name="materi" id="addMateri">
+                  @foreach($materi as $m)
+                  <option value="{{ $m['materi_id'] }}">
+                    {{ $m['materi_nama'] }}
+                  </option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="Judul">Judul Ujian</label>
+                <input type="text" class="form-control" name="judul" id="AddJudul" placeholder="Masukkan Judul Ujian">
               </div>
               <div class="form-group">
                 <label for="Pembuat">Pembuat</label>
-                <!-- <input type="text" class="form-control" id="Pembuat" placeholder="Masukkan Pembuat Tugas"> -->
                 <select class="form-control" name="pembuat" id="addPembuat">
                   <option value="1">Admin LPIQNAS</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="Kelas">Kelas</label>
-                <!-- <input type="text" class="form-control" id="addKelas" placeholder="Masukkan Kelas"> -->
                 <select class="form-control" name="kelas" id="addKelas">
                   @foreach($kelas as $k)
                   <option value="{{ $k['kelas_id'] }}">
-                    {{ $k['kelas_tingkat'].' '.$k['kelas_nama'].' - '.$k['kelas_tahun_ajaran'] }}
+                    {{ $k['kelas_tingkat'].' - '.$k['kelas_tahun_ajaran'] }}
                   </option>
                   @endforeach
                 </select>
               </div>
-              <!-- <div class="form-group">
-                <label for="Bsoal">Banyak Soal</label>
-                <input type="text" class="form-control" id="addBsoal" placeholder="Masukkan Banyaknya Soal">
-              </div> -->
+              <div class="form-group">
+                <label for="AddTanggal">Tanggal Ujian</label>
+                <input type="date" class="form-control" name="tanggal" id="AddTanggal" placeholder="Masukkan Tanggal Ujian">
+              </div>
+              <div class="form-group">
+                <label>Jam Ujian</label>
+                <input type="text" class="form-control" name="jam" id="addJam" placeholder="Masukkan Jam Mulai">
+              </div>
+              <div class="form-group">
+                <label for="Bsoal">Durasi Ujian (Menit)</label>
+                <input type="text" class="form-control" name="durasi" id="AddDurasi" placeholder="Masukkan Durasi Ujian" value="0">
+              </div>
             </div>
             <!-- /.card-body -->
           </form>
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-          <button id="tambahDataTugas" type="button" class="btn btn-success"><a class="text-white">Tambah</a></button>
+          <button id="tambahDataUjian" type="button" class="btn btn-success"><a href="#" class="text-white">Tambah</a></button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -127,13 +156,18 @@
 @section('scriptTambahan')
 <!-- page script -->
 <script>
-  var tableTugas;
+  var tableUjian;
 
   const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
     timer: 3000
+  });
+
+  $('#addJam').bootstrapMaterialDatePicker({
+    date: false,
+    format: 'HH:mm'
   });
 
   $.ajaxSetup({
@@ -143,22 +177,24 @@
   });
 
   $(document).ready( function () {
-    tableTugas = $('#tabel-tugas').DataTable({
+    tableUjian = $('#tabel-ujian').DataTable({
       processing: true,
       serverSide: true,
-      ajax: "{{ url('tugas-management/get-json-tugas') }}",
+      ajax: "{{ url('ujian-management/get-json-ujian') }}",
       columns: [
-          { data: 'tugas_judul' },
+          { data: 'ujian_judul' },
           { data: 'admin_nama_lengkap' },
           { data: null,
             render: function(data, type, row){
-              return data.kelas_tingkat+' '+data.kelas_nama+' - '+data.kelas_tahun_ajaran;
+              return data.kelas_tingkat+' - '+data.kelas_tahun_ajaran;
           }},
+          { data: 'ujian_jadwal' },
+          { data: 'ujian_durasi' },
           { data: null,
             render: function(data, type, row){
               return `<div class="btn-group btn-group-sm">
-              <a href="{{ url('tugas-management/detail-tugas/`+data.tugas_id+`') }}" class="btn btn-primary" title="Detail"><i class="fas fa-eye"></i></a>
-              <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus" onclick="setIdHapus(`+data.tugas_id+`)"><i class="fas fa-trash"></i></a>
+              <a href="{{ url('ujian-management/detail-ujian/`+data.ujian_id+`') }}" class="btn btn-primary" title="Detail"><i class="fas fa-eye"></i></a>
+              <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus" onclick="setIdHapus(`+data.ujian_id+`)"><i class="fas fa-trash"></i></a>
             </div>`;
             }
           }
@@ -170,9 +206,9 @@
     });
   });
 
-  $('#tambahDataTugas').on('click', function(){
+  $('#tambahDataUjian').on('click', function(){
     $.ajax({
-      url:"{{ url('tugas-management/tambah-tugas') }}",
+      url:"{{ url('ujian-management/tambah-ujian') }}",
       method:"POST", 
       data:$('#formTambah').serialize(),
       success:function(response) {
@@ -180,53 +216,53 @@
           $('#modal-tambah').modal('toggle');
           Toast.fire({
             type: 'success',
-            title: 'Anda Berhasil Menambahkan Data Tugas.'
+            title: 'Anda Berhasil Menambahkan Data Ujian.'
           });
-          tableTugas.ajax.reload();
+          tableUjian.ajax.reload();
         }else{
           Toast.fire({
             type: 'error',
-            title: 'Anda Gagal Menambahkan Data Tugas. Mohon Coba Kembali!'
+            title: 'Anda Gagal Menambahkan Data Ujian. Mohon Coba Kembali!'
           });  
         }
       },
       error:function(){
         Toast.fire({
           type: 'error',
-          title: 'Anda Gagal Menambahkan Data Tugas. Hubungi Developer!'
+          title: 'Anda Gagal Menambahkan Data Ujian. Hubungi Developer!'
         });
       }
     });
   });
 
   function setIdHapus(id){
-    $('#tugas_id').val(id);
+    $('#ujian_id').val(id);
   }
 
-  $('#hapusDataTugas').on('click', function(){
+  $('#hapusDataUjian').on('click', function(){
     $.ajax({
-      url:"{{ url('tugas-management/hapus-tugas') }}",
+      url:"{{ url('ujian-management/hapus-ujian') }}",
       method:"POST", 
-      data:{tugas_id : $('#tugas_id').val()},
+      data:{ujian_id : $('#ujian_id').val()},
       success:function(response) {
         if (response.success == true) {
           $('#modal-hapus').modal('toggle');
           Toast.fire({
             type: 'success',
-            title: 'Anda Berhasil Menghapus Data Tugas.'
+            title: 'Anda Berhasil Menghapus Data Ujian.'
           });
-          tableTugas.ajax.reload();
+          tableUjian.ajax.reload();
         }else{
           Toast.fire({
             type: 'error',
-            title: 'Anda Gagal Menghapus Data Tugas. Mohon Coba Kembali!'
+            title: 'Anda Gagal Menghapus Data Ujian. Mohon Coba Kembali!'
           });  
         }
       },
       error:function(){
         Toast.fire({
           type: 'error',
-          title: 'Anda Gagal Menghapus Data Tugas. Hubungi Developer!'
+          title: 'Anda Gagal Menghapus Data Ujian. Hubungi Developer!'
         });
       }
     });
@@ -263,7 +299,7 @@
             type: 'success',
             title: 'Anda Berhasil Memperbaharui Data Video.'
           });
-          tableTugas.ajax.reload();
+          tableUjian.ajax.reload();
         }else{
           Toast.fire({
             type: 'error',

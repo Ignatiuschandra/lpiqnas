@@ -1,13 +1,8 @@
 @extends('layouts.master')
-@section('title_nav', 'LPIQNAS | Detail Tugas')
-@section('judul_halaman', 'Detail Tugas')
+@section('title_nav', 'LPIQNAS | Detail Ujian')
+@section('judul_halaman', 'Detail Ujian')
 
 @section('konten')
-<style type="text/css">
-  .essay{
-    display: none;
-  }
-</style>
 <!-- Main content -->
 <section class="content">
   <div class="row">
@@ -32,17 +27,7 @@
               </tr>
             </thead>
             <tbody>
-              <!-- <tr>
-                <td>1</td>
-                <td>Siapa kah?<br> A. #<br>B. #<br>C. #<br>D. #</td>
-                <td><img src="#"></td>
-                <td>A. #</td>
-                <td class="text-center py-0 align-middle">
-                  <div class="btn-group btn-group-sm">
-                    <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
-                    <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus"><i class="fas fa-trash"></i></a>
-                  </div>
-                </td> -->
+              
             </tbody>
           </table>
 
@@ -87,7 +72,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Edit Soal Tugas</h4>
+          <h4 class="modal-title">Edit Soal Ujian</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -97,17 +82,6 @@
           <form role="form" id="formEdit" enctype="multipart/form-data">
             <input type="hidden" name="id" id="editId">
             <div class="card-body">
-              <div class="form-group">
-                  <label>Jenis Soal</label>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="jenisEdit" value="PG" checked>
-                    <label class="form-check-label">Pilihan Ganda</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="jenisEdit" value="ESSAY">
-                    <label class="form-check-label">Essay</label>
-                  </div>
-              </div>
               <div class="form-group">
                 <label for="Soal">Soal</label>
                 <textarea name="soal" id="editSoal" class="form-control" rows="2" placeholder="Masukkan Soal"></textarea>
@@ -126,7 +100,6 @@
               </div>
               <div class="form-group">
                 <label for="Jawaban">Jawaban</label>
-                <textarea id="editJawaban" class="form-control jawaban essay" rows="3" name="jawaban"></textarea>
                 <div class="form-inline jawaban pg">
                   <label>A.</label>
                   <input type="text" class="form-control col-4 mb-3" name="jawabanA" id="editJawabanA">
@@ -190,17 +163,6 @@
             <input type="hidden" name="id" value="{{ $id }}" id="addId">
             <div class="card-body">
               <div class="form-group">
-                  <label>Jenis Soal</label>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="jenis" value="PG" checked>
-                    <label class="form-check-label">Pilihan Ganda</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="jenis" value="ESSAY">
-                    <label class="form-check-label">Essay</label>
-                  </div>
-              </div>
-              <div class="form-group">
                 <label for="Soal">Soal</label>
                 <textarea name="soal" id="addSoal" class="form-control" rows="2" placeholder="Masukkan Soal"></textarea>
               </div>
@@ -218,7 +180,6 @@
               </div>
               <div class="form-group">
                 <label for="Jawaban">Jawaban</label>
-                <textarea id="addJawaban" class="form-control jawaban essay" rows="3" name="jawaban"></textarea>
                 <div class="form-inline jawaban pg">
                   <label>A.</label>
                   <input type="text" class="form-control col-4 mb-3" name="jawabanA" id="addJawabanA">
@@ -291,26 +252,21 @@
     tableTugas = $('#tabel-soal').DataTable({
       processing: true,
       serverSide: true,
-      ajax: '{{ url("tugas-management/get-json-tugas-soal/$id") }}',
+      ajax: '{{ url("ujian-management/get-json-ujian-soal/$id") }}',
       columns: [
           { data: null,
             render: function(data, type, row){
-              if (data.ts_jenis === 'ESSAY') {
-                return data.ts_soal;  
-              }else{
                 var jawaban = '';
-                raw = JSON.parse(data.ts_jawaban.replace(/&quot;/g,'"'));
+                raw = JSON.parse(data.us_jawaban.replace(/&quot;/g,'"'));
 
                 $.each(raw, function(i, v){
                   jawaban += '<br>'+i+'. '+v;
                 });
-                return data.ts_soal+jawaban;
-              }
-              
+                return data.us_soal+jawaban;
             },
             orderable: false
           },
-          { data: 'ts_gambar',
+          { data: 'us_gambar',
           render: function(data, type, row){
             if (data !== null) {
               return `<img width="300" src="data:image/jpeg;base64,`+data+`">`;  
@@ -318,21 +274,13 @@
               return 'No Image';
             }
           }},
-          { data: null,
-            render: function(data, type, row){
-              if (data.ts_jenis === 'ESSAY') {
-                return data.ts_kunci_essay;  
-              }else{
-                return data.ts_kunci;
-              }
-            },
-            orderable: false 
+          { data: 'us_kunci' 
           },
           { data: null,
             render: function(data, type, row){
               return `<div class="btn-group btn-group-sm">
-              <a href="#" class="btn btn-primary" title="Detail" onclick="getDataSoal(`+data.ts_id+`)" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
-              <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus" onclick="setIdHapus(`+data.ts_id+`)"><i class="fas fa-trash"></i></a>
+              <a href="#" class="btn btn-primary" title="Detail" onclick="getDataSoal(`+data.us_id+`)" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
+              <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-hapus" onclick="setIdHapus(`+data.us_id+`)"><i class="fas fa-trash"></i></a>
             </div>`;
             },
             orderable: false
@@ -352,26 +300,23 @@
     formData.append('jenis', $("input[name='jenis']:checked").val());
     formData.append('gambar', $('#addExampleInputFile')[0].files[0]);
 
-    if ($("input[name='jenis']:checked").val() === 'PG') {
-      if($('#addKunciPG').val() === "" || $('#addKunciPG').val() === null){
-        Toast.fire({
-          type: 'warning',
-          title: 'Kunci jawaban belum dipilih!'
-        });
-        return false;
-      }
-      formData.append('jawabanA', $("#addJawabanA").val());
-      formData.append('jawabanB', $("#addJawabanB").val());
-      formData.append('jawabanC', $("#addJawabanC").val());
-      formData.append('jawabanD', $("#addJawabanD").val());
-      formData.append('jawabanE', $("#addJawabanE").val());
-      formData.append('jawaban', $("#addKunciPG").val());
-    }else{
-      formData.append('jawaban', $("#addJawaban").val());
+    if($('#addKunciPG').val() === "" || $('#addKunciPG').val() === null){
+      Toast.fire({
+        type: 'warning',
+        title: 'Kunci jawaban belum dipilih!'
+      });
+      return false;
     }
 
+    formData.append('jawabanA', $("#addJawabanA").val());
+    formData.append('jawabanB', $("#addJawabanB").val());
+    formData.append('jawabanC', $("#addJawabanC").val());
+    formData.append('jawabanD', $("#addJawabanD").val());
+    formData.append('jawabanE', $("#addJawabanE").val());
+    formData.append('jawaban', $("#addKunciPG").val());
+
     $.ajax({
-      url:"{{ url('tugas-management/tambah-soal') }}",
+      url:"{{ url('ujian-management/tambah-soal') }}",
       method:"POST", 
       data:formData,
       processData: false,
@@ -406,7 +351,7 @@
 
   $('#hapusDataSoal').on('click', function(){
     $.ajax({
-      url:"{{ url('tugas-management/hapus-soal') }}",
+      url:"{{ url('ujian-management/hapus-soal') }}",
       method:"POST", 
       data:{soal_id : $('#soal_id').val()},
       success:function(response) {
@@ -435,33 +380,24 @@
 
   function getDataSoal(id){
     $.ajax({
-      url:"{{ url('tugas-management/get-soal') }}",
+      url:"{{ url('ujian-management/get-soal') }}",
       method:"POST", 
       data:{soal_id : id},
       success:function(response) {
-        $('.jawaban').hide('slow');
-        if (response.data.ts_jenis == 'PG') {
-          $('.pg').show('slow');
-          $("input[name='jenisEdit']").filter('[value=PG]').prop('checked', true);
-          raw = JSON.parse(response.data.ts_jawaban.replace(/&quot;/g,'"'));
+        raw = JSON.parse(response.data.us_jawaban.replace(/&quot;/g,'"'));
 
-          $.each(raw, function(i, v){
-            $('#editJawaban'+i).val(v);
-          });
+        $.each(raw, function(i, v){
+          $('#editJawaban'+i).val(v);
+        });
 
-          $("#editKunciPG").val(response.data.ts_kunci);
-        }else if(response.data.ts_jenis == 'ESSAY'){
-          $('.essay').show('slow');
-          $("input[name='jenisEdit']").filter('[value=ESSAY]').prop('checked', true);
-          $("#editJawaban").val(response.data.ts_kunci_essay);
-        }
-        $('#editSoal').val(response.data.ts_soal);
+        $("#editKunciPG").val(response.data.us_kunci);
+        $('#editSoal').val(response.data.us_soal);
         $('#editId').val(id);
       },
       error:function(){
         Toast.fire({
           type: 'error',
-          title: 'Anda Gagal Mengambil Data Soal. Hubungi Developer!'
+          title: 'Anda Gagal Mengambil Data Video. Hubungi Developer!'
         });
       }
     });
@@ -471,29 +407,24 @@
     var formData = new FormData();
     formData.append('id', $('#editId').val());
     formData.append('soal', $('#editSoal').val());
-    formData.append('jenis', $("input[name='jenisEdit']:checked").val());
     formData.append('gambar', $('#editExampleInputFile')[0].files[0]);
 
-    if ($("input[name='jenisEdit']:checked").val() === 'PG') {
-      if($('#editKunciPG').val() === "" || $('#editKunciPG').val() === null){
-        Toast.fire({
-          type: 'warning',
-          title: 'Kunci jawaban belum dipilih!'
-        });
-        return false;
-      }
-      formData.append('jawabanA', $("#editJawabanA").val());
-      formData.append('jawabanB', $("#editJawabanB").val());
-      formData.append('jawabanC', $("#editJawabanC").val());
-      formData.append('jawabanD', $("#editJawabanD").val());
-      formData.append('jawabanE', $("#editJawabanE").val());
-      formData.append('jawaban', $("#editKunciPG").val());
-    }else{
-      formData.append('jawaban', $("#editJawaban").val());
+    if($('#editKunciPG').val() === "" || $('#editKunciPG').val() === null){
+      Toast.fire({
+        type: 'warning',
+        title: 'Kunci jawaban belum dipilih!'
+      });
+      return false;
     }
+    formData.append('jawabanA', $("#editJawabanA").val());
+    formData.append('jawabanB', $("#editJawabanB").val());
+    formData.append('jawabanC', $("#editJawabanC").val());
+    formData.append('jawabanD', $("#editJawabanD").val());
+    formData.append('jawabanE', $("#editJawabanE").val());
+    formData.append('jawaban', $("#editKunciPG").val());
 
     $.ajax({
-      url:"{{ url('tugas-management/update-soal') }}",
+      url:"{{ url('ujian-management/update-soal') }}",
       method:"POST", 
       data:formData,
       processData: false,
@@ -520,15 +451,6 @@
         });
       }
     });
-  });
-
-  $("input[name='jenis']").click(function() {
-    $('.jawaban').hide('slow');
-      if ($(this).val() == 'PG') {
-        $('.pg').show('slow');
-      }else if ($(this).val() == 'ESSAY') {
-        $('.essay').show('slow');
-      }
   });
 
   // cek masksimal gambar 2MB
