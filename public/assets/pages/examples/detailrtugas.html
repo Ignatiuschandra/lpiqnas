@@ -211,13 +211,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Detail Review Ujian Aqidah KELAS C</h1>
+            <h1>Detail Review Tugas Aqidah KELAS C</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index3.html">Home</a></li>
-              <li class="breadcrumb-item"><a href="rujian.html">Review Ujian</a></li>
-              <li class="breadcrumb-item active">Detail Review Ujian</li>
+              <li class="breadcrumb-item"><a href="rtugas.html">Review Tugas</a></li>
+              <li class="breadcrumb-item active">Detail Review Tugas</li>
             </ol>
           </div>
         </div>
@@ -243,64 +243,62 @@
                   <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>Jawaban</th>
-                    <th>Nilai</th> <!--kalau PG otomatis muncul nilai, seperti ujian-->
+                    <th>Aksi</th> 
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>1</td>
                     <td>Adri</td>
-                    <td>Bendera Indonesia itu merah putih</td>
-                    <td>
-                      <input type="text" class="form-control" id="nilai" placeholder="Masukkan Nilai">
+                    <td class="text-center py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail" title="detail"><i class="fas fa-eye"></i></a> 
+                      </div>
                     </td>
                   <tr>
                     <td>2</td>
                     <td>Andi</td>
-                    <td>Bendera Indonesia itu dari kain</td>
-                    <td>
-                      <input type="text" class="form-control" id="nilai" placeholder="Masukkan Nilai">
+                    <td class="text-center py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail" title="detail"><i class="fas fa-eye"></i></a> 
+                      </div>
                     </td>
                   <tr>
                     <td>3</td>
                     <td>Budi</td>
-                    <td>Bendera Indonesia itu kalau tidak salah merah, apa putih</td>
-                    <td>
-                      <input type="text" class="form-control" id="nilai" placeholder="Masukkan Nilai">
+                    <td class="text-center py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail" title="detail"><i class="fas fa-eye"></i></a> 
+                      </div>
                     </td>
                   <tr>
                     <td>4</td>
                     <td>Chandra</td>
-                    <td>Bendera Indonesia itu merah putih</td>
-                    <td>
-                      <input type="text" class="form-control" id="nilai" placeholder="Masukkan Nilai">
+                    <td class="text-center py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail" title="detail"><i class="fas fa-eye"></i></a> 
+                      </div>
                     </td>
                   <tr>
                     <td>5</td>
                     <td>Dimas</td>
-                    <td>Bendera Indonesia itu merah putih</td>
-                    <td>
-                      <input type="text" class="form-control" id="nilai" placeholder="Masukkan Nilai">
+                   <td class="text-center py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail" title="detail"><i class="fas fa-eye"></i></a> 
+                      </div>
                     </td>
                   <tr>
                     <td>6</td>
                     <td>Robby</td>
-                    <td>Bendera Indonesia itu merah putih</td>
-                    <td>
-                      <input type="text" class="form-control" id="nilai" placeholder="Masukkan Nilai">
+                    <td class="text-center py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail" title="detail"><i class="fas fa-eye"></i></a> 
+                      </div>
                     </td>
                 </tbody>
               </table>
 
-              <div class="row">
-                <div class="col-md-6" style="margin-top: 20px;">
-                  <label>Showing 1 to 30 of 30 entries </label>
-                </div>
-                <div class="col-md-6">
-                  <a href="detailrtugas.html" class="btn btn-success mb-3" style="float: right;">Input Nilai</a>
-                </div>
-              </div>
+              
 
             </div>
             <!-- /.card-body -->
@@ -337,39 +335,71 @@
       </div>
       <!-- /.modal -->
 
-      <!-- modal tambah -->
-      <div class="modal fade" id="modal-tambah">
+      <!-- modal detail -->
+      <div class="modal fade" id="modal-detail">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Tambah Ujian</h4>
+              <h4 class="modal-title">Detail Jawaban (Nama Siswa)</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <!-- /.modal form body -->
+              <div class="form-group text-center"> <!-- kalo tugasnya PG -->
+                    <h3>Nilai Siswa</h3>
+                    <h2 style="color: #056644;">90</h2>
+              </div>
+
               <form role="form">
                 <div class="card-body">
-                  <div class="form-group">
-                    <label for="Judul">Judul Ujian</label>
-                    <input type="text" class="form-control" id="Judul" placeholder="Masukkan Judul Ujian">
+                 <table class="table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Jawaban</th>
+                    <th>Kunci Jawaban</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>A. Indonesia</td>
+                    <td>B. Indonesia</td>
+                  <tr>
+                    <td>2</td>
+                    <td>A. Indonesia</td>
+                    <td>B. Belanda</td>
+                  <tr>
+                    <td>3</td>
+                    <td>A. Jepang</td>
+                    <td>D. Korea</td>
+                  <tr>
+                    <td>4</td>
+                    <td>C. 1994</td>
+                    <td>C. 1994</td>
+                  <tr>
+                    <td>5</td>
+                    <td>A. 2019</td>
+                    <td>A. 2019</td>
+                </tbody>
+              </table>
+
+              <!-- kalo tugasnya ESSAY 
+                  <div class="form-group">  
+                    <label for="Nilai">Nilai</label>
+                    <input type="text" class="form-control" id="Nilai" placeholder="Masukkan Nilai">
                   </div>
-                  <div class="form-group">
-                    <label for="Pembuat">Pembuat</label>
-                    <input type="text" class="form-control" id="Pembuat" placeholder="Masukkan Pembuat Ujian">
-                  </div>
-                  <div class="form-group">
-                    <label for="Bsoal">Banyak Soal</label>
-                    <input type="text" class="form-control" id="Bsoal" placeholder="Masukkan Banyaknya Soal">
-                  </div>
+              -->
+                  
                 </div>
                 <!-- /.card-body -->
               </form>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-              <button type="button" class="btn btn-primary"><a href="tambah-ujian.html" class="text-white">Tambah</a></button>
+               <!-- Kalo tugasnya essay pake button ini chan 
+              <button type="button" class="btn btn-primary toastrAddSuccess">Beri Nilai</button>-->
             </div>
           </div>
           <!-- /.modal-content -->
@@ -465,7 +495,7 @@
     });
 
     $('.toastrAddSuccess').click(function() {
-      toastr.success('Berhasil Menambahkan Jadwal.')
+      toastr.success('Berhasil Memberikan Nilai')
     });
     $('.toastrEditSuccess').click(function() {
       toastr.success('Data Berhasil Diubah.')
