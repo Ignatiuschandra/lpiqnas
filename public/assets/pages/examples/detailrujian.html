@@ -233,7 +233,11 @@
 
             <div class="card-body">
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6 form-inline">
+                  <h4>Bobot Nilai: </h4>
+                  <input type="text" class="form-control col-3 mb-3 ml-2" placeholder=".." title="Bobot tiap soal PG">
+                </div>
+                <div class="col-md-6">
                   <input class="form-control col-4 mb-3" type="search" placeholder="Search" style="float: right;">
                 </div>
               </div>
@@ -345,10 +349,6 @@
               </button>
             </div>
             <div class="modal-body">
-              <div class="form-group text-center"> 
-                    <h3>Nilai Siswa</h3>
-                    <h2 style="color: #056644;">90</h2>
-              </div>
 
               <form role="form">
                 <div class="card-body">
@@ -390,7 +390,14 @@
               </form>
             </div>
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+              <div class="form-inline"> 
+                    <label>Nilai Siswa</label>
+                    <div class="col-3">
+                    <input type="text" class="form-control" placeholder=".." value="90" 
+                    title="PG: Jumlah benar x Bobot">
+                    </div>
+              </div>
+              <button type="button" class="btn btn-primary">OK</button>
             </div>
           </div>
           <!-- /.modal-content -->

@@ -233,7 +233,11 @@
 
             <div class="card-body">
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6 form-inline">
+                  <h4>Bobot Nilai: </h4>
+                  <input type="text" class="form-control col-3 mb-3 ml-2" placeholder=".." title="Bobot tiap soal PG">
+                </div>
+                <div class="col-md-6">
                   <input class="form-control col-4 mb-3" type="search" placeholder="Search" style="float: right;">
                 </div>
               </div>
@@ -243,6 +247,9 @@
                   <tr>
                     <th>No</th>
                     <th>Nama</th>
+                    <th style="width: 8%" class="text-center">
+                          Status
+                      </th>
                     <th>Aksi</th> 
                   </tr>
                 </thead>
@@ -250,6 +257,10 @@
                   <tr>
                     <td>1</td>
                     <td>Adri</td>
+                    <td class="project-state">
+                          <span class="badge badge-success">Sudah</span>
+                          <!--<span class="badge badge-danger">Belum</span>-->
+                    </td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
                         <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail" title="detail"><i class="fas fa-eye"></i></a> 
@@ -258,6 +269,10 @@
                   <tr>
                     <td>2</td>
                     <td>Andi</td>
+                    <td class="project-state">
+                          <span class="badge badge-success">Sudah</span>
+                          <!--<span class="badge badge-danger">Belum</span>-->
+                    </td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
                         <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail" title="detail"><i class="fas fa-eye"></i></a> 
@@ -266,6 +281,10 @@
                   <tr>
                     <td>3</td>
                     <td>Budi</td>
+                    <td class="project-state">
+                          <span class="badge badge-success">Sudah</span>
+                          <!--<span class="badge badge-danger">Belum</span>-->
+                    </td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
                         <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail" title="detail"><i class="fas fa-eye"></i></a> 
@@ -274,6 +293,10 @@
                   <tr>
                     <td>4</td>
                     <td>Chandra</td>
+                    <td class="project-state">
+                          <span class="badge badge-success">Sudah</span>
+                          <!--<span class="badge badge-danger">Belum</span>-->
+                    </td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
                         <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail" title="detail"><i class="fas fa-eye"></i></a> 
@@ -282,6 +305,10 @@
                   <tr>
                     <td>5</td>
                     <td>Dimas</td>
+                    <td class="project-state">
+                          <span class="badge badge-success">Sudah</span>
+                          <!--<span class="badge badge-danger">Belum</span>-->
+                    </td>
                    <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
                         <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail" title="detail"><i class="fas fa-eye"></i></a> 
@@ -290,6 +317,10 @@
                   <tr>
                     <td>6</td>
                     <td>Robby</td>
+                    <td class="project-state">
+                          <span class="badge badge-success">Sudah</span>
+                          <!--<span class="badge badge-danger">Belum</span>-->
+                    </td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
                         <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal-detail" title="detail"><i class="fas fa-eye"></i></a> 
@@ -311,30 +342,6 @@
  <!-- /.row -->
 
 
-      <!-- modal hapus -->
-      <div class="modal fade" id="modal-hapus">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Hapus Ujian</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Apakah Anda Yakin Ingin Menghapus Ujian ini?</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-              <button type="button" class="btn btn-primary toastrDeleteSuccess">Ya</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
-
       <!-- modal detail -->
       <div class="modal fade" id="modal-detail">
         <div class="modal-dialog modal-lg">
@@ -346,10 +353,6 @@
               </button>
             </div>
             <div class="modal-body">
-              <div class="form-group text-center"> <!-- kalo tugasnya PG -->
-                    <h3>Nilai Siswa</h3>
-                    <h2 style="color: #056644;">90</h2>
-              </div>
 
               <form role="form">
                 <div class="card-body">
@@ -359,6 +362,7 @@
                     <th>No</th>
                     <th>Jawaban</th>
                     <th>Kunci Jawaban</th>
+                    <th>Nilai Essay</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -366,24 +370,30 @@
                     <td>1</td>
                     <td>A. Indonesia</td>
                     <td>B. Indonesia</td>
+                    <td><input type="text" class="form-control" placeholder=".." disabled></td>
                   <tr>
                     <td>2</td>
                     <td>A. Indonesia</td>
                     <td>B. Belanda</td>
+                    <td><input type="text" class="form-control" placeholder=".." disabled></td>
                   <tr>
                     <td>3</td>
                     <td>A. Jepang</td>
                     <td>D. Korea</td>
+                    <td><input type="text" class="form-control" placeholder=".." disabled></td>
                   <tr>
                     <td>4</td>
                     <td>C. 1994</td>
                     <td>C. 1994</td>
+                    <td><input type="text" class="form-control" placeholder=".." disabled></td>
                   <tr>
                     <td>5</td>
                     <td>A. 2019</td>
                     <td>A. 2019</td>
+                    <td><input type="text" class="form-control" placeholder=".." disabled></td>
                 </tbody>
               </table>
+
 
               <!-- kalo tugasnya ESSAY 
                   <div class="form-group">  
@@ -397,9 +407,14 @@
               </form>
             </div>
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-               <!-- Kalo tugasnya essay pake button ini chan 
-              <button type="button" class="btn btn-primary toastrAddSuccess">Beri Nilai</button>-->
+              <div class="form-inline"> 
+                    <label>Nilai Siswa</label>
+                    <div class="col-3">
+                    <input type="text" class="form-control" placeholder=".." value="90" 
+                    title="PG: Jumlah benar x Bobot || Essay: Jumlah tiap nilai jawaban">
+                    </div>
+              </div>
+              <button type="button" class="btn btn-primary toastrAddSuccess">OK</button>
             </div>
           </div>
           <!-- /.modal-content -->
