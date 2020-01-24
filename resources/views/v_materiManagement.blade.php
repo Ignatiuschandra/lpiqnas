@@ -1,6 +1,6 @@
 @extends('layouts.master')
-@section('title_nav', 'LPIQNAS | User Management')
-@section('judul_halaman', 'User Management')
+@section('title_nav', 'LPIQNAS | Materi Management')
+@section('judul_halaman', 'Materi Management')
 
 @section('konten')
 <!-- Main content -->
@@ -79,31 +79,32 @@
         </div>
         <div class="modal-body">
           <!-- /.modal form body -->
-          <form role="form">
+          <form role="form" id="formEdit">
+            <input type="hidden" name="id" id="editId">
             <div class="card-body">
                   <div class="form-group">
-                  <label for="judul">Judul Materi</label>
-                  <input type="text" class="form-control" id="judul" placeholder="">
+                    <label for="judul">Judul Materi</label>
+                    <input type="text" class="form-control" id="editJudul" placeholder="Masukkan Judul Materi" name="judul">
                   </div>
 
                   <div class="form-group">
                     <label>Pilih Kelas</label>
-                    <select class="form-control">
-                      <option>Kelas 10</option>
-                      <option>Kelas 11</option>
-                      <option>Kelas 12</option>
+                    <select class="form-control" name="kelas" id="editKelas">
+                      <option value="10">Kelas 10</option>
+                      <option value="11">Kelas 11</option>
+                      <option value="12">Kelas 12</option>
                     </select>
                   </div>
 
                   <div class="form-group">
                   <label for="desc">Deskripsi Materi</label>
-                  <textarea id="desc" class="form-control" rows="4" placeholder=""></textarea>
+                  <textarea name="desc" id="editDesc" class="form-control" rows="4" placeholder="Masukkan Deskripsi"></textarea>
                   </div>
 
                   <label for="exampleInputFile">Upload File</label>
                   <div class="input-group">
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                    <input type="file" class="custom-file-input" id="editExampleInputFile" name="file">
                     <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
                   </div>
                   <div class="input-group-append mb-3">
@@ -116,7 +117,7 @@
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-          <button id="" type="button" class="btn btn-success toastrEditSuccess">Edit</button>
+          <button id="updateDataMateri" type="button" class="btn btn-success toastrEditSuccess">Edit</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -140,8 +141,8 @@
           <form role="form" enctype="multipart/form-data" id="formTambah">
             <div class="card-body">
                   <div class="form-group">
-                  <label for="judul">Judul Materi</label>
-                  <input type="text" class="form-control" id="addJudul" placeholder="Masukkan Judul Materi" name="judul">
+                    <label for="judul">Judul Materi</label>
+                    <input type="text" class="form-control" id="addJudul" placeholder="Masukkan Judul Materi" name="judul">
                   </div>
 
                   <div class="form-group">
@@ -306,31 +307,37 @@
 
   function getDataMateri(id){
     $.ajax({
-      url:"{{ url('user-management/get-materi') }}",
+      url:"{{ url('materi-management/get-materi') }}",
       method:"POST", 
       data:{materi_id : id},
       success:function(response) {
-        $('#editNamaLengkap').val(response.data.materi_nama_lengkap);
-        $('#editUsername').val(response.data.materi_username);
-        $('#editAlamat').val(response.data.materi_alamat);
-        $('#editTgl').val(response.data.materi_dob);
-        $('#editTelepon').val(response.data.materi_telepon);
-        $('#editId').val(response.data.materi_id);
+        $('#editJudul').val(response.data.materi_nama);
+        $('#editKelas').val(response.data.materi_tingkat);
+        $('#editDesc').val(response.data.materi_detail);
+        $('#editId').val(id);
       },
       error:function(){
         Toast.fire({
           type: 'error',
-          title: 'Anda Gagal Menghapus Data materi. Hubungi Developer!'
+          title: 'Anda Gagal Mengambil Data materi. Hubungi Developer!'
         });
       }
     });
   }
 
   $('#updateDataMateri').on('click', function(){
+    var formData = new FormData();
+    formData.append('id', $('#editId').val());
+    formData.append('judul', $('#editJudul').val());
+    formData.append('kelas', $('#editKelas').val());
+    formData.append('desc', $('#editDesc').val());
+    formData.append('file', $('#editExampleInputFile')[0].files[0]);
     $.ajax({
-      url:"{{ url('user-management/update-materi') }}",
+      url:"{{ url('materi-management/update-materi') }}",
       method:"POST", 
-      data:$('#formEdit').serialize(),
+      data:formData,
+      processData: false,
+      contentType: false,
       success:function(response) {
         if (response.success == true) {
           $('#modal-edit').modal('toggle');

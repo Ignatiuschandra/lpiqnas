@@ -138,8 +138,8 @@ class C_api extends Controller
     		'tanggalLahir'	=> 'date_format:Y-m-d|before:today|nullable',
     		'noTelp' 		=> 'required|string',
     		'username' 		=> 'required|string',
-    		'password'		=> 'required|string|same:password2',
-    		'password2'		=> 'required|string',
+    		// 'password'		=> 'required|string|same:password2',
+    		// 'password2'		=> 'required|string',
     	]);
 
     	if ($validate->fails()) {
@@ -158,7 +158,7 @@ class C_api extends Controller
     			'siswa_dob' 			=> $request->tanggalLahir,
     			'siswa_telepon' 		=> $request->noTelp,
     			'siswa_username' 		=> $request->username,
-    			'siswa_password' 		=> password_hash($request->password, PASSWORD_DEFAULT)
+    			// 'siswa_password' 		=> password_hash($request->password, PASSWORD_DEFAULT)
     		]);
 
     		return [
@@ -173,6 +173,52 @@ class C_api extends Controller
     			'data'		=> null
     		];	
     	}
+    }
+
+    public function updatePassword(Request $request){
+        $validate = Validator::make($request->all(), [
+            'idSiswa'       => 'required|numeric',
+            'passwordBaru'  => 'required|string',
+            'passwordLama'  => 'required|string'
+        ]);
+
+        if ($validate->fails()) {
+            return [
+                'success'   => false,
+                'info'      => $validate->errors(),
+                'data'      => null
+            ];
+        }
+
+        $cek_user = Siswa::where('siswa_id', $request->idSiswa)->first();
+
+        //cek password lama
+        if(!password_verify($request->passwordLama, $cek_user->siswa_password)){
+            return [
+                'success'   => false,
+                'info'      => 'Invalid old password provided',
+                'data'      => null
+            ];
+        }
+
+        try {
+            Siswa::where('siswa_id', $request->idSiswa)
+                ->update([
+                    'siswa_password'        => password_hash($request->passwordBaru, PASSWORD_DEFAULT)
+                ]);
+
+            return [
+                'success'   => true,
+                'info'      => 'Success update to DB',
+                'data'      => null
+            ];      
+        } catch (Exception $e) {
+            return [
+                'success'   => false,
+                'info'      => $e->getMessage(),
+                'data'      => null
+            ];  
+        }
     }
 
     public function getJadwalKelasHariIni(Request $request){
@@ -956,6 +1002,14 @@ class C_api extends Controller
                 'data'      => null
             ];  
         }
+    }
+
+    public function getWaktuServer(){
+        return [
+            'success'   => true,
+            'info'      => 'Success get server time',
+            'data'      => date('Y-m-d H:i:s')
+        ]; 
     }
 
 }

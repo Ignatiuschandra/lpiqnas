@@ -66,7 +66,7 @@ class C_user_management extends Controller
     		->update([
     			'siswa_nama_lengkap' 	=> $request->namaLengkap,
     			'siswa_alamat' 			=> $request->alamat,
-    			'siswa_dob' 			=> $request->tanggalLahir,
+    			'siswa_dob' 			=> $request->dob,
     			'siswa_telepon' 		=> $request->noTelp,
     			'siswa_username' 		=> $request->username
     		]);

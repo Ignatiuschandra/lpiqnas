@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use App\Models\Materi;
 use Datatables;
 use DB;
@@ -43,7 +43,10 @@ class C_materi_management extends Controller
 	}
 
 	public function deleteMateri(Request $request){
+        $materi = Materi::select('materi_file')->where('materi_id', '=', $request->materi_id)->first();
+
 		if (Materi::where('materi_id', $request->materi_id)->delete()) {
+            File::delete(public_path() . '/storage/files/'.$materi->materi_file);
     		return Response::json([
     			'success'	=> true,
     			'data'		=> null
@@ -56,22 +59,28 @@ class C_materi_management extends Controller
     	}
 	}	
 
-	public function getSiswa(Request $request){
+	public function getMateri(Request $request){
 		return Response::json([
-			'data' => Siswa::select('siswa_id', 'siswa_nama_lengkap', 'siswa_alamat', 'siswa_username', 'siswa_dob', 'siswa_telepon')->where('siswa_id', '=', $request->siswa_id)->first()
+			'data' => Materi::select('materi_id', 'materi_nama', 'materi_tingkat', 'materi_detail', 'materi_file')->where('materi_id', '=', $request->materi_id)->first()
 		]);
 	}
 
-	public function updateSiswa(Request $request){
+	public function updateMateri(Request $request){
 		try {
-    		Siswa::where('siswa_id', $request->id)
-    		->update([
-    			'siswa_nama_lengkap' 	=> $request->namaLengkap,
-    			'siswa_alamat' 			=> $request->alamat,
-    			'siswa_dob' 			=> $request->tanggalLahir,
-    			'siswa_telepon' 		=> $request->noTelp,
-    			'siswa_username' 		=> $request->username
-    		]);
+            $dataMateri = array(
+                'materi_nama'       => $request->judul,
+                'materi_tingkat'    => $request->kelas,
+                'materi_detail'     => $request->desc
+            );
+
+            if ($request->hasFile('file')) {
+                $uploadedFile               = $request->file('file');
+                $path                       = $uploadedFile->store('', ['disk' => 'storage_files']);
+                $dataMateri['materi_file']  = $path;
+            }
+
+    		Materi::where('materi_id', $request->id)
+    		  ->update($dataMateri);
 
     		return Response::json([
     			'success' 	=> true,
