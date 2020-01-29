@@ -15,13 +15,20 @@
 //     return view('welcome');
 // });
 
-Route::get('/', 'C_dashboard@index');
-Route::get('/email', function(){
-    return view('email.v_resend',['info' => 'abc']);
-});
+// Route::get('/auth', function(){
+//     return view('v_login',['info' => 'abc']);
+// });
 
 Route::get('/confirm/{token}', 'C_api@confirmEmail');
 Route::post('/resend-email', 'C_api@resendEmail');
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/', 'C_dashboard@index');
+});
+
+Route::get('/email', function(){
+    return view('v_login',['info' => 'abc']);
+});
 
 Route::get('/foo', function () {
     if(!file_exists(public_path('storage'))) {
@@ -33,7 +40,7 @@ Route::get('/foo', function () {
     }
 });
 
-Route::group(['prefix'=>'user-management'], function(){
+Route::group(['middleware' => 'auth', 'prefix'=>'user-management'], function(){
     Route::get('/', 'C_user_management@index');
     Route::get('/get-json-siswa', 'C_user_management@getJsonSiswa');
     Route::post('/get-siswa', 'C_user_management@getSiswa');
@@ -42,7 +49,7 @@ Route::group(['prefix'=>'user-management'], function(){
     Route::post('/update-siswa', 'C_user_management@updateSiswa');
 });
 
-Route::group(['prefix'=>'materi-management'], function(){
+Route::group(['middleware' => 'auth', 'prefix'=>'materi-management'], function(){
     Route::get('/', 'C_materi_management@index');
     Route::get('/get-json-materi', 'C_materi_management@getJsonMateri');
     Route::post('/get-materi', 'C_materi_management@getMateri');
@@ -52,7 +59,7 @@ Route::group(['prefix'=>'materi-management'], function(){
     Route::get('/download/{id}', 'C_materi_management@downloadMateri');
 });
 
-Route::group(['prefix'=>'video-management'], function(){
+Route::group(['middleware' => 'auth', 'prefix'=>'video-management'], function(){
     Route::get('/', 'C_video_management@index');
     Route::get('/get-json-video', 'C_video_management@getJsonVideo');
     Route::post('/get-video', 'C_video_management@getVideo');
@@ -61,7 +68,7 @@ Route::group(['prefix'=>'video-management'], function(){
     Route::post('/update-video', 'C_video_management@updateVideo');
 });
 
-Route::group(['prefix'=>'tugas-management'], function(){
+Route::group(['middleware' => 'auth', 'prefix'=>'tugas-management'], function(){
     Route::get('/', 'C_tugas_management@index');
     Route::get('/get-json-tugas', 'C_tugas_management@getJsonTugas');
     Route::post('/get-tugas', 'C_tugas_management@getTugas');
@@ -77,7 +84,7 @@ Route::group(['prefix'=>'tugas-management'], function(){
     Route::post('/update-soal', 'C_tugas_management@updateSoal');
 });
 
-Route::group(['prefix'=>'ujian-management'], function(){
+Route::group(['middleware' => 'auth', 'prefix'=>'ujian-management'], function(){
     Route::get('/', 'C_ujian_management@index');
     Route::get('/get-json-ujian', 'C_ujian_management@getJsonUjian');
     Route::post('/get-ujian', 'C_ujian_management@getUjian');
@@ -93,7 +100,7 @@ Route::group(['prefix'=>'ujian-management'], function(){
     Route::post('/update-soal', 'C_ujian_management@updateSoal');
 });
 
-Route::group(['prefix'=>'jadwal'], function(){
+Route::group(['middleware' => 'auth', 'prefix'=>'jadwal'], function(){
     Route::get('/', 'C_jadwal@index');
     Route::get('/get-json-jadwal', 'C_jadwal@getJsonJadwal');
     Route::post('/get-jadwal', 'C_jadwal@getJadwal');
@@ -102,7 +109,7 @@ Route::group(['prefix'=>'jadwal'], function(){
     Route::post('/update-jadwal', 'C_jadwal@updateJadwal');
 });
 
-Route::group(['prefix'=>'pengumuman'], function(){
+Route::group(['middleware' => 'auth', 'prefix'=>'pengumuman'], function(){
     Route::get('/', 'C_pengumuman@index');
     Route::get('/get-json-pengumuman', 'C_pengumuman@getJsonPengumuman');
     Route::post('/get-pengumuman', 'C_pengumuman@getPengumuman');
@@ -111,7 +118,7 @@ Route::group(['prefix'=>'pengumuman'], function(){
     Route::post('/update-pengumuman', 'C_pengumuman@updatePengumuman');
 });
 
-Route::group(['prefix'=>'diskusi'], function(){
+Route::group(['middleware' => 'auth', 'prefix'=>'diskusi'], function(){
     Route::get('/', 'C_diskusi@index');
     Route::get('/get-json-diskusi', 'C_diskusi@getJsonDiskusi');
     Route::post('/get-diskusi', 'C_diskusi@getDiskusi');
@@ -122,7 +129,7 @@ Route::group(['prefix'=>'diskusi'], function(){
     Route::post('/update-diskusi', 'C_diskusi@updateDiskusi');
 });
 
-Route::group(['prefix'=>'review-ujian'], function(){
+Route::group(['middleware' => 'auth', 'prefix'=>'review-ujian'], function(){
     Route::get('/', 'C_review_ujian@index');
     Route::get('/get-json-ujian', 'C_review_ujian@getJsonUjian');
     Route::post('/get-ujian', 'C_review_ujian@getUjian');
@@ -134,7 +141,7 @@ Route::group(['prefix'=>'review-ujian'], function(){
     Route::get('/get-json-ujian-detail/{id}', 'C_review_ujian@getJsonUjianDetail');
 });
 
-Route::group(['prefix'=>'review-tugas'], function(){
+Route::group(['middleware' => 'auth', 'prefix'=>'review-tugas'], function(){
     Route::get('/', 'C_review_tugas@index');
     Route::get('/get-json-tugas', 'C_review_tugas@getJsonTugas');
     Route::post('/get-tugas', 'C_review_tugas@getTugas');
@@ -148,3 +155,10 @@ Route::group(['prefix'=>'review-tugas'], function(){
     Route::post('/insert-nilai', 'C_review_tugas@insertNilai');
 
 });
+
+Auth::routes(['register' => false, 'reset' => false, 'verify' => false]);
+
+// Route::get('/auth', 'HomeController@index')->name('home')->middleware('auth');
+// Route::get('login', function(){
+//     return redirect('/auth');
+// })->name('name');
