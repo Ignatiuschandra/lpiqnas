@@ -103,7 +103,7 @@ to get the desired effect
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #056644 !important; ">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="{{ url('/') }}" class="brand-link">
       <img src="{{ asset('assets/dist/img/logo_lpiqnas.png') }}" alt="AdminLTE Logo" class="brand-image">
       <span class="brand-text font-weight-light" style="color: #ffffff;">Adm LPIQNAS</span>
     </a>
@@ -181,7 +181,7 @@ to get the desired effect
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/examples/rtugas.html" class="nav-link" style="color: #ffffff;">
+                <a href="{{url('review-tugas')}}" class="nav-link" style="color: #ffffff;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tugas</p>
                 </a>
@@ -306,16 +306,16 @@ to get the desired effect
 <!-- Toastr -->
 <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+<!-- <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script> -->
 <!-- Moment -->
 <script src="{{ asset('assets/plugins/moment/moment.min.js') }}"></script>
 <!-- Timepicker -->
 <script src="{{ asset('assets/plugins/timepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
 
 <!-- OPTIONAL SCRIPTS -->
-<script src="{{ asset('assets/plugins/chart.js/Chart.min.js') }}"></script>
-<script src="{{ asset('assets/dist/js/demo.js') }}"></script>
-<script src="{{ asset('assets/dist/js/pages/dashboard3.js') }}"></script>
+<!-- <script src="{{ asset('assets/plugins/chart.js/Chart.min.js') }}"></script> -->
+<!-- <script src="{{ asset('assets/dist/js/demo.js') }}"></script> -->
+<!-- <script src="{{ asset('assets/dist/js/pages/dashboard3.js') }}"></script> -->
 @yield('scriptTambahan')
 </body>
 </html>

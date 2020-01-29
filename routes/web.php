@@ -16,6 +16,12 @@
 // });
 
 Route::get('/', 'C_dashboard@index');
+Route::get('/email', function(){
+    return view('email.v_resend',['info' => 'abc']);
+});
+
+Route::get('/confirm/{token}', 'C_api@confirmEmail');
+Route::post('/resend-email', 'C_api@resendEmail');
 
 Route::get('/foo', function () {
     if(!file_exists(public_path('storage'))) {
@@ -126,4 +132,19 @@ Route::group(['prefix'=>'review-ujian'], function(){
 
     Route::get('/detail-ujian/{id}', 'C_review_ujian@detailReviewUjian');
     Route::get('/get-json-ujian-detail/{id}', 'C_review_ujian@getJsonUjianDetail');
+});
+
+Route::group(['prefix'=>'review-tugas'], function(){
+    Route::get('/', 'C_review_tugas@index');
+    Route::get('/get-json-tugas', 'C_review_tugas@getJsonTugas');
+    Route::post('/get-tugas', 'C_review_tugas@getTugas');
+    Route::post('/tambah-tugas', 'C_review_tugas@insertTugas');
+    Route::post('/hapus-tugas', 'C_review_tugas@deleteTugas');
+    Route::post('/update-tugas', 'C_review_tugas@updateTugas');
+
+    Route::get('/detail-tugas/{id}', 'C_review_tugas@detailReviewTugas');
+    Route::get('/get-json-tugas-detail/{id}', 'C_review_tugas@getJsonTugasDetail');
+    Route::post('/get-jawaban', 'C_review_tugas@getJawaban');
+    Route::post('/insert-nilai', 'C_review_tugas@insertNilai');
+
 });

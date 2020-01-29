@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Siswa;
 use App\Models\SiswaPembayaran;
+use App\Models\SiswaPengumuman;
 use App\Models\KelasJadwal;
 use App\Models\Pengumuman;
 use App\Models\Arsip;
@@ -21,6 +23,7 @@ use App\Models\TugasSoal;
 use App\Models\TugasJawabanSiswa;
 use App\Models\VideoBroadcasting;
 use App\Models\VideoBroadcastingKomentar;
+use App\Mail\ActivationEmail;
 use Validator;
 use DB;
 
@@ -30,10 +33,87 @@ class C_api extends Controller
 		echo "LPIQNAS API is ONLINE!";
 	}
 
+    public function confirmEmail(Request $request){
+        $validate = Validator::make($request->all(), [
+            'token'   => 'string'
+        ]);
+
+        if ($validate->fails()) {
+            $data = [
+                'success'   => false,
+                'info'      => $validate->errors(),
+                'data'      => null
+            ];
+            return view('email.v_failed', $data);
+        }
+
+        $siswa = Siswa::where('siswa_register_token', $request->token)->first();
+        if (empty($siswa)) { //token tidak ada atau user tidak ada
+            $data = [
+                'success'   => false,
+                'info'      => 'Token Not Found',
+                'data'      => null
+            ];
+            return view('email.v_failed', $data);
+        }else{ //token ada
+            try {
+                Siswa::where('siswa_register_token', $request->token)
+                    ->update([
+                        'siswa_is_verified' => 1
+                    ]);
+
+                return view('email.v_confirmed');   
+            } catch (Exception $e) {
+                $data = [
+                    'success'   => false,
+                    'info'      => $e->message(),
+                    'data'      => null
+                ];
+
+                return view('email.v_failed', $data);
+            }
+        }
+    }
+
+    public function resendEmail(Request $request){
+        $validate = Validator::make($request->all(), [
+            'email'         => 'required|email'
+        ]);
+
+        if ($validate->fails()) {
+            return [
+                'success'   => false,
+                'info'      => $validate->errors(),
+                'data'      => null
+            ];
+        }
+
+        try {
+            $token = base64_encode(sha1(rand(1, 10000) . uniqid() . time()));
+            Siswa::where('siswa_email', $request->email)
+                ->update([
+                    'siswa_token' => $token
+                ]);
+
+            Mail::to($request->email)->send(new ActivationEmail($token));
+
+            return view('email.v_resend');   
+        } catch (Exception $e) {
+            $data = [
+                'success'   => false,
+                'info'      => $e->message(),
+                'data'      => null
+            ];
+
+            return view('email.v_failed', $data);
+        }
+    }
+
 	public function register(Request $request){
     	$validate = Validator::make($request->all(), [
     		'namaLengkap' 	=> 'required|string',
     		'noTelp' 		=> 'required|string',
+            'email'         => 'required|email',
     		'username' 		=> 'required|string',
     		'password'		=> 'required|string'
     	]);
@@ -46,13 +126,28 @@ class C_api extends Controller
     		];
     	}
 
+        //cek username
+        $cek_user = Siswa::where('siswa_username', $request->username)->first();
+        if(!empty($cek_user)){
+            return [
+                'success'   => false,
+                'info'      => 'Username already taken',
+                'data'      => null
+            ];
+        }
+
+        $token = base64_encode(sha1(rand(1, 10000) . uniqid() . time()));
+
     	$siswa = new Siswa();
-    	$siswa->siswa_nama_lengkap 	= $request->namaLengkap;
-    	$siswa->siswa_telepon 		= $request->noTelp;
-    	$siswa->siswa_username 		= $request->username;
-    	$siswa->siswa_password 		= password_hash($request->password, PASSWORD_DEFAULT);
+    	$siswa->siswa_nama_lengkap 	  = $request->namaLengkap;
+    	$siswa->siswa_telepon 		  = $request->noTelp;
+        $siswa->siswa_email           = $request->email;
+    	$siswa->siswa_username 		  = $request->username;
+    	$siswa->siswa_password 		  = password_hash($request->password, PASSWORD_DEFAULT);
+        $siswa->siswa_register_token  = $token;
 
     	if ($siswa->save()) {
+            Mail::to($siswa->siswa_email)->send(new ActivationEmail($token));
     		return [
     			'success'	=> true,
     			'info' 		=> 'Success insert to DB',
@@ -91,6 +186,15 @@ class C_api extends Controller
     			'data' 		=> null
     		];
     	}
+
+        //cek is verified
+        if($cek_user->siswa_is_verified == 0){
+            return [
+                'success'   => false,
+                'info'      => 'User not verified',
+                'data'      => null
+            ];
+        }
 
     	//cek password
     	if(!password_verify($request->password, $cek_user->siswa_password)){
@@ -221,6 +325,40 @@ class C_api extends Controller
         }
     }
 
+    public function updateFoto(Request $request){
+        $validate = Validator::make($request->all(), [
+            'idSiswa'       => 'required|numeric',
+            'foto'          => 'required|string'
+        ]);
+
+        if ($validate->fails()) {
+            return [
+                'success'   => false,
+                'info'      => $validate->errors(),
+                'data'      => null
+            ];
+        }
+
+        try {
+            Siswa::where('siswa_id', $request->idSiswa)
+                ->update([
+                    'siswa_foto'    => $request->foto
+                ]);
+
+            return [
+                'success'   => true,
+                'info'      => 'Success insert to DB',
+                'data'      => null
+            ];      
+        } catch (Exception $e) {
+            return [
+                'success'   => false,
+                'info'      => $e->getMessage(),
+                'data'      => null
+            ];  
+        }
+    }
+
     public function getJadwalKelasHariIni(Request $request){
     	$validate = Validator::make($request->all(), [
     		'idSiswa'		=> 'required|numeric'
@@ -256,11 +394,42 @@ class C_api extends Controller
     	}
     }
 
-    public function getPengumuman(){
+    public function getPengumuman(Request $request){
+        $validate = Validator::make($request->all(), [
+            'idSiswa'       => 'required|numeric'
+        ]);
+
+        if ($validate->fails()) {
+            return [
+                'success'   => false,
+                'info'      => $validate->errors(),
+                'data'      => null
+            ];
+        }
+
     	try {
-    		$data['pengumuman'] = Pengumuman::select('pengumuman_id', 'pengumuman_judul', 'pengumuman_konten', DB::raw('admin_nama_lengkap as pengumuman_pembuat'), DB::raw('DATE(pengumuman.created_at) as pengumuman_tanggal'))
+            $data = array();
+    		$pengumuman = Pengumuman::select('pengumuman_id', 'pengumuman_judul', 'pengumuman_konten', DB::raw('admin_nama_lengkap as pengumuman_pembuat'), DB::raw('DATE(pengumuman.created_at) as pengumuman_tanggal'), DB::Raw('COALESCE(siswa_pengumuman.created_at, 0) as status_buka'))
 	    		->join('admin', 'pengumuman_pembuat_id', '=', 'admin.admin_id')
+                // ->leftJoin('siswa_pengumuman', 'sp_pengumuman_id', '=', 'pengumuman_id')
+                ->leftJoin('siswa_pengumuman', function($join) use ($request){
+                        $join->on('sp_pengumuman_id', '=', 'pengumuman_id'); 
+                        $join->on('sp_siswa_id', '=', DB::raw($request->idSiswa)); 
+                   })
 	    		->where('pengumuman_expired', '>=', date('Y-m-d'))->get();
+
+            // print_r($pengumuman);
+            foreach ($pengumuman as $p) {
+                if ($p->status_buka == 0) {
+                    $p->pengumuman_buka = 0;
+                }else{
+                    $p->pengumuman_buka = 1;
+                }
+
+                unset($p->status_buka);
+
+                $data['pengumuman'][] = $p;
+            }
 
     		return [
     			'success' 	=> true,
@@ -275,6 +444,52 @@ class C_api extends Controller
     		];	
     	}
     }
+
+    public function openPengumuman(Request $request){
+        $validate = Validator::make($request->all(), [
+            'idSiswa'       => 'required|numeric',
+            'idPengumuman'  => 'required|numeric'
+        ]);
+
+        if ($validate->fails()) {
+            return [
+                'success'   => false,
+                'info'      => $validate->errors(),
+                'data'      => null
+            ];
+        }
+
+        try {
+            // avoid duplicate
+            $cek = SiswaPengumuman::where('sp_siswa_id', $request->idSiswa)
+                    ->where('sp_pengumuman_id', $request->idPengumuman)->first();
+
+            if (!empty($cek)) {
+                return [
+                    'success'   => true,
+                    'info'      => 'Data already exist',
+                    'data'      => null
+                ];
+            }
+
+            SiswaPengumuman::insert([
+                'sp_siswa_id'       => $request->idSiswa,
+                'sp_pengumuman_id'  => $request->idPengumuman
+            ]);
+
+            return [
+                'success'   => true,
+                'info'      => 'Success insert data to DB',
+                'data'      => null
+            ];
+        } catch (Exception $e) {
+            return [
+                'success'   => false,
+                'info'      => $e->getMessage(),
+                'data'      => null
+            ];   
+        }
+    }       
 
     public function getArsip(Request $request){
     	$validate = Validator::make($request->all(), [
@@ -987,7 +1202,7 @@ class C_api extends Controller
         }
 
         try {
-            $data['materi'] = Siswa::select('siswa_nama_lengkap', 'siswa_alamat', 'siswa_dob', 'siswa_telepon', 'siswa_foto', 'siswa_username')
+            $data['siswa'] = Siswa::select('siswa_nama_lengkap', 'siswa_alamat', 'siswa_dob', 'siswa_telepon', 'siswa_foto', 'siswa_username')
                 ->where('siswa_id', '=', $request->idSiswa)->get();
 
             return [
