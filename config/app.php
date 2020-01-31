@@ -164,6 +164,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Kawankoding\Fcm\FcmServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -232,6 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Datatables' => Yajra\DataTables\Facades\DataTables::class,
+        'Fcm' => Kawankoding\Fcm\FcmFacade::class,
 
     ],
 

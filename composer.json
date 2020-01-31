@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
+        "kawankoding/laravel-fcm": "^0.1.9",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^1.0",
         "yajra/laravel-datatables-oracle": "^9.8"

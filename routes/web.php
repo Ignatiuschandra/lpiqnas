@@ -10,34 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/auth', function(){
-//     return view('v_login',['info' => 'abc']);
-// });
-
 Route::get('/confirm/{token}', 'C_api@confirmEmail');
 Route::post('/resend-email', 'C_api@resendEmail');
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/', 'C_dashboard@index');
-});
-
-Route::get('/email', function(){
-    return view('v_login',['info' => 'abc']);
-});
-
-Route::get('/foo', function () {
-    if(!file_exists(public_path('storage'))) {
-        echo "string";
-
-        $target = 'public_html/api/public';
-        $shortcut = 'public_html/api/storage';
-        symlink($target, $shortcut);
-    }
 });
 
 Route::group(['middleware' => 'auth', 'prefix'=>'user-management'], function(){
@@ -162,3 +139,43 @@ Auth::routes(['register' => false, 'reset' => false, 'verify' => false]);
 // Route::get('login', function(){
 //     return redirect('/auth');
 // })->name('name');
+
+
+
+// testing dan debugging
+Route::get('/email', function(){
+    return view('v_login',['info' => 'abc']);
+});
+
+Route::get('/foo', function () {
+    if(!file_exists(public_path('storage'))) {
+        echo "string";
+
+        $target = 'public_html/api/public';
+        $shortcut = 'public_html/api/storage';
+        symlink($target, $shortcut);
+    }
+});
+
+Route::get('/testFCM/{id?}', function ($id) {
+    try {
+        $penerima = array(
+            "$id"
+        );
+        fcm()
+        ->to($penerima) // $recipients must an array
+        ->priority('high')
+        ->timeToLive(0)
+        ->data([
+            'title' => 'Test FCM',
+            'body' => 'This is a test of FCM',
+        ])
+        ->notification([
+            'title' => 'Tes FCM LPIQNAS',
+            'body' => 'Ini Test FCM',
+        ])
+        ->send();   
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+});

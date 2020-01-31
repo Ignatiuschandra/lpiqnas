@@ -46,4 +46,7 @@ Route::group(['middleware' => 'check-token'], function(){
 	Route::post('updatePassword', 'C_api@updatePassword');
 	Route::post('updateFoto', 'C_api@updateFoto');
 	Route::post('openPengumuman', 'C_api@openPengumuman');
+	Route::post('getNotifikasi', 'C_api@getNotifikasi');
+	Route::post('openNotifikasi', 'C_api@openNotifikasi');
+	Route::post('updateFCMToken', 'C_api@updateFCMToken');
 });

@@ -23,6 +23,8 @@ use App\Models\TugasSoal;
 use App\Models\TugasJawabanSiswa;
 use App\Models\VideoBroadcasting;
 use App\Models\VideoBroadcastingKomentar;
+use App\Models\Notifikasi;
+use App\Models\NotifikasiOpen;
 use App\Mail\ActivationEmail;
 use Validator;
 use DB;
@@ -348,6 +350,40 @@ class C_api extends Controller
             return [
                 'success'   => true,
                 'info'      => 'Success insert to DB',
+                'data'      => null
+            ];      
+        } catch (Exception $e) {
+            return [
+                'success'   => false,
+                'info'      => $e->getMessage(),
+                'data'      => null
+            ];  
+        }
+    }
+
+    public function updateFCMToken(Request $request){
+        $validate = Validator::make($request->all(), [
+            'idSiswa'       => 'required|numeric',
+            'FCMToken'      => 'required|string'
+        ]);
+
+        if ($validate->fails()) {
+            return [
+                'success'   => false,
+                'info'      => $validate->errors(),
+                'data'      => null
+            ];
+        }
+
+        try {
+            Siswa::where('siswa_id', $request->idSiswa)
+                ->update([
+                    'siswa_fcm_token'    => $request->FCMToken
+                ]);
+
+            return [
+                'success'   => true,
+                'info'      => 'Success update to DB',
                 'data'      => null
             ];      
         } catch (Exception $e) {
@@ -1225,6 +1261,117 @@ class C_api extends Controller
             'info'      => 'Success get server time',
             'data'      => date('Y-m-d H:i:s')
         ]; 
+    }
+
+    public function getNotifikasi(Request $request){
+        $validate = Validator::make($request->all(), [
+            'idSiswa'       => 'required|numeric'
+        ]);
+
+        if ($validate->fails()) {
+            return [
+                'success'   => false,
+                'info'      => $validate->errors(),
+                'data'      => null
+            ];
+        }
+
+        try {
+            $siswa = Siswa::join('siswa_kelas', 'sk_siswa_id', '=', 'siswa_id')
+                    ->join('kelas', 'kelas_id', '=', 'sk_kelas_id')
+                    ->where('sk_siswa_id', $request->idSiswa)->first();
+
+            $idKelas        = '';
+            $tingkatKelas   = '';
+
+            if (!empty($siswa)) {
+                $idKelas        = $siswa->kelas_id;
+                $tingkatKelas   = $siswa->kelas_tingkat;
+            }
+
+            $notif = Notifikasi::select('notif_id', 'notif_jenis', 'notif_konten', 
+                        DB::Raw('COALESCE(notif_open.created_at, 0) as status_buka'))
+                        ->join('notif_to', 'notif_id', '=', 'nt_notif_id')
+                        ->leftJoin('notif_open', 'notif_id', '=', 'no_notif_id')
+                        ->whereRaw("(nt_key = 'kelas_id' AND nt_value = '$idKelas')")
+                        ->orWhereRaw("(nt_key = 'kelas_tingkat' AND nt_value = '$tingkatKelas')")
+                        ->orWhereRaw("(nt_key = 'siswa_id' AND nt_value = '$request->idSiswa')")
+                        ->groupBy('nt_notif_id')->get();
+
+            $data = array(); 
+            $data['new_notif'] = 0;
+            foreach ($notif as $n) {
+                if ($n->status_buka == 0) {
+                    $n->notif_buka = 0;
+                    $data['new_notif']++;
+                }else{
+                    $n->notif_buka = 1;
+                }
+
+                unset($n->status_buka);
+
+                $data['notifikasi'][] = $n;
+            }
+
+            return [
+                'success'   => true,
+                'info'      => 'Success get data from DB',
+                'data'      => $data
+            ]; 
+        } catch (Exception $e) {
+            return [
+                'success'   => true,
+                'info'      => 'Failed get data from DB',
+                'data'      => $e->getMessage()
+            ]; 
+        }
+        
+    }
+
+    public function openNotifikasi(Request $request){
+        $validate = Validator::make($request->all(), [
+            'idSiswa'       => 'required|numeric',
+            'idNotifikasi'  => 'required|numeric'
+        ]);
+
+        if ($validate->fails()) {
+            return [
+                'success'   => false,
+                'info'      => $validate->errors(),
+                'data'      => null
+            ];
+        }
+
+        try {
+            $is_exist = NotifikasiOpen::where('no_siswa_id', $request->idSiswa)
+                ->where('no_notif_id', $request->idNotifikasi)->first();
+
+            if ($is_exist) {
+                return [
+                    'success'   => true,
+                    'info'      => 'Data already exist in DB',
+                    'data'      => null
+                ];
+            }else{
+                NotifikasiOpen::insert([
+                    'no_siswa_id'  => $request->idSiswa,
+                    'no_notif_id'  => $request->idNotifikasi
+                ]);
+
+                return [
+                    'success'   => true,
+                    'info'      => 'Success insert data to DB',
+                    'data'      => null
+                ];
+            }
+
+        } catch (Exception $e) {
+            return [
+                'success'   => true,
+                'info'      => 'Failed insert data to DB',
+                'data'      => $e->getMessage()
+            ];
+        }
     }
 
 }
