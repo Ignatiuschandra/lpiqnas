@@ -951,7 +951,9 @@ class C_api extends Controller
 
     public function getDiskusi(Request $request){
     	try {
-    		$diskusiRaw = Diskusi::select('diskusi_id', 'diskusi_pertanyaan', DB::Raw('diskusi_jawaban_admin as diskusi_dijawab_admin'))->get();
+    		$diskusiRaw = Diskusi::select('diskusi_id', 'diskusi_pertanyaan', DB::Raw('SUM(dk_admin_id) as diskusi_dijawab_admin'))
+                            ->leftJoin('diskusi_komentar', 'diskusi_id', '=', 'dk_diskusi_id')
+                            ->groupBy('diskusi_id')->get();
 
     		foreach ($diskusiRaw as $key) {
     			if (!is_null($key->diskusi_dijawab_admin)) {
@@ -991,8 +993,25 @@ class C_api extends Controller
     	}
 
     	try {
-    		$data['diskusi'] = Diskusi::select('diskusi_id', 'diskusi_pertanyaan', 'diskusi_jawaban_admin')->first();
-			$data['diskusiKomentar'] = DiskusiKomentar::select('siswa_nama_lengkap', 'dk_komentar', 'diskusi_komentar.created_at')->join('siswa', 'dk_siswa_id', '=', 'siswa_id')->get();
+    		$data['diskusi'] = Diskusi::select('diskusi_id', 'diskusi_pertanyaan')
+                                ->where('diskusi_id', $request->idDiskusi)->first();
+			$komentar = DiskusiKomentar::
+                        select('siswa_nama_lengkap', 'admin_nama_lengkap', DB::Raw('dk_komentar as komentar'), 'diskusi_komentar.created_at')
+                        ->where('dk_diskusi_id', $request->idDiskusi)
+                        ->leftJoin('siswa', 'dk_siswa_id', '=', 'siswa_id')
+                        ->leftJoin('admin', 'dk_admin_id', '=', 'admin_id')->get();
+
+            $data['diskusiKomentar'] = array();
+
+            foreach ($komentar as $key) {
+                if (!is_null($key->siswa_nama_lengkap)) {
+                    $key->komentator = $key->siswa_nama_lengkap;
+                }else if(!is_null($key->admin_nama_lengkap)){
+                    $key->komentator = $key->admin_nama_lengkap;
+                }
+                unset($key->siswa_nama_lengkap, $key->admin_nama_lengkap);
+                $data['diskusiKomentar'][] = $key;
+            }
 
     		return [
     			'success' 	=> true,
