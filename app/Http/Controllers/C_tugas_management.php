@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Tugas;
 use App\Models\TugasSoal;
 use App\Models\Kelas;
+use App\Models\Siswa;
+use App\Models\Notifikasi;
+use App\Models\NotifikasiTo;
 use Datatables;
 use DB;
 use Response;
@@ -33,6 +36,48 @@ class C_tugas_management extends Controller
         $tugas->tugas_kelas_id     = $request->kelas;
 
     	if ($tugas->save()) {
+            try {
+                $siswa = Siswa::join('siswa_kelas', 'sk_siswa_id', '=', 'siswa_id')
+                            ->where('sk_kelas_id', $request->kelas)->get('siswa_fcm_token');
+
+                $sendTo = array();
+                foreach ($siswa as $key) {
+                    $sendTo[] = $key->siswa_fcm_token;
+                }
+
+                $notif = array(
+                    'title' => 'Ayo Kerjakan Tugas Anda!',
+                    'body'  => $request->judul,
+                );
+
+                $notifInsert = array(
+                    'notif_jenis'   => 'TUGAS',
+                    'notif_title'   => 'Ayo Kerjakan Tugas Anda!',
+                    'notif_konten'  => $request->judul,
+                );
+
+                fcm()
+                    ->to($sendTo) // $recipients must an array
+                    ->priority('high')
+                    ->timeToLive(0)
+                    ->data($notif)
+                    ->notification($notif)
+                ->send();
+
+                $notifId = Notifikasi::insertGetId($notifInsert);
+
+                NotifikasiTo::insert([
+                    'nt_notif_id'   => $notifId,
+                    'nt_key'        => 'kelas_id',
+                    'nt_value'      => $request->kelas
+                ]);
+
+            } catch (Exception $e) {
+                return Response::json([
+                    'success'   => false,
+                    'data'      => $e->getMessage()
+                ]);
+            }
     		return Response::json([
     			'success'	=> true,
     			'data'		=> null

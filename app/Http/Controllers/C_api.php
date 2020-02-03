@@ -1126,8 +1126,7 @@ class C_api extends Controller
 
     public function getVideoBroadcasting(Request $request){
     	try {
-    		$data['videoBroadcasting'] = VideoBroadcasting::select('siswa_nama_lengkap', 'vb_judul', 'vb_link')
-    										->join('siswa', 'vb_siswa_id', '=', 'siswa_id')->get();
+    		$data['videoBroadcasting'] = VideoBroadcasting::select('vb_judul', 'vb_link')->get();
 
     		return [
     			'success' 	=> true,
@@ -1308,14 +1307,16 @@ class C_api extends Controller
                 $tingkatKelas   = $siswa->kelas_tingkat;
             }
 
-            $notif = Notifikasi::select('notif_id', 'notif_jenis', 'notif_konten', 
+            $notif = Notifikasi::select('notif_id', 'notif_jenis', 'notif_title', 'notif_konten', 
                         DB::Raw('COALESCE(notif_open.created_at, 0) as status_buka'))
-                        ->join('notif_to', 'notif_id', '=', 'nt_notif_id')
+                        ->leftJoin('notif_to', 'notif_id', '=', 'nt_notif_id')
                         ->leftJoin('notif_open', 'notif_id', '=', 'no_notif_id')
-                        ->whereRaw("(nt_key = 'kelas_id' AND nt_value = '$idKelas')")
+                        ->where("notif_jenis", 'VIDEO')
+                        ->orWhereRaw("(nt_key = 'kelas_id' AND nt_value = '$idKelas')")
                         ->orWhereRaw("(nt_key = 'kelas_tingkat' AND nt_value = '$tingkatKelas')")
                         ->orWhereRaw("(nt_key = 'siswa_id' AND nt_value = '$request->idSiswa')")
-                        ->groupBy('nt_notif_id')->get();
+                        ->groupBy('nt_notif_id')
+                        ->orderBy('notif.created_at', 'DESC')->get();
 
             $data = array(); 
             $data['new_notif'] = 0;

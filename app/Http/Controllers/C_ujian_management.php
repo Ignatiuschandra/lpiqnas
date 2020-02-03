@@ -7,6 +7,9 @@ use App\Models\Ujian;
 use App\Models\UjianSoal;
 use App\Models\Kelas;
 use App\Models\Materi;
+use App\Models\Siswa;
+use App\Models\Notifikasi;
+use App\Models\NotifikasiTo;
 use Datatables;
 use DB;
 use Response;
@@ -39,6 +42,51 @@ class C_ujian_management extends Controller
         $ujian->ujian_pembuat_id    = $request->pembuat;
 
     	if ($ujian->save()) {
+            try {
+                $materi = Materi::where('materi_id', $request->materi)->first();
+                $siswa  = Siswa::join('siswa_kelas', 'sk_siswa_id', '=', 'siswa_id')
+                            ->join('kelas', 'sk_kelas_id', '=', 'kelas_id')
+                            ->where('kelas_tingkat', $materi->materi_tingkat)
+                            ->get('siswa_fcm_token');
+
+                $sendTo = array();
+                foreach ($siswa as $key) {
+                    $sendTo[] = $key->siswa_fcm_token;
+                }
+
+                $notif = array(
+                    'title' => 'Ayo Persiapkan Ujian Anda!',
+                    'body'  => $request->judul,
+                );
+
+                $notifInsert = array(
+                    'notif_jenis'   => 'UJIAN',
+                    'notif_title'   => 'Ayo Persiapkan Ujian Anda!',
+                    'notif_konten'  => $request->judul,
+                );
+
+                fcm()
+                    ->to($sendTo) // $recipients must an array
+                    ->priority('high')
+                    ->timeToLive(0)
+                    ->data($notif)
+                    ->notification($notif)
+                ->send();
+
+                $notifId = Notifikasi::insertGetId($notifInsert);
+
+                NotifikasiTo::insert([
+                    'nt_notif_id'   => $notifId,
+                    'nt_key'        => 'kelas_tingkat',
+                    'nt_value'      => $materi->materi_tingkat
+                ]);
+
+            } catch (Exception $e) {
+                return Response::json([
+                    'success'   => false,
+                    'data'      => $e->getMessage()
+                ]);
+            }
     		return Response::json([
     			'success'	=> true,
     			'data'		=> null

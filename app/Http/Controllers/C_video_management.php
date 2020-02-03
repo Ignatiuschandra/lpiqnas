@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\VideoBroadcasting as Video;
+use App\Models\Siswa;
+use App\Models\Notifikasi;
+use App\Models\NotifikasiTo;
 use Datatables;
 use DB;
 use Response;
@@ -24,6 +27,42 @@ class C_video_management extends Controller
     	$video->vb_link		= $request->link;
 
     	if ($video->save()) {
+            try {
+                $siswa  = Siswa::get('siswa_fcm_token');
+
+                $sendTo = array();
+                foreach ($siswa as $key) {
+                    $sendTo[] = $key->siswa_fcm_token;
+                }
+
+                $notif = array(
+                    'title' => 'Jangan Lewatkan Video Terbaru!',
+                    'body'  => $request->judul,
+                );
+
+                $notifInsert = array(
+                    'notif_jenis'   => 'VIDEO',
+                    'notif_title'   => 'Jangan Lewatkan Video Terbaru!',
+                    'notif_konten'  => $request->judul,
+                );
+
+                fcm()
+                    ->to($sendTo) // $recipients must an array
+                    ->priority('high')
+                    ->timeToLive(0)
+                    ->data($notif)
+                    ->notification($notif)
+                ->send();
+
+                Notifikasi::insert($notifInsert);
+
+            } catch (Exception $e) {
+                return Response::json([
+                    'success'   => false,
+                    'data'      => $e->getMessage()
+                ]);
+            }
+
     		return Response::json([
     			'success'	=> true,
     			'data'		=> null
