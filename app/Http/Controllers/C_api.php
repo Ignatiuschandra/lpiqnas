@@ -167,8 +167,8 @@ class C_api extends Controller
 
     public function login(Request $request){
     	$validate = Validator::make($request->all(), [
-    		'username' => 'required|string',
-    		'password' => 'required|string'
+    		'username'  => 'required|string',
+    		'password'  => 'required|string'
     	]);
 
     	if ($validate->fails()) {
@@ -180,11 +180,12 @@ class C_api extends Controller
     	}
 
     	//cek username
-    	$cek_user = Siswa::where('siswa_username', $request->username)->first();
+    	$cek_user = Siswa::where('siswa_username', $request->username)
+                        ->orWhere('siswa_email', $request->username)->first();
     	if(empty($cek_user)){
     		return [
     			'success'	=> false,
-    			'info' 		=> 'Username not found',
+    			'info' 		=> 'Username or email not found',
     			'data' 		=> null
     		];
     	}

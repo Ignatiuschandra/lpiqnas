@@ -209,7 +209,7 @@ to get the desired effect
           </li> -->
 
           <li class="nav-item">
-            <a href="pages/examples/broadcast.html" class="nav-link" style="color: #ffffff;">
+            <a href="{{url('broadcast-wa')}}" class="nav-link" style="color: #ffffff;">
               <i class="nav-icon fab fa-whatsapp"></i>
               <p>
                 Broadcast
