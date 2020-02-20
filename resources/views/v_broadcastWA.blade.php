@@ -10,6 +10,16 @@
     <div class="col-12">
       <div class="card card-primary">
         <div class="card-body">
+          <label for="broadcast">Kelas</label>
+          <select class="form-control mr-2 " id="kelas" name="kelas" required>
+            <option disabled="" value="" selected="">Pilih Kelas: </option>
+            @foreach($kelas as $k)
+              <option value="{{$k->kelas_id}}">
+                Kelas {{$k->kelas_tingkat.' '.$k->kelas_nama.' - '.$k->kelas_tahun_ajaran}} 
+              </option>
+            @endforeach
+          </select>
+
           <div class="form-group">
             <label for="pesan">Pesan</label>
             <textarea id="pesan" class="form-control" rows="4" placeholder="Masukkan Pesan Broadcast"></textarea>
@@ -74,6 +84,14 @@
   });
 
   $('#sendWA').on('click', function(){
+    if ($('#kelas').val() == '' || $('#kelas').val() == null) {
+        Toast.fire({
+          type: 'warning',
+          title: 'Pilih Kelas Terlebih Dahulu!'
+        });
+        $('#sendWA').attr('disabled', false);
+        return false;
+    }
     $(this).attr('disabled', true);
     $.ajax({
       url:"{{ url('broadcast-wa/kirim') }}",
@@ -88,7 +106,7 @@
         }else{
           Toast.fire({
             type: 'error',
-            title: 'Anda Gagal Menambahkan Data Video. Hubungi Developer!'
+            title: response.data
           });
         }
       },

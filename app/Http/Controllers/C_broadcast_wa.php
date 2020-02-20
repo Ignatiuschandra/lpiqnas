@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Siswa;
+use App\Models\Kelas;
 // use Twilio\Rest\Client;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -14,7 +15,8 @@ use Response;
 class C_broadcast_wa extends Controller
 {
 	public function index(){
-		return view('v_broadcastWA');
+        $data['kelas'] = Kelas::all(); 
+		return view('v_broadcastWA', $data);
 	}
 
 	// public function sendWA(Request $request){
@@ -59,7 +61,11 @@ class C_broadcast_wa extends Controller
 	// }
 
     public function sendWA(Request $request){
-        $siswa      = Siswa::whereNotNull('siswa_telepon')->get('siswa_telepon');
+        $siswa      = Siswa::join('siswa_kelas', 'sk_siswa_id', '=', 'siswa_id')
+                        ->whereNotNull('siswa_telepon')
+                        ->where('sk_kelas_id', $request->kelas)
+                        ->get('siswa_telepon');
+
         $my_apikey  = "PDVM4FGP0EWIB8UPEN5B";
         $message    = "$request->pesan";
 
