@@ -38,7 +38,8 @@ class C_tugas_management extends Controller
     	if ($tugas->save()) {
             try {
                 $siswa = Siswa::join('siswa_kelas', 'sk_siswa_id', '=', 'siswa_id')
-                            ->where('sk_kelas_id', $request->kelas)->get('siswa_fcm_token');
+                            ->where('sk_kelas_id', $request->kelas)
+                            ->whereNotNull('siswa_fcm_token')->get('siswa_fcm_token');
 
                 $sendTo = array();
                 foreach ($siswa as $key) {

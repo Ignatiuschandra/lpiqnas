@@ -28,7 +28,7 @@ class C_video_management extends Controller
 
     	if ($video->save()) {
             try {
-                $siswa  = Siswa::get('siswa_fcm_token');
+                $siswa  = Siswa::whereNotNull('siswa_fcm_token')->get('siswa_fcm_token');
 
                 $sendTo = array();
                 foreach ($siswa as $key) {

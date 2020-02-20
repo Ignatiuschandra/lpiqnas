@@ -47,6 +47,7 @@ class C_ujian_management extends Controller
                 $siswa  = Siswa::join('siswa_kelas', 'sk_siswa_id', '=', 'siswa_id')
                             ->join('kelas', 'sk_kelas_id', '=', 'kelas_id')
                             ->where('kelas_tingkat', $materi->materi_tingkat)
+                            ->whereNotNull('siswa_fcm_token')
                             ->get('siswa_fcm_token');
 
                 $sendTo = array();

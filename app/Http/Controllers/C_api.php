@@ -68,7 +68,7 @@ class C_api extends Controller
             } catch (Exception $e) {
                 $data = [
                     'success'   => false,
-                    'info'      => $e->message(),
+                    'info'      => $e->getMessage(),
                     'data'      => null
                 ];
 
@@ -103,7 +103,7 @@ class C_api extends Controller
         } catch (Exception $e) {
             $data = [
                 'success'   => false,
-                'info'      => $e->message(),
+                'info'      => $e->getMessage(),
                 'data'      => null
             ];
 
@@ -1316,7 +1316,7 @@ class C_api extends Controller
                         ->orWhereRaw("(nt_key = 'kelas_id' AND nt_value = '$idKelas')")
                         ->orWhereRaw("(nt_key = 'kelas_tingkat' AND nt_value = '$tingkatKelas')")
                         ->orWhereRaw("(nt_key = 'siswa_id' AND nt_value = '$request->idSiswa')")
-                        ->groupBy('nt_notif_id')
+                        ->groupBy('notif_id')
                         ->orderBy('notif.created_at', 'DESC')->get();
 
             $data = array(); 
