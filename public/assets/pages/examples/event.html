@@ -244,6 +244,7 @@
                     <th>Deskripsi</th>
                     <th>Pembuat Event</th>
                     <th>Tanggal Event</th>
+                    <th>Gambar</th>
                     <th class="text-center">Aksi</th>
                   </tr>
                 </thead>
@@ -253,6 +254,7 @@
                     <td>Akan diadakan pekan olahraga</td>
                     <td>Guru Olahraga</td>
                     <td>2 Januari 2020</td>
+                    <td><a href="" data-toggle="modal" data-target="#modal-detail">Detail</a></td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
                         <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
@@ -264,6 +266,7 @@
                     <td>Libur Nasional serempak</td>
                     <td>Kepala Sekolah</td>
                     <td>12 Januari 2020</td>
+                    <td><a href="" data-toggle="modal" data-target="#modal-detail">Detail</a></td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
                         <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
@@ -275,6 +278,7 @@
                     <td>Adu skill mengajimu!</td>
                     <td>Guru Agama</td>
                     <td>20 Januari 2020</td>
+                    <td><a href="" data-toggle="modal" data-target="#modal-detail">Detail</a></td>
                     <td class="text-center py-0 align-middle">
                       <div class="btn-group btn-group-sm">
                         <a href="" class="btn btn-info" data-toggle="modal" data-target="#modal-edit"><i class="fas fa-user-edit"></i></a>
@@ -354,6 +358,36 @@
       </div>
       <!-- /.modal -->
 
+     <!-- modal detail -->
+      <div class="modal fade" id="modal-detail">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Detail Foto</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- /.modal form body -->
+              <form role="form">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <img src="../../dist/img/banner.png" class="text-center" name="foto" id="detailFoto">
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
       <!-- modal edit -->
       <div class="modal fade" id="modal-edit">
         <div class="modal-dialog modal-lg">
@@ -368,6 +402,13 @@
               <!-- /.modal form body -->
               <form role="form">
                 <div class="card-body">
+                  <b>Foto Event</b>
+                  <div class="input-group">
+                    <div class="custom-file mb-3 mt-3">
+                        <input type="file" class="custom-file-input" id="editFoto" name="Foto">
+                        <label class="custom-file-label" for="editFoto">Pilih Foto</label>
+                    </div>
+                  </div>
                   <div class="form-group">
                     <label for="Judul">Judul Event</label>
                     <input type="text" class="form-control" id="Judul" placeholder="">
@@ -413,6 +454,13 @@
               <!-- /.modal form body -->
               <form role="form">
                 <div class="card-body">
+                  <b>Foto Event</b>
+                  <div class="input-group">
+                    <div class="custom-file mb-3 mt-2">
+                        <input type="file" class="custom-file-input" id="addFoto" name="Foto">
+                        <label class="custom-file-label" for="addFoto">Pilih Foto</label>
+                    </div>
+                  </div>
                   <div class="form-group">
                     <label for="Judul">Judul Event</label>
                     <input type="text" class="form-control" id="Judul" placeholder="Masukkan Judul Event">
@@ -428,7 +476,7 @@
                   <div class="form-group">
                     <label for="Tanggal">Tanggal Event</label>
                     <input type="date" class="form-control" id="Tanggal" placeholder="Masukkan Tanggal Event">
-                  </div>              
+                  </div>
                 </div>
                 <!-- /.card-body -->
               </form>
