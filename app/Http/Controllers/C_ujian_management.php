@@ -17,6 +17,7 @@ use Response;
 class C_ujian_management extends Controller
 {
 	public function index(){
+        session(['navbar' => 'ujian']);
         $kelas  = Kelas::groupBy('kelas_tingkat', 'kelas_tahun_ajaran')->get();
         $materi = Materi::get();
         // print_r($kelas); exit();

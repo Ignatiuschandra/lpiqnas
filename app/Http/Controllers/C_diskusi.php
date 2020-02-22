@@ -12,6 +12,7 @@ use Response;
 class C_diskusi extends Controller
 {
 	public function index(){
+        session(['navbar' => 'diskusi']);
 		return view('v_diskusi');
 	}
 

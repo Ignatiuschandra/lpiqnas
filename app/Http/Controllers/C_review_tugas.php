@@ -16,6 +16,7 @@ use Response;
 class C_review_tugas extends Controller
 {
 	public function index(){
+        session(['navbar' => 'rtugas']);
 		return view('v_reviewTugas');
 	}
 

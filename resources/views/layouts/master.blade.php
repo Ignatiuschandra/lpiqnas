@@ -29,6 +29,12 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Timepicker -->
   <link rel="stylesheet" href="{{ asset('assets/plugins/timepicker/css/bootstrap-material-datetimepicker.css') }}">
+
+  <style type="text/css">
+    .nav-active{
+      background-color: rgba(255,255,255,.1);
+    }
+  </style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -104,7 +110,7 @@ to get the desired effect
                with font-awesome or any other icon font library -->
 
           <li class="nav-item">
-            <a href="{{url('user-management')}}" class="nav-link" style="color: #ffffff;">
+            <a href="{{url('user-management')}}" class="nav-link {{ session('navbar') == 'user' ? 'nav-active' : '' }}" style="color: #ffffff;">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User Management
@@ -113,7 +119,7 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
-            <a href="{{url('materi-management')}}" class="nav-link" style="color: #ffffff;">
+            <a href="{{url('materi-management')}}" class="nav-link {{ session('navbar') == 'materi' ? 'nav-active' : '' }}" style="color: #ffffff;">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Materi Management
@@ -122,7 +128,7 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
-            <a href="{{url('video-management')}}" class="nav-link" style="color: #ffffff;">
+            <a href="{{url('video-management')}}" class="nav-link {{ session('navbar') == 'video' ? 'nav-active' : '' }}" style="color: #ffffff;">
               <i class="nav-icon fas fa-play"></i>
               <p>
                 Video Management
@@ -131,7 +137,7 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
-            <a href="{{url('tugas-management')}}" class="nav-link" style="color: #ffffff;">
+            <a href="{{url('tugas-management')}}" class="nav-link {{ session('navbar') == 'tugas' ? 'nav-active' : '' }}" style="color: #ffffff;">
               <i class="nav-icon fas fa-list-alt"></i>
               <p>
                 Tugas Management
@@ -140,7 +146,7 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
-            <a href="{{url('ujian-management')}}" class="nav-link" style="color: #ffffff;">
+            <a href="{{url('ujian-management')}}" class="nav-link {{ session('navbar') == 'ujian' ? 'nav-active' : '' }}" style="color: #ffffff;">
               <i class="nav-icon fas fa-file"></i>
               <p>
                 Ujian Management
@@ -148,7 +154,7 @@ to get the desired effect
             </a>
           </li>
           
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview {{ session('navbar') == 'rtugas' || session('navbar') == 'rujian' ? 'menu-open' : '' }}">
             <a href="#" class="nav-link" style="color: #ffffff;">
               <i class=" nav-icon far fa-file-pdf"></i>
               <p>
@@ -156,15 +162,15 @@ to get the desired effect
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview" {{ session('navbar') == 'rtugas' || session('navbar') == 'rujian' ? 'style=display:block' : '' }}>
               <li class="nav-item">
-                <a href="{{url('review-tugas')}}" class="nav-link" style="color: #ffffff;">
+                <a href="{{url('review-tugas')}}" class="nav-link {{ session('navbar') == 'rtugas' ? 'nav-active' : '' }}" style="color: #ffffff;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tugas</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('review-ujian')}}" class="nav-link" style="color: #ffffff;">
+                <a href="{{url('review-ujian')}}" class="nav-link {{ session('navbar') == 'rujian' ? 'nav-active' : '' }}" style="color: #ffffff;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Ujian</p>
                 </a>
@@ -173,7 +179,7 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
-            <a href="{{url('jadwal')}}" class="nav-link" style="color: #ffffff;">
+            <a href="{{url('jadwal')}}" class="nav-link {{ session('navbar') == 'jadwal' ? 'nav-active' : '' }}" style="color: #ffffff;">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Jadwal Kelas
@@ -182,7 +188,7 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
-            <a href="{{url('pengumuman')}}" class="nav-link" style="color: #ffffff;">
+            <a href="{{url('pengumuman')}}" class="nav-link {{ session('navbar') == 'info' ? 'nav-active' : '' }}" style="color: #ffffff;">
               <i class="nav-icon fas fa-info"></i>
               <p>
                 Informasi dan Event
@@ -191,7 +197,7 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
-            <a href="{{url('diskusi')}}" class="nav-link" style="color: #ffffff;"> 
+            <a href="{{url('diskusi')}}" class="nav-link {{ session('navbar') == 'diskusi' ? 'nav-active' : '' }}" style="color: #ffffff;"> 
               <i class="nav-icon fas fa-plus-circle"></i>
               <p>
                 Posting dan Diskusi
@@ -209,7 +215,7 @@ to get the desired effect
           </li> -->
 
           <li class="nav-item">
-            <a href="{{url('broadcast-wa')}}" class="nav-link" style="color: #ffffff;">
+            <a href="{{url('broadcast-wa')}}" class="nav-link {{ session('navbar') == 'wa' ? 'nav-active' : '' }}" style="color: #ffffff;">
               <i class="nav-icon fab fa-whatsapp"></i>
               <p>
                 Broadcast

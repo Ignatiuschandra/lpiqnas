@@ -14,6 +14,7 @@ use Response;
 class C_review_ujian extends Controller
 {
 	public function index(){
+        session(['navbar' => 'rujian']);
         $kelas  = Kelas::groupBy('kelas_tingkat', 'kelas_tahun_ajaran')->get();
         $materi = Materi::get();
         // print_r($kelas); exit();

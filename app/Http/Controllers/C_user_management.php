@@ -19,6 +19,7 @@ use Response;
 class C_user_management extends Controller
 {
 	public function index(){
+        session(['navbar' => 'user']);
 		return view('v_userManagement');
 	}
 

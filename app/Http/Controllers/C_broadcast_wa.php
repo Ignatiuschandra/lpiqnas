@@ -15,6 +15,7 @@ use Response;
 class C_broadcast_wa extends Controller
 {
 	public function index(){
+        session(['navbar' => 'wa']);
         $data['kelas'] = Kelas::all(); 
 		return view('v_broadcastWA', $data);
 	}

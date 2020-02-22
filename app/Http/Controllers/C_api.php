@@ -457,6 +457,7 @@ class C_api extends Controller
 
             // print_r($pengumuman);
             foreach ($pengumuman as $p) {
+                $p->pengumuman_image = url('/').$p->pengumuman_image;
                 if ($p->status_buka == 0) {
                     $p->pengumuman_buka = 0;
                 }else{
@@ -622,7 +623,17 @@ class C_api extends Controller
 
     	try {
     		$materi = Materi::select('materi_nama', 'materi_detail', 'materi_file')
-	    		->where('materi_id', '=', $request->idMateri)->first()->toArray();
+	    		->where('materi_id', '=', $request->idMateri)->first();
+
+            if (empty($materi)) {
+                return [
+                    'success'   => true,
+                    'info'      => 'Success get data from DB',
+                    'data'      => null
+                ];    
+            }
+
+            $materi = $materi->toArray();
 
             foreach ($materi as $key => $value) {
                 if ($key == 'materi_file') {
@@ -680,13 +691,15 @@ class C_api extends Controller
 
 	    		if (isset($jumlah->JUMLAH)) {
 	    			// ditagih hanya jika kurang
-	    			if ($jumlah->JUMLAH < $p->pembayaran_tagihan) {
-	    				$data['pembayaran'][] = $p;
-	    			}
-	    		}else{
-	    			// sudah pasti minta ditagih
-	    			$data['pembayaran'][] = $p;
+                    $persen = ($jumlah->JUMLAH / $p->pembayaran_tagihan) * 100;
+                    $p->pembayaran_terbayar         =  $jumlah->JUMLAH;
+                    $p->pembayaran_persentase_lunas =  $persen;
+	    		}else{ //belum bayar
+                    $p->pembayaran_terbayar         =  0;
+                    $p->pembayaran_persentase_lunas =  0;
 	    		}
+
+                $data['pembayaran'][] = $p;
 	    	}
 
     		return [

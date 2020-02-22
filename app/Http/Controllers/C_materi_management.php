@@ -13,6 +13,7 @@ use Response;
 class C_materi_management extends Controller
 {
 	public function index(){
+        session(['navbar' => 'materi']);
 		return view('v_materiManagement');
 	}
 

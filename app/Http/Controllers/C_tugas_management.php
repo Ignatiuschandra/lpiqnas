@@ -16,6 +16,7 @@ use Response;
 class C_tugas_management extends Controller
 {
 	public function index(){
+        session(['navbar' => 'tugas']);
         $kelas = Kelas::get();
         // print_r($kelas); exit();
 		return view('v_tugasManagement', ['kelas' => $kelas]);

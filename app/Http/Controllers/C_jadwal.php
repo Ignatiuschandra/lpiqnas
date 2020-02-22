@@ -13,6 +13,7 @@ use Response;
 class C_jadwal extends Controller
 {
 	public function index(){
+        session(['navbar' => 'jadwal']);
         $materi = Materi::get();
         $kelas  = Kelas::get();
 		return view('v_jadwalKelas', ['materi' => $materi, 'kelas' => $kelas]);

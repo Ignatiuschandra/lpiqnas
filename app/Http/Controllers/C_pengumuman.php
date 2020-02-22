@@ -15,6 +15,7 @@ use Response;
 class C_pengumuman extends Controller
 {
 	public function index(){
+        session(['navbar' => 'info']);
 		return view('v_pengumuman');
 	}
 

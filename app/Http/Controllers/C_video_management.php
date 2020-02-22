@@ -14,6 +14,7 @@ use Response;
 class C_video_management extends Controller
 {
 	public function index(){
+        session(['navbar' => 'video']);
 		return view('v_videoManagement');
 	}
 
