@@ -629,7 +629,7 @@ class C_api extends Controller
                     $val_temp = $value;
                     unset($materi['materi_file']);
                     $url = url('/');
-                    $materi['materi_file'] = $url.'/storage/files/'.$val_temp;
+                    $materi['materi_file'] = $url.$val_temp;
                 }
             }
 

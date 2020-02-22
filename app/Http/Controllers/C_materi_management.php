@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Materi;
 use Datatables;
 use DB;
@@ -24,7 +25,7 @@ class C_materi_management extends Controller
         // $path           = $uploadedFile->store('', ['disk' => 'storage_files']); 
         $uploadedFile   = $request->file('file');
         $filename       = 'materi'.time() . '.' . $uploadedFile->getClientOriginalExtension();
-        Storage::disk('storage_events')->put($filename, file_get_contents($uploadedFile)); 
+        Storage::disk('storage_files')->put($filename, file_get_contents($uploadedFile)); 
 
 		$materi = new Materi();
     	$materi->materi_nama 	= $request->judul;
@@ -79,7 +80,7 @@ class C_materi_management extends Controller
             if ($request->hasFile('file')) {
                 $uploadedFile   = $request->file('file');
                 $filename       = 'materi'.time() . '.' . $uploadedFile->getClientOriginalExtension();
-                Storage::disk('storage_events')->put($filename, file_get_contents($uploadedFile));
+                Storage::disk('storage_files')->put($filename, file_get_contents($uploadedFile));
                 $dataMateri['materi_file']  = '/storage/files/'.$filename;
             }
 
@@ -102,7 +103,7 @@ class C_materi_management extends Controller
 
     public function downloadMateri(Request $request){
         $materi = Materi::where('materi_id', '=', $request->id)->first();
-        return Response::download(public_path() . '/storage/files/'.$materi->materi_file);
+        return Response::download(public_path() .$materi->materi_file);
     }
 
 }
