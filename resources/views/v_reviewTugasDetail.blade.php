@@ -1,6 +1,6 @@
 @extends('layouts.master')
-@section('title_nav', 'LPIQNAS | Review Ujian')
-@section('judul_halaman', 'Review Ujian')
+@section('title_nav', 'LPIQNAS | Review Tugas')
+@section('judul_halaman', 'Review Tugas')
 
 @section('konten')
 <!-- Main content -->

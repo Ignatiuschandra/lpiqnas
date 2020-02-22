@@ -3,7 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Arsip;
+use App\Models\Diskusi;
+use App\Models\DiskusiKomentar;
 use App\Models\Siswa;
+use App\Models\VideoBroadcastingKomentar;
+use App\Models\TugasJawabanSiswa;
+use App\Models\SiswaPembayaran;
+use App\Models\SiswaNilai;
+use App\Models\SiswaNilaiTugas;
 use Datatables;
 use DB;
 use Response;
@@ -41,17 +49,34 @@ class C_user_management extends Controller
 	}
 
 	public function deleteSiswa(Request $request){
-		if (Siswa::where('siswa_id', $request->siswa_id)->delete()) {
-    		return Response::json([
-    			'success'	=> true,
-    			'data'		=> null
-    		]);
-    	}else{
-    		return Response::json([
-    			'success'	=> false,
-    			'data'		=> null
-    		]);
-    	}
+        $siswaId = $request->siswa_id;
+        if (VideoBroadcastingKomentar::where('vbk_siswa_id', $siswaId)->delete()) {
+            if (TugasJawabanSiswa::where('tjs_siswa_id', $siswaId)->delete()) {
+                if (SiswaPembayaran::where('sp_siswa_id', $siswaId)->delete()) {
+                    if (SiswaNilai::where('sn_siswa_id', $siswaId)->delete()) {
+                        if (SiswaNilaiTugas::where('snt_siswa_id', $siswaId)->delete()) {
+                            if (Arsip::where('arsip_siswa_id', $siswaId)->delete()) {
+                                if (Diskusi::where('diskusi_siswa_id', $siswaId)->delete()) {
+                                    if (DiskusiKomentar::where('diskusi_siswa_id', $siswaId)->delete()) {
+                                        if (Siswa::where('siswa_id', $siswaId)->delete()) {
+                                            return Response::json([
+                                                'success'   => true,
+                                                'data'      => null
+                                            ]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+		return Response::json([
+			'success'	=> false,
+			'data'		=> null
+		]);
 	}	
 
 	public function getSiswa(Request $request){

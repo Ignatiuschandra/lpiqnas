@@ -20,14 +20,17 @@ class C_materi_management extends Controller
 	}
 
 	public function insertMateri(Request $request){
+        // $uploadedFile   = $request->file('file');
+        // $path           = $uploadedFile->store('', ['disk' => 'storage_files']); 
         $uploadedFile   = $request->file('file');
-        $path           = $uploadedFile->store('', ['disk' => 'storage_files']);  
+        $filename       = 'materi'.time() . '.' . $uploadedFile->getClientOriginalExtension();
+        Storage::disk('storage_events')->put($filename, file_get_contents($uploadedFile)); 
 
 		$materi = new Materi();
     	$materi->materi_nama 	= $request->judul;
     	$materi->materi_tingkat = $request->kelas;
     	$materi->materi_detail  = $request->desc;
-    	$materi->materi_file 	= $path;
+    	$materi->materi_file 	= '/storage/files/'.$filename;
 
     	if ($materi->save()) {
     		return Response::json([
@@ -46,7 +49,7 @@ class C_materi_management extends Controller
         $materi = Materi::select('materi_file')->where('materi_id', '=', $request->materi_id)->first();
 
 		if (Materi::where('materi_id', $request->materi_id)->delete()) {
-            File::delete(public_path() . '/storage/files/'.$materi->materi_file);
+            File::delete(public_path() . $materi->materi_file);
     		return Response::json([
     			'success'	=> true,
     			'data'		=> null
@@ -74,9 +77,10 @@ class C_materi_management extends Controller
             );
 
             if ($request->hasFile('file')) {
-                $uploadedFile               = $request->file('file');
-                $path                       = $uploadedFile->store('', ['disk' => 'storage_files']);
-                $dataMateri['materi_file']  = $path;
+                $uploadedFile   = $request->file('file');
+                $filename       = 'materi'.time() . '.' . $uploadedFile->getClientOriginalExtension();
+                Storage::disk('storage_events')->put($filename, file_get_contents($uploadedFile));
+                $dataMateri['materi_file']  = '/storage/files/'.$filename;
             }
 
     		Materi::where('materi_id', $request->id)

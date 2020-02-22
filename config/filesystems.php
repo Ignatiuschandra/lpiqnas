@@ -69,6 +69,11 @@ return [
             'root' => public_path() . '/storage/files'
         ],
 
+        'storage_events' => [
+            'driver' => 'local',
+            'root' => public_path() . '/storage/events'
+        ],
+
     ],
 
 ];

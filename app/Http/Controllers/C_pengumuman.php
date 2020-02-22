@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Pengumuman;
 use App\Models\Materi;
 use App\Models\Kelas;
@@ -29,6 +31,15 @@ class C_pengumuman extends Controller
         $pengumuman->pengumuman_pembuat_id   = $request->pembuat;
         $pengumuman->pengumuman_expired      = $request->tanggal;
 
+        if ($request->hasFile('file')) {
+            $uploadedFile   = $request->file('file');
+            $fotoName       = 'event'.time() . '.' . $uploadedFile->getClientOriginalExtension();
+            Storage::disk('storage_events')->put($fotoName, file_get_contents($uploadedFile));
+            $pengumuman->pengumuman_image        = '/storage/events/'.$fotoName;
+        }else{
+            $pengumuman->pengumuman_image        = null;
+        }
+
     	if ($pengumuman->save()) {
     		return Response::json([
     			'success'	=> true,
@@ -43,7 +54,9 @@ class C_pengumuman extends Controller
 	}
 
 	public function deletePengumuman(Request $request){
+        $pengumuman = Pengumuman::where('pengumuman_id', $request->pengumuman_id)->first();
 		if (Pengumuman::where('pengumuman_id', $request->pengumuman_id)->delete()) {
+            File::delete(public_path() . $pengumuman->pengumuman_image);
     		return Response::json([
     			'success'	=> true,
     			'data'		=> null
@@ -64,13 +77,20 @@ class C_pengumuman extends Controller
 
 	public function updatePengumuman(Request $request){
 		try {
-    		Pengumuman::where('pengumuman_id', $request->id)
-    		->update([
-    			'pengumuman_judul' 	     => $request->judul,
-    			'pengumuman_konten' 	 => $request->konten,
+            $dataPengumuman = array(
+                'pengumuman_judul'       => $request->judul,
+                'pengumuman_konten'      => $request->konten,
                 'pengumuman_pembuat_id'  => $request->pembuat,
                 'pengumuman_expired'     => $request->tanggal
-    		]);
+            );
+            if ($request->hasFile('file')) {
+                $uploadedFile   = $request->file('file');
+                $filename       = 'envet'.time() . '.' . $uploadedFile->getClientOriginalExtension();
+                Storage::disk('storage_events')->put($filename, file_get_contents($uploadedFile));
+                $dataPengumuman['pengumuman_image']  = '/storage/events/'.$filename;
+            }
+    		Pengumuman::where('pengumuman_id', $request->id)
+    		  ->update($dataPengumuman);
 
     		return Response::json([
     			'success' 	=> true,

@@ -83,6 +83,13 @@
           <form role="form" id="formEdit">
             <input type="hidden" name="id" id="editId">
             <div class="card-body">
+              <label for="exampleInputFile">Foto Event</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="editExampleInputFile" name="file">
+                  <label class="custom-file-label" for="exampleInputFile">Pilih Foto</label>
+                </div>
+              </div>
               <div class="form-group">
                 <label for="Judul">Judul Event</label>
                 <input name="judul" type="text" class="form-control" id="editJudul" placeholder="Masukkan Judul Event">
@@ -130,6 +137,13 @@
           <!-- /.modal form body -->
           <form role="form" id="formTambah">
             <div class="card-body">
+              <label for="exampleInputFile">Foto Event</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="addExampleInputFile" name="file">
+                  <label class="custom-file-label" for="exampleInputFile">Pilih Foto</label>
+                </div>
+              </div>
               <div class="form-group">
                 <label for="Judul">Judul Event</label>
                 <input name="judul" type="text" class="form-control" id="addJudul" placeholder="Masukkan Judul Event">
@@ -211,10 +225,18 @@
   });
 
   $('#tambahDataPengumuman').on('click', function(){
+    var formData = new FormData();
+    formData.append('judul', $('#addJudul').val());
+    formData.append('konten', $('#addKonten').val());
+    formData.append('pembuat', $('#addPembuat').val());
+    formData.append('tanggal', $('#addTanggal').val());
+    formData.append('file', $('#addExampleInputFile')[0].files[0]);
     $.ajax({
       url:"{{ url('pengumuman/tambah-pengumuman') }}",
       method:"POST", 
-      data:$('#formTambah').serialize(),
+      data:formData,
+      processData: false,
+      contentType: false,
       success:function(response) {
         if (response.success == true) {
           $('#modal-tambah').modal('toggle');
@@ -294,10 +316,18 @@
   }
 
   $('#updateDataPengumuman').on('click', function(){
+    var formData = new FormData();
+    formData.append('judul', $('#editJudul').val());
+    formData.append('konten', $('#editKonten').val());
+    formData.append('pembuat', $('#editPembuat').val());
+    formData.append('tanggal', $('#editTanggal').val());
+    formData.append('file', $('#editExampleInputFile')[0].files[0]);
     $.ajax({
       url:"{{ url('pengumuman/update-pengumuman') }}",
       method:"POST", 
-      data:$('#formEdit').serialize(),
+      data:formData,
+      processData: false,
+      contentType: false,
       success:function(response) {
         if (response.success == true) {
           $('#modal-edit').modal('toggle');

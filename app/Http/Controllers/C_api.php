@@ -446,7 +446,7 @@ class C_api extends Controller
 
     	try {
             $data = array();
-    		$pengumuman = Pengumuman::select('pengumuman_id', 'pengumuman_judul', 'pengumuman_konten', DB::raw('admin_nama_lengkap as pengumuman_pembuat'), DB::raw('DATE(pengumuman.created_at) as pengumuman_tanggal'), DB::Raw('COALESCE(siswa_pengumuman.created_at, 0) as status_buka'))
+    		$pengumuman = Pengumuman::select('pengumuman_id', 'pengumuman_judul', 'pengumuman_konten', 'pengumuman_image', DB::raw('admin_nama_lengkap as pengumuman_pembuat'), DB::raw('DATE(pengumuman.created_at) as pengumuman_tanggal'), DB::Raw('COALESCE(siswa_pengumuman.created_at, 0) as status_buka'))
 	    		->join('admin', 'pengumuman_pembuat_id', '=', 'admin.admin_id')
                 // ->leftJoin('siswa_pengumuman', 'sp_pengumuman_id', '=', 'pengumuman_id')
                 ->leftJoin('siswa_pengumuman', function($join) use ($request){
