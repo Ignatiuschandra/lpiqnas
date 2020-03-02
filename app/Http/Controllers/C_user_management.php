@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Arsip;
 use App\Models\Diskusi;
 use App\Models\DiskusiKomentar;
+use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\SiswaKelas;
 use App\Models\VideoBroadcastingKomentar;
 use App\Models\TugasJawabanSiswa;
 use App\Models\SiswaPembayaran;
@@ -20,7 +22,8 @@ class C_user_management extends Controller
 {
 	public function index(){
         session(['navbar' => 'user']);
-		return view('v_userManagement');
+        $kelas  = Kelas::all();
+		return view('v_userManagement', ['kelas' => $kelas]);
 	}
 
 	public function getJsonSiswa(){
@@ -37,6 +40,11 @@ class C_user_management extends Controller
     	$siswa->siswa_password 		= password_hash('lpiqnas', PASSWORD_DEFAULT);
 
     	if ($siswa->save()) {
+            $ks = new SiswaKelas();
+            $ks->sk_siswa_id = $siswa->id;
+            $ks->sk_kelas_id = $request->kelas;
+            $ks->save();
+
     		return Response::json([
     			'success'	=> true,
     			'data'		=> null
@@ -82,7 +90,13 @@ class C_user_management extends Controller
 
 	public function getSiswa(Request $request){
 		return Response::json([
-			'data' => Siswa::select('siswa_id', 'siswa_nama_lengkap', 'siswa_alamat', 'siswa_username', 'siswa_dob', 'siswa_telepon')->where('siswa_id', '=', $request->siswa_id)->first()
+			'data' => Siswa::select('siswa_id', 'siswa_nama_lengkap', 'siswa_alamat', 'siswa_username', 'siswa_dob', 'siswa_telepon', 'sk_kelas_id')
+                ->join('siswa_kelas', 'sk_siswa_id', '=', 'siswa_id')
+                ->where('siswa_id', '=', $request->siswa_id)
+                ->whereRaw("siswa_kelas.created_at = (select 
+                                max(created_at) from siswa_kelas
+                                where sk_siswa_id = $request->siswa_id)")
+                ->first()
 		]);
 	}
 
@@ -96,6 +110,28 @@ class C_user_management extends Controller
     			'siswa_telepon' 		=> $request->noTelp,
     			'siswa_username' 		=> $request->username
     		]);
+
+            // cari tingkat kelas yang baru
+            $kelasBaru = Kelas::where('kelas_id', $request->kelas)->first();
+
+            //cari tingkat kelas ssiwa yang sederajat
+            $kelas = SiswaKelas::join('kelas', 'kelas_id', '=', 'sk_kelas_id')
+                        ->where('kelas_tingkat', $kelasBaru->kelas_tingkat)
+                        ->first();
+
+            // kalo kosong berarti ganti tingkat / naik kelas
+            // maka insert
+            if (empty($kelas)) {
+                $ks = new SiswaKelas();
+                $ks->sk_siswa_id = $request->id;
+                $ks->sk_kelas_id = $request->kelas;
+                $ks->save();
+            }else{ // kalau ada maka update aja
+                SiswaKelas::where('sk_id', $kelas->sk_id)
+                    ->update([
+                        'sk_kelas_id'  => $request->kelas
+                    ]);
+            }
 
     		return Response::json([
     			'success' 	=> true,

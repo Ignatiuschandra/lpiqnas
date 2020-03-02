@@ -415,6 +415,9 @@ class C_api extends Controller
 	    		->join('materi', 'materi_id', '=', 'kj_materi_id')
 	    		->join('siswa_kelas', 'sk_kelas_id', '=', 'kelas_id')
 	    		->where('sk_siswa_id', '=', $request->idSiswa)
+                ->whereRaw("siswa_kelas.created_at = (select 
+                                max(created_at) from siswa_kelas
+                                where sk_siswa_id = $request->idSiswa)")
 	    		->where('kj_hari', '=', date('N'))->get();
 
     		return [
@@ -608,6 +611,39 @@ class C_api extends Controller
     	}
     }
 
+    public function removeArsip(Request $request){
+        $validate = Validator::make($request->all(), [
+            'idSiswa'       => 'required|numeric',
+            'idMateri'      => 'required|numeric'
+        ]);
+
+        if ($validate->fails()) {
+            return [
+                'success'   => false,
+                'info'      => $validate->errors(),
+                'data'      => null
+            ];
+        }
+
+        try {
+            Arsip::where('arsip_siswa_id', $request->idSiswa)
+                ->where('arsip_materi_id', $request->idMateri)->delete();
+
+            return [
+                'success'   => true,
+                'info'      => 'Success remove data from DB',
+                'data'      => null
+            ];
+                    
+        } catch (Exception $e) {
+            return [
+                'success'   => false,
+                'info'      => $e->getMessage(),
+                'data'      => null
+            ];  
+        }
+    }
+
     public function getDetailMateri(Request $request){
     	$validate = Validator::make($request->all(), [
     		'idMateri'		=> 'required|numeric'
@@ -735,7 +771,11 @@ class C_api extends Controller
     			->join('kelas','materi_tingkat', '=', 'kelas_tingkat')
     			->join('siswa_kelas','sk_kelas_id', '=', 'kelas_id')
     			->where('ujian_jadwal', 'LIKE', date('Y-m-d').'%')
-	    		->where('sk_siswa_id', '=', $request->idSiswa)->get();
+	    		->where('sk_siswa_id', '=', $request->idSiswa)
+                ->whereRaw("siswa_kelas.created_at = (select 
+                                max(created_at) from siswa_kelas
+                                where sk_siswa_id = $request->idSiswa)")
+                ->get();
 
     		return [
     			'success' 	=> true,
@@ -1057,7 +1097,11 @@ class C_api extends Controller
     	try {
     		$data['tugas'] = Tugas::select('tugas_id', 'tugas_judul')
 	    		->join('siswa_kelas','tugas_kelas_id', '=', 'sk_kelas_id')
-	    		->where('sk_siswa_id', '=', $request->idSiswa)->get();
+	    		->where('sk_siswa_id', '=', $request->idSiswa)
+                ->whereRaw("siswa_kelas.created_at = (select 
+                                max(created_at) from siswa_kelas
+                                where sk_siswa_id = $request->idSiswa)")
+                ->get();
 
     		return [
     			'success' 	=> true,
@@ -1311,7 +1355,11 @@ class C_api extends Controller
         try {
             $siswa = Siswa::join('siswa_kelas', 'sk_siswa_id', '=', 'siswa_id')
                     ->join('kelas', 'kelas_id', '=', 'sk_kelas_id')
-                    ->where('sk_siswa_id', $request->idSiswa)->first();
+                    ->where('sk_siswa_id', $request->idSiswa)
+                    ->whereRaw("siswa_kelas.created_at = (select 
+                                max(created_at) from siswa_kelas
+                                where sk_siswa_id = $request->idSiswa)")
+                    ->first();
 
             $idKelas        = '';
             $tingkatKelas   = '';

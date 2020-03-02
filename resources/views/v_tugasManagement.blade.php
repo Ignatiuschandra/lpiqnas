@@ -85,6 +85,16 @@
                 <input type="text" class="form-control" name="judul" id="addJudul" placeholder="Masukkan Judul Tugas">
               </div>
               <div class="form-group">
+                <label for="Kelas">Materi</label>
+                <select class="form-control" name="materi" id="addMateri">
+                  @foreach($materi as $m)
+                  <option value="{{ $m['materi_id'] }}">
+                    {{ $m['materi_nama'] }}
+                  </option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
                 <label for="Pembuat">Pembuat</label>
                 <!-- <input type="text" class="form-control" id="Pembuat" placeholder="Masukkan Pembuat Tugas"> -->
                 <select class="form-control" name="pembuat" id="addPembuat">

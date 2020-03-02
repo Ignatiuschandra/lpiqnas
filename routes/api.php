@@ -24,6 +24,7 @@ Route::group(['middleware' => 'check-token'], function(){
 	Route::post('getJadwalKelasHariIni', 'C_api@getJadwalKelasHariIni');
 	Route::post('getPengumuman', 'C_api@getPengumuman');
 	Route::post('getArsip', 'C_api@getArsip');
+	Route::post('removeArsip', 'C_api@removeArsip');
 	Route::post('getDetailMateri', 'C_api@getDetailMateri');
 	Route::post('getPembayaran', 'C_api@getPembayaran');
 	Route::post('insertArsip', 'C_api@insertArsip');

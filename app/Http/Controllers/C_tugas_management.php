@@ -7,6 +7,7 @@ use App\Models\Tugas;
 use App\Models\TugasSoal;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\Materi;
 use App\Models\Notifikasi;
 use App\Models\NotifikasiTo;
 use Datatables;
@@ -18,8 +19,9 @@ class C_tugas_management extends Controller
 	public function index(){
         session(['navbar' => 'tugas']);
         $kelas = Kelas::get();
+        $materi = Materi::get();
         // print_r($kelas); exit();
-		return view('v_tugasManagement', ['kelas' => $kelas]);
+		return view('v_tugasManagement', ['kelas' => $kelas, 'materi' => $materi]);
 	}
 
 	public function getJsonTugas(){
@@ -32,6 +34,7 @@ class C_tugas_management extends Controller
 
 	public function insertTugas(Request $request){
 		$tugas = new Tugas();
+        $tugas->tugas_materi_id    = $request->materi;
     	$tugas->tugas_judul 	   = $request->judul;
     	$tugas->tugas_pembuat_id   = $request->pembuat;
         $tugas->tugas_kelas_id     = $request->kelas;

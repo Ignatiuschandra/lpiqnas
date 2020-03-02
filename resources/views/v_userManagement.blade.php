@@ -112,6 +112,17 @@
                 <label for="Telepon">Telepon</label>
                 <input type="text" class="form-control" name="noTelp" id="editTelepon" placeholder="">
               </div>
+              <div class="form-group">
+                <label for="Kelas">Kelas</label>
+                <select class="form-control" name="kelas" id="editKelas">
+                  <option value="">-- Pilih Kelas</option>
+                  @foreach($kelas as $k):
+                    <option value="{{$k->kelas_id}}">
+                      {{ $k->kelas_tingkat.' '.$k->kelas_nama.' - '.$k->kelas_tahun_ajaran }}
+                    </option>
+                  @endforeach
+                </select>
+              </div>
             </div>
             <!-- /.card-body -->
           </form>
@@ -160,6 +171,17 @@
               <div class="form-group">
                 <label for="Telepon">Telepon</label>
                 <input type="text" class="form-control" name="noTelp" id="addTelepon" placeholder="Masukkan Telepon">
+              </div>
+              <div class="form-group">
+                <label for="Kelas">Kelas</label>
+                <select class="form-control" name="kelas" id="addKelas">
+                  <option value="">-- Pilih Kelas</option>
+                  @foreach($kelas as $k):
+                    <option value="{{$k->kelas_id}}">
+                      {{ $k->kelas_tingkat.' '.$k->kelas_nama.' - '.$k->kelas_tahun_ajaran }}
+                    </option>
+                  @endforeach
+                </select>
               </div>
             </div>
             <!-- /.card-body -->
@@ -299,6 +321,7 @@
         $('#editTgl').val(response.data.siswa_dob);
         $('#editTelepon').val(response.data.siswa_telepon);
         $('#editId').val(response.data.siswa_id);
+        $('#editKelas').val(response.data.sk_kelas_id);
       },
       error:function(){
         Toast.fire({
