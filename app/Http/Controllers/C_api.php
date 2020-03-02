@@ -1280,16 +1280,30 @@ class C_api extends Controller
         }
 
         try {
-            $data['materi'] = Materi::select('materi_id', 'materi_nama')
-                                ->join('kelas', 'kelas_tingkat', '=', 'materi_tingkat')
-                                ->join('siswa_kelas', 'sk_kelas_id', '=', 'kelas_id')
-                                ->join('siswa', 'siswa_id', '=', 'sk_siswa_id')
-                                ->where('siswa_id', '=', $request->idSiswa)->get();
+            $materi = Materi::select('materi_id', 'materi_nama', DB::Raw('arsip_id'))
+                        ->join('kelas', 'kelas_tingkat', '=', 'materi_tingkat')
+                        ->join('siswa_kelas', 'sk_kelas_id', '=', 'kelas_id')
+                        ->join('siswa', 'siswa_id', '=', 'sk_siswa_id')
+                        ->leftJoin('arsip', 'arsip_materi_id', '=', 'materi_id')
+                        ->where('siswa_id', '=', $request->idSiswa)
+                        ->whereRaw("siswa_kelas.created_at = (select 
+                            max(created_at) from siswa_kelas
+                            where sk_siswa_id = $request->idSiswa)")
+                        ->get();
+
+            foreach ($materi as $key) {
+                $key->materi_is_arsip = true;
+                if (is_null($key->arsip_id)) {
+                    $key->materi_is_arsip = false;
+                }
+
+                unset($key->arsip_id);
+            }
 
             return [
                 'success'   => true,
                 'info'      => 'Success get data from DB',
-                'data'      => $data
+                'data'      => ['materi' => $materi]
             ];      
         } catch (Exception $e) {
             return [
