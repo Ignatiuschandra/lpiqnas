@@ -1285,7 +1285,10 @@ class C_api extends Controller
                         ->join('kelas', 'kelas_tingkat', '=', 'materi_tingkat')
                         ->join('siswa_kelas', 'sk_kelas_id', '=', 'kelas_id')
                         ->join('siswa', 'siswa_id', '=', 'sk_siswa_id')
-                        ->leftJoin('arsip', 'arsip_materi_id', '=', 'materi_id')
+                        ->leftJoin('arsip', function($join){
+                            $join->on('arsip_materi_id', '=', 'materi_id');
+                            $join->on('arsip_siswa_id', '=', 'siswa_id');
+                        })
                         ->where('siswa_id', '=', $request->idSiswa)
                         ->whereRaw("siswa_kelas.created_at = (select 
                             max(created_at) from siswa_kelas
