@@ -135,7 +135,7 @@ Route::group(['middleware' => 'auth', 'prefix'=>'review-tugas'], function(){
 
 Route::group(['middleware' => 'auth', 'prefix'=>'broadcast-wa'], function(){
     Route::get('/', 'C_broadcast_wa@index');
-    Route::post('/kirim', 'C_broadcast_wa@sendWA');
+    Route::post('/kirim', 'C_broadcast_wa@sendWAV2');
 });
 
 Auth::routes(['register' => false, 'reset' => false, 'verify' => false]);

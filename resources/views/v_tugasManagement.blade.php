@@ -21,6 +21,7 @@
             <thead>
               <tr>
                 <th>Judul Tugas</th>
+                <th>Materi</th>
                 <th>Pembuat</th>
                 <th>Kelas</th>
                 <th class="text-center">Aksi</th>
@@ -159,6 +160,7 @@
       ajax: "{{ url('tugas-management/get-json-tugas') }}",
       columns: [
           { data: 'tugas_judul' },
+          { data: 'materi_nama' },
           { data: 'admin_nama_lengkap' },
           { data: null,
             render: function(data, type, row){

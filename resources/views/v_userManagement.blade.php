@@ -23,6 +23,7 @@
               <tr>
                 <th scope="col">Nama Lengkap</th>
                 <th scope="col">Username</th>
+                <th scope="col">Kelas</th>
                 <th scope="col">Alamat</th>
                 <th scope="col">Tanggal Lahir</th>
                 <th scope="col">Telepon</th>
@@ -35,6 +36,7 @@
               <tr>
                 <th scope="col">Nama Lengkap</th>
                 <th scope="col">Username</th>
+                <th scope="col">Kelas</th>
                 <th scope="col">Alamat</th>
                 <th scope="col">Tanggal Lahir</th>
                 <th scope="col">Telepon</th>
@@ -228,6 +230,15 @@
       columns: [
           { data: 'siswa_nama_lengkap' },
           { data: 'siswa_username' },
+          { data: null,
+            render: function(data, type, row){
+              if (data.kelas_tingkat != null) {
+                return data.kelas_tingkat+' '+data.kelas_nama+' - '+data.kelas_tahun_ajaran;
+              }
+
+              return '';
+            }
+          },
           { data: 'siswa_alamat' },
           { data: 'siswa_dob' },
           { data: 'siswa_telepon' },
@@ -315,13 +326,21 @@
       method:"POST", 
       data:{siswa_id : id},
       success:function(response) {
+        $('#editNamaLengkap').val(null);
+        $('#editUsername').val(null);
+        $('#editAlamat').val(null);
+        $('#editTgl').val(null);
+        $('#editTelepon').val(null);
+        $('#editId').val(null);
+        $('#editKelas').val(null);
+
         $('#editNamaLengkap').val(response.data.siswa_nama_lengkap);
         $('#editUsername').val(response.data.siswa_username);
         $('#editAlamat').val(response.data.siswa_alamat);
         $('#editTgl').val(response.data.siswa_dob);
         $('#editTelepon').val(response.data.siswa_telepon);
         $('#editId').val(response.data.siswa_id);
-        $('#editKelas').val(response.data.sk_kelas_id);
+        $('#editKelas').val(response.data.kelas_id);
       },
       error:function(){
         Toast.fire({

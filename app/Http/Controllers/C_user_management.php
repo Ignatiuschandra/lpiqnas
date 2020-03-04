@@ -27,7 +27,12 @@ class C_user_management extends Controller
 	}
 
 	public function getJsonSiswa(){
-		return Datatables::of(Siswa::select('siswa_id', 'siswa_nama_lengkap', 'siswa_alamat', 'siswa_username', 'siswa_dob', 'siswa_telepon'))->make(true);
+		return Datatables::of(SiswaKelas::select('siswa_id', 'siswa_nama_lengkap', 
+                'siswa_alamat', 'siswa_username', 'siswa_dob', 'siswa_telepon', 'kelas_tingkat', 
+                'kelas_nama', 'kelas_tahun_ajaran')
+                ->join(DB::Raw("(select max(created_at) as ca from siswa_kelas GROUP BY sk_siswa_id) as ca"), 'ca.ca', '=', DB::Raw('siswa_kelas.created_at'))
+                ->rightJoin('siswa', 'siswa_id', '=', 'sk_siswa_id')
+                ->leftJoin('kelas', 'sk_kelas_id', '=', 'kelas_id'))->make(true);
 	}
 
 	public function insertSiswa(Request $request){
@@ -90,12 +95,13 @@ class C_user_management extends Controller
 
 	public function getSiswa(Request $request){
 		return Response::json([
-			'data' => Siswa::select('siswa_id', 'siswa_nama_lengkap', 'siswa_alamat', 'siswa_username', 'siswa_dob', 'siswa_telepon', 'sk_kelas_id')
-                ->join('siswa_kelas', 'sk_siswa_id', '=', 'siswa_id')
+			'data' => SiswaKelas::select('siswa_id', 'siswa_nama_lengkap', 
+                'siswa_alamat', 'siswa_username', 'siswa_dob', 'siswa_telepon', 'kelas_id', 'kelas_tingkat', 
+                'kelas_nama', 'kelas_tahun_ajaran')
+                ->join(DB::Raw("(select max(created_at) as ca from siswa_kelas GROUP BY sk_siswa_id) as ca"), 'ca.ca', '=', DB::Raw('siswa_kelas.created_at'))
+                ->rightJoin('siswa', 'siswa_id', '=', 'sk_siswa_id')
+                ->leftJoin('kelas', 'sk_kelas_id', '=', 'kelas_id')
                 ->where('siswa_id', '=', $request->siswa_id)
-                ->whereRaw("siswa_kelas.created_at = (select 
-                                max(created_at) from siswa_kelas
-                                where sk_siswa_id = $request->siswa_id)")
                 ->first()
 		]);
 	}
@@ -114,8 +120,9 @@ class C_user_management extends Controller
             // cari tingkat kelas yang baru
             $kelasBaru = Kelas::where('kelas_id', $request->kelas)->first();
 
-            //cari tingkat kelas ssiwa yang sederajat
+            //cari tingkat kelas siwa yang sederajat
             $kelas = SiswaKelas::join('kelas', 'kelas_id', '=', 'sk_kelas_id')
+                        ->where('sk_siswa_id', '=', $request->id)
                         ->where('kelas_tingkat', $kelasBaru->kelas_tingkat)
                         ->first();
 

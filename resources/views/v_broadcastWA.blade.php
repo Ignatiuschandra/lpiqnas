@@ -96,7 +96,7 @@
     $.ajax({
       url:"{{ url('broadcast-wa/kirim') }}",
       method:"POST", 
-      data:{pesan: $('#pesan').val()},
+      data:{pesan: $('#pesan').val(), kelas: $('#kelas').val()},
       success:function(response) {
         if (response.success) {
           Toast.fire({

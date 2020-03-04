@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Siswa;
+use App\Models\SiswaKelas;
 use App\Models\SiswaPembayaran;
 use App\Models\SiswaPengumuman;
 use App\Models\KelasJadwal;
@@ -1328,8 +1329,12 @@ class C_api extends Controller
         }
 
         try {
-            $data['siswa'] = Siswa::select('siswa_nama_lengkap', 'siswa_alamat', 'siswa_dob', 'siswa_telepon', 'siswa_foto', 'siswa_username')
-                ->where('siswa_id', '=', $request->idSiswa)->get();
+            $data['siswa'] = SiswaKelas::select('siswa_nama_lengkap', 'siswa_alamat', 'siswa_dob', 
+                            'siswa_telepon', 'siswa_foto', 'siswa_username', DB::Raw('kelas_id as siswa_kelas_id'),DB::Raw("CONCAT(kelas_tingkat, ' ', kelas_nama) as siswa_kelas_kelas"), DB::Raw('kelas_tahun_ajaran as siswa_kelas_ta'))
+                                ->join(DB::Raw("(select max(created_at) as ca from siswa_kelas GROUP BY sk_siswa_id) as ca"), 'ca.ca', '=', DB::Raw('siswa_kelas.created_at'))
+                                ->rightJoin('siswa', 'siswa_id', '=', 'sk_siswa_id')
+                                ->leftJoin('kelas', 'sk_kelas_id', '=', 'kelas_id')
+                                ->where('siswa_id', '=', $request->idSiswa)->get();
 
             return [
                 'success'   => true,

@@ -26,9 +26,10 @@ class C_tugas_management extends Controller
 
 	public function getJsonTugas(){
 		return Datatables::of(
-            Tugas::select('tugas_id', 'tugas_judul', 'kelas_nama', 'kelas_tingkat', 'kelas_tahun_ajaran', 'admin_nama_lengkap')
+            Tugas::select('tugas_id', 'tugas_judul', 'kelas_nama', 'kelas_tingkat', 'kelas_tahun_ajaran', 'admin_nama_lengkap', 'materi_nama')
             ->join('kelas', 'kelas_id', '=', 'tugas_kelas_id')
             ->join('admin', 'admin_id', '=', 'tugas_pembuat_id')
+            ->join('materi', 'tugas_materi_id', '=', 'materi_id')
         )->make(true);
 	}
 
