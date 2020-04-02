@@ -51,6 +51,10 @@ class C_tugas_management extends Controller
                     $sendTo[] = $key->siswa_fcm_token;
                 }
 
+                $dataFCM = array(
+                    'click_action' => 'FLUTTER_NOTIFICATION_CLICK',
+                );
+
                 $notif = array(
                     'title' => 'Ayo Kerjakan Tugas Anda!',
                     'body'  => $request->judul,
@@ -66,7 +70,7 @@ class C_tugas_management extends Controller
                     ->to($sendTo) // $recipients must an array
                     ->priority('high')
                     ->timeToLive(0)
-                    ->data($notif)
+                    ->data($dataFCM)
                     ->notification($notif)
                 ->send();
 

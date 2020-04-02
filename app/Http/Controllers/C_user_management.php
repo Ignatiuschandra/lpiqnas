@@ -32,7 +32,8 @@ class C_user_management extends Controller
                 'kelas_nama', 'kelas_tahun_ajaran')
                 ->join(DB::Raw("(select max(created_at) as ca from siswa_kelas GROUP BY sk_siswa_id) as ca"), 'ca.ca', '=', DB::Raw('siswa_kelas.created_at'))
                 ->rightJoin('siswa', 'siswa_id', '=', 'sk_siswa_id')
-                ->leftJoin('kelas', 'sk_kelas_id', '=', 'kelas_id'))->make(true);
+                ->leftJoin('kelas', 'sk_kelas_id', '=', 'kelas_id')
+                ->groupBy('siswa_id'))->make(true);
 	}
 
 	public function insertSiswa(Request $request){

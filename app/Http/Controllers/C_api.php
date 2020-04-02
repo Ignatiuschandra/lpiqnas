@@ -771,6 +771,8 @@ class C_api extends Controller
     			->join('materi','ujian_materi_id', '=', 'materi_id')
     			->join('kelas','materi_tingkat', '=', 'kelas_tingkat')
     			->join('siswa_kelas','sk_kelas_id', '=', 'kelas_id')
+                ->leftJoin('siswa_nilai','sn_ujian_id', '=', 'ujian_id')
+                ->where('sn_nilai', null)
     			->where('ujian_jadwal', 'LIKE', date('Y-m-d').'%')
 	    		->where('sk_siswa_id', '=', $request->idSiswa)
                 ->whereRaw("siswa_kelas.created_at = (select 
@@ -1098,6 +1100,12 @@ class C_api extends Controller
     	try {
     		$data['tugas'] = Tugas::select('tugas_id', 'tugas_judul')
 	    		->join('siswa_kelas','tugas_kelas_id', '=', 'sk_kelas_id')
+                ->leftJoin('tugas_soal','tugas_id', '=', 'ts_tugas_id')
+                ->leftJoin('tugas_jawaban_siswa', function($join){
+                    $join->on('tjs_siswa_id', '=', 'sk_siswa_id');
+                    $join->on('tjs_tugas_soal_id', '=', 'ts_tugas_id');
+                })
+                ->where('tjs_id', '=', null)
 	    		->where('sk_siswa_id', '=', $request->idSiswa)
                 ->whereRaw("siswa_kelas.created_at = (select 
                                 max(created_at) from siswa_kelas
