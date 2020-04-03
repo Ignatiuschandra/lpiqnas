@@ -31,7 +31,7 @@ class ActivationEmail extends Mailable
     public function build()
     {
         // return $this->view('view.name');
-        return $this->from('support-lpiqnas@carryu.id')->view('email.v_aktivasi')->with([
+        return $this->from('support-lpiqnas@carryucloud.online')->view('email.v_aktivasi')->with([
             'action_url' => url("/confirm/$this->token")    
         ]);
     }
